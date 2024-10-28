@@ -247,6 +247,9 @@ body {
     margin: 0 5px;
     margin-top: 5px;
 }
+.radio-sm._price-tag::before {
+}
+
 .radio-sm .price-tag {
     position: absolute;
     right: 0;
@@ -648,12 +651,13 @@ body {
     bottom: 0;
 }
 
+.cart__container {
+}
 .cart__body {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
-
 .cart__header {
     position: relative;
 }
@@ -945,7 +949,6 @@ body {
     top: 0;
     width: 23px;
     height: 100%;
-    display: none;
 }
 .header__burger span {
     position: absolute;
@@ -1084,20 +1087,6 @@ body {
     display: block;
 }
 /*-------------------------------- Header mobile nav --------------------------------*/
-
-@media (max-width: 1470px) {
-    .navigation,
-    .header__burger {
-        display: block;
-    }
-    .header__navigation {
-        display: block;
-    }
-    .header__menu {
-        display: flex;
-        align-items: center;
-    }
-}
 
 .header.scrolled .navigation,
 .header.scrolled .header__drawer {
@@ -2376,7 +2365,8 @@ body {
     line-height: 1.5;
     font-size: var(--calori-default-text-fz);
 }
-
+.quote__author {
+}
 .quote__button {
     display: flex;
     align-items: center;
@@ -2413,7 +2403,8 @@ body {
 #reviews {
     padding: var(--calori-sections-padding) 0;
 }
-
+.reviews {
+}
 .reviews__container {
     max-width: var(--calori-container-width);
     width: 100%;
@@ -2422,11 +2413,13 @@ body {
 .reviews__title {
     text-align: center;
 }
-
+.section-title {
+}
 .reviews-swiper {
     margin-top: 25px;
 }
-
+.reviews-swiper__wrapper {
+}
 .reviews-slide {
     display: flex;
     justify-content: center;
@@ -2502,7 +2495,10 @@ body {
 .banner {
     display: block;
 }
-
+.banner-swiper {
+}
+.banner-swiper__wrapper {
+}
 .banner-slide {
     display: flex;
     align-items: center;
@@ -2677,7 +2673,8 @@ body {
     flex-direction: column;
     align-items: start;
 }
-
+.info-content__wrapper {
+}
 .info-content__address {
     margin-top: 15px;
 }

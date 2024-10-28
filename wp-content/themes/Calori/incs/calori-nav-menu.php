@@ -36,7 +36,7 @@ function clean_menu($theme_location, $classes)
                 $menu_list .= '</li>' . "\n";
 
 
-                if ($menu_items[$count + 1]->menu_item_parent != $parent_id && $submenu) {
+                if (isset($menu_items[$count + 1]) && $menu_items[$count + 1]->menu_item_parent != $parent_id && $submenu) {
                     $menu_list .= '</ul>' . "\n";
                     $submenu = false;
                 }
@@ -99,7 +99,7 @@ function mobile_menu($theme_location)
                 $menu_list .= '</li>' . "\n";
 
 
-                if ($menu_items[$count + 1]->menu_item_parent != $parent_id && $submenu) {
+                if (isset($menu_items[$count + 1]) && $menu_items[$count + 1]->menu_item_parent != $parent_id && $submenu) {
                     $menu_list .= '</ul>' . "\n";
                     $submenu = false;
                 }
