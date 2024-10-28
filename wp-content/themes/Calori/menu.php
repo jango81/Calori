@@ -134,7 +134,7 @@ get_header();
                 </header>
             </div>
             <div class="menu__image section-banner__image">
-                <img src="images/menu banner.png" alt="banner image" />
+                <img src="<?php echo get_template_directory_uri()?>/assets/images/menu banner.png" alt="banner image" />
             </div>
         </div>
         <custom-menu class="menu">

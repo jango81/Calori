@@ -13,7 +13,7 @@ get_header();
                 <div class="cart__container _container">
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri()?>/assets/images/menu/meal1.jpg" alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -25,7 +25,7 @@ get_header();
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri()?>/assets/images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -51,7 +51,7 @@ get_header();
                     </div>
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri()?>/assets/images/menu/meal1.jpg" alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -63,7 +63,7 @@ get_header();
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri()?>/assets/images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -133,7 +133,7 @@ get_header();
                 </header>
             </div>
             <div class="faq__image section-banner__image">
-                <img src="images/menu banner.png" alt="banner image" />
+                <img src="<?php echo get_template_directory_uri()?>/assets/images/menu banner.png" alt="banner image" />
             </div>
         </section>
         <div class="faq__container _container">

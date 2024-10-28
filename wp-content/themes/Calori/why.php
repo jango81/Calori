@@ -13,7 +13,8 @@ get_header();
                 <div class="cart__container _container">
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg"
+                                alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -25,7 +26,8 @@ get_header();
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/delete-2-svgrepo-com.svg"
+                                            alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -51,7 +53,8 @@ get_header();
                     </div>
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg"
+                                alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -63,7 +66,8 @@ get_header();
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/delete-2-svgrepo-com.svg"
+                                            alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -133,13 +137,15 @@ get_header();
                 </header>
             </div>
             <div class="why-calori__banner-image section-banner__image">
-                <img src="images/menu banner.png" alt="banner image" />
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu banner.png"
+                    alt="banner image" />
             </div>
         </div>
         <div class="why-calori__container _container">
             <section class="why-calori__block">
                 <div class="why-calori__image">
-                    <img src="images/vastaanota.png" alt="why calori image">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        alt="why calori image">
                 </div>
                 <div class="why-calori__content">
                     <header class="why-calori__heading">
@@ -156,7 +162,8 @@ get_header();
             </section>
             <section class="why-calori__block">
                 <div class="why-calori__image">
-                    <img src="images/vastaanota.png" alt="why calori image">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        alt="why calori image">
                 </div>
                 <div class="why-calori__content">
                     <header class="why-calori__heading">
@@ -173,7 +180,8 @@ get_header();
             </section>
             <section class="why-calori__block">
                 <div class="why-calori__image">
-                    <img src="images/vastaanota.png" alt="why calori image">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        alt="why calori image">
                 </div>
                 <div class="why-calori__content">
                     <header class="why-calori__heading">
@@ -190,7 +198,8 @@ get_header();
             </section>
             <section class="why-calori__block">
                 <div class="why-calori__image">
-                    <img src="images/vastaanota.png" alt="why calori image">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        alt="why calori image">
                 </div>
                 <div class="why-calori__content">
                     <header class="why-calori__heading">
@@ -207,7 +216,8 @@ get_header();
             </section>
             <section class="why-calori__block">
                 <div class="why-calori__image">
-                    <img src="images/vastaanota.png" alt="why calori image">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        alt="why calori image">
                 </div>
                 <div class="why-calori__content">
                     <header class="why-calori__heading">
@@ -226,7 +236,9 @@ get_header();
     </article>
     <div class="main__dark">
     </div>
-    <section class="order-now__banner section-banner">
+</main>
+<section class="order-now__banner section-banner">
+    <div class="order-now__banner section-banner">
         <div class="order-now__wrapper section-banner__wrapper _container">
             <header class="order-now__title section-banner__title">
                 <h3>Tilaa alkaen 5,7€ / ateria</h3>
@@ -234,8 +246,8 @@ get_header();
             <a href="#" class="order-now-button btn btn-transparent btn-small">Tilaa nyt</a>
         </div>
         <div class="order-now__banner-image section-banner__image">
-            <img src="images/menu banner.png" alt="banner image" />
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu banner.png" alt="banner image" />
         </div>
-    </section>
-</main>
+    </div>
+</section>
 <?php get_footer() ?>

@@ -13,7 +13,7 @@ get_header()
                 <div class="cart__container _container">
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri()?>/assets/images/menu/meal1.jpg" alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -25,7 +25,7 @@ get_header()
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri()?>/assets/images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -51,7 +51,7 @@ get_header()
                     </div>
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri()?>/assets/images/menu/meal1.jpg" alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -63,7 +63,7 @@ get_header()
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri()?>/assets/images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -134,7 +134,7 @@ get_header()
                 <p class="about__subtext">Missiomme on tehdä terveellisestä syömisestä helppoa ja maukasta</p>
             </div>
             <div class="about__image section-banner__image">
-                <img src="images/menu banner.png" alt="banner image" />
+                <img src="<?php echo get_template_directory_uri()?>/assets/images/menu banner.png" alt="banner image" />
             </div>
         </section>
         <section id="about-quote">
@@ -159,13 +159,13 @@ get_header()
                         <div class="about-quote__icons">
                             <div class="about-quote__icon">
                                 <div class="about-quote__image">
-                                    <img src="images/quote-icon.png" alt="quote icon" />
+                                    <img src="<?php echo get_template_directory_uri()?>/assets/images/quote-icon.png" alt="quote icon" />
                                 </div>
                                 <span></span>
                             </div>
                             <div class="about-quote__icon">
                                 <div class="about-quote__image">
-                                    <img src="images/quote-icon.png" alt="quote icon" />
+                                    <img src="<?php echo get_template_directory_uri()?>/assets/images/quote-icon.png" alt="quote icon" />
                                 </div>
                                 <span></span>
                             </div>
@@ -178,7 +178,7 @@ get_header()
             <div class="about-info__container _container">
                 <div class="about-info__body">
                     <div class="about-info__image">
-                        <img src="images/vastaanota.png" alt="about image" />
+                        <img src="<?php echo get_template_directory_uri()?>/assets/images/vastaanota.png" alt="about image" />
                     </div>
                     <div class="about-info__content">
                         <header class="about-info__heading">
@@ -200,7 +200,7 @@ get_header()
             <div class="about-info__container _container">
                 <div class="about-info__body">
                     <div class="about-info__image">
-                        <img src="images/vastaanota.png" alt="about image" />
+                        <img src="<?php echo get_template_directory_uri()?>/assets/images/vastaanota.png" alt="about image" />
                     </div>
                     <div class="about-info__content">
                         <header class="about-info__heading">
@@ -222,7 +222,7 @@ get_header()
             <div class="about-info__container _container">
                 <div class="about-info__body">
                     <div class="about-info__image">
-                        <img src="images/vastaanota.png" alt="about image" />
+                        <img src="<?php echo get_template_directory_uri()?>/assets/images/vastaanota.png" alt="about image" />
                     </div>
                     <div class="about-info__content">
                         <header class="about-info__heading">

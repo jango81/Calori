@@ -48,21 +48,19 @@ add_action("wp_enqueue_scripts", function () {
     if (is_page(222)) {
         wp_enqueue_script("calori-swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js");
         wp_enqueue_script("calori-menu", get_template_directory_uri() . "/assets/scripts/menu.js", array(), false, true);
+
         wp_enqueue_style("calori-menu", get_template_directory_uri() . "/assets/styles/menu.css");
         wp_enqueue_style("calori-swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css");
     }
 
-
     wp_enqueue_style("calori-reset-style", get_template_directory_uri() . "/assets/styles/reset.css");
     wp_enqueue_style("calori-style", get_template_directory_uri() . "/assets/styles/style.css");
 
-
     wp_enqueue_script("calori-main", get_template_directory_uri() . "/assets/scripts/main.js", array(), false, true);
-    wp_script_add_data("calori-main", 'type', 'module');
 });
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-    $script_names = array("calori-landing", "calori-main");
+    $script_names = array("calori-landing", "calori-main", "calori-menu");
     foreach ($script_names as $name) {
         if ($name === $handle) {
             return str_replace('<script ', '<script type="module"', $tag);
