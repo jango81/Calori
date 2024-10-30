@@ -10,7 +10,24 @@ export class Time {
             "saturday": 6,
         };
     }
+    getDayNumber(dayName) {
+        const daysOfWeek = {
+            "sunday": 0,
+            "monday": 1,
+            "tuesday": 2,
+            "wednesday": 3,
+            "thursday": 4,
+            "friday": 5,
+            "saturday": 6,
+        };
 
+        return daysOfWeek[dayName.toLowerCase()] ?? null;
+    }
+    splitTimeString(timeString) {
+        const [hours, minutes] = timeString.split(":").map(Number);
+
+        return [hours, minutes];
+    }
     getCurrentDateInfo() {
         const currentDate = new Date();
 
@@ -26,12 +43,13 @@ export class Time {
             milliseconds: currentDate.getMilliseconds(),
         };
     }
-    calcRemainingDays(finishDate, finishDay, currentDate) {
+    calcRemainingDays(finishDate = null, finishDay, currentDate) {
+        finishDay = this.getDayNumber(finishDay);
         let daysRemaining;
 
         if (currentDate.day < finishDay) {
             daysRemaining = finishDay - currentDate.day;
-        } else if (currentDate.day === finishDay) {
+        } else if (currentDate.day === finishDay && finishDate) {
             if (Date.parse(currentDate.fullDate) > Date.parse(finishDate)) {
                 daysRemaining = 7;
             } else {
@@ -43,20 +61,27 @@ export class Time {
 
         return daysRemaining;
     }
-    getEndDate(endDay, endTime = "23:59") {
+    getEndDate(endDay, endTime = "00:00") {
         const currentDate = this.getCurrentDateInfo();
-        const [hours, minutes] = endTime.split(":").map(Number);
-        const finishDay = this.week[endDay];
+        const [hours, minutes] = this.splitTimeString(endTime);
+        const finishDay = endDay;
         const finishDate = new Date(currentDate.fullDate);
-        finishDate.setHours(hours);
-        finishDate.setMinutes(minutes);
-        finishDate.setSeconds(0);
-        finishDate.setMilliseconds(0);
+        finishDate.setHours(hours, minutes, 0, 0);
 
         const daysRemaining = this.calcRemainingDays(finishDate, finishDay, currentDate);
 
         finishDate.setDate(currentDate.date + daysRemaining);
 
         return finishDate;
+    }
+
+    updateDeliveryDate(updateDate, deliveryDay) {
+        const date = new Date(updateDate);
+        const deliveryDayNum = this.getDayNumber(deliveryDay);
+        const dayDiff = deliveryDayNum - date.getDay();
+
+        date.setDate(date.getDate() + dayDiff);
+
+        return date;
     }
 }

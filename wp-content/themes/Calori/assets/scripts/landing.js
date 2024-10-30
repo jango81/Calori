@@ -169,9 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mealsSelectors = {
         mealsDays: ".meals__days",
+        mealsDaysButtons: ".meals__days button",
         mealsPopup: ".meals-popup",
         mealsPopupImage: ".meals-popup__image",
         mealsSlideImage: ".meals-slide__image",
+        mealsSwiperWrapper: ".meals-swiper__wrapper",
     };
     class CustomMeals extends HTMLElement {
         constructor() {
@@ -190,16 +192,21 @@ document.addEventListener("DOMContentLoaded", () => {
         connectedCallback() {
             this.init();
             this.addDays();
+
+            this.defaultButton = this.dayButtons[0];
+            this.defaultButton.classList.add("_active");
+
+            this.currentDay = this.defaultButton.getAttribute("data-value");
+
+            if (this.defaultButton) this.fetchData(this.currentDay);
         }
         init() {
             this.daysElement = this.querySelector(mealsSelectors.mealsDays);
             this.mealsPopup = this.querySelector(mealsSelectors.mealsPopup);
             this.mealsPopupImage = this.querySelector(mealsSelectors.mealsPopupImage);
             this.mealsSlideImages = this.querySelectorAll(mealsSelectors.mealsSlideImage);
-
-            if (this.mealsSlideImages.length > 0 && this.mealsPopup) {
-                this.mealsSlideImages.forEach((el) => el.addEventListener("click", this.openPopup.bind(this)));
-            }
+            this.mealsSwiperWrapper = this.querySelector(mealsSelectors.mealsSwiperWrapper);
+            this.loadingElement = document.querySelector(".loading-gif");
         }
 
         openPopup(e) {
@@ -219,34 +226,100 @@ document.addEventListener("DOMContentLoaded", () => {
 
         buttonClickHandle(event) {
             const currentBtn = event.currentTarget;
-            if (this.clickedBtn) this.clickedBtn.classList.remove("_active");
 
-            this.clickedBtn = currentBtn;
-            currentBtn.classList.toggle("_active");
+            this.dayButtons.forEach((el) => el.classList.remove("_active"));
+
+            currentBtn.classList.add("_active");
+
+            this.fetchData(currentBtn.getAttribute("data-value"));
         }
+        async fetchData(day) {
+            this.loadingElement.style.display = "flex";
+            this.mealsSwiperWrapper.innerHTML = "";
+            try {
+                const response = await fetch(ajax_object.ajax_url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({
+                        action: "get_meal_menu",
+                    }),
+                });
+                const data = await response.json();
 
+                this.fetchedData = data;
+                this.printData(day);
+                this.loadingElement.style.display = "none";
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        printData(day) {
+            const meals = this.getDataValues(this.fetchedData, day);
+
+            for (const meal of meals) {
+                this.mealsSwiperWrapper.innerHTML += `
+                <div class="swiper-slide meals-slide">
+                        <div class="meals-slide__content">
+                            <div class="meals-slide__image">
+                                <img src="${meal.meal_image}" alt="food image" />
+                            </div>
+                            <div class="meals-slide__info">
+                                <header class="meals-slide__title">
+                                    <h2>${meal.meal_name}</h2>
+                                </header>
+                                <div class="meals-slide__description">
+                                    <p>${meal.meal_of_day}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            this.mealsSlideImages = this.querySelectorAll(mealsSelectors.mealsSlideImage);
+            if (this.mealsSlideImages && this.mealsSlideImages.length > 0 && this.mealsPopup) {
+                this.mealsSlideImages.forEach((el) => el.addEventListener("click", this.openPopup.bind(this)));
+            }
+        }
+        getDataValues(obj, keyToFind) {
+            for (const key in obj) {
+                if (key === keyToFind) {
+                    return obj[key];
+                }
+                if (typeof obj[key] === "object" && obj[key] !== null) {
+                    const result = this.getDataValues(obj[key], keyToFind);
+                    if (result !== undefined) {
+                        return result;
+                    }
+                }
+            }
+        }
         addDays() {
             this.daysElement.innerHTML = "";
 
             if (window.innerWidth > 640) {
-                for (const day in this.daysObj) {
-                    this.daysElement.innerHTML += `<li><button>${this.daysObj[day]}</button></li>`;
+                for (const [key, value] of Object.entries(this.daysObj)) {
+                    this.daysElement.innerHTML += `<li><button data-value="${key}">${value}</button></li>`;
                     this.daysElement.querySelectorAll("button").forEach((el) => el.addEventListener("click", this.buttonClickHandle.bind(this)));
                 }
             } else if (window.innerWidth < 640) {
-                for (const day in this.daysObj) {
-                    const calcSliceIndex = 0 - this.daysObj[day].length + 2;
-                    const shortestDay = this.daysObj[day].slice(0, calcSliceIndex);
-                    this.daysElement.innerHTML += `<li><button>${shortestDay}</button></li>`;
+                for (const [key, value] of Object.entries(this.daysObj)) {
+                    const calcSliceIndex = 0 - value.length + 2;
+                    const shortestDay = value.slice(0, calcSliceIndex);
+                    this.daysElement.innerHTML += `<li><button data-value="${key}">${shortestDay}</button></li>`;
                     this.daysElement.querySelectorAll("button").forEach((el) => el.addEventListener("click", this.buttonClickHandle.bind(this)));
                 }
             }
+
+            this.dayButtons = this.querySelectorAll(mealsSelectors.mealsDaysButtons);
         }
     }
     customElements.define("custom-meals", CustomMeals);
 
     const customOrderSelectors = {
-        productButton: ".order-products__product",
+        productButton: ".order-products__product input",
         orderSpoiler: ".infos-order__spoiler",
         orderDeliveryDate: ".order-delivery__date",
         orderInfoHeading: ".infos-order__heading",
@@ -255,6 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
         orderBlock: ".order-block",
         orderDuration: ".order__duration",
         orderRadio: ".order-radio",
+        orderControls: ".order__controls",
         priceElement: ".custom-radio__price",
         calculatorButton: ".order-calculator__button",
         calculator: ".calculator",
@@ -268,58 +342,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
         connectedCallback() {
             this.init();
-            this.setDeliveryDate();
         }
 
         init() {
             this.productButtons = this.querySelectorAll(customOrderSelectors.productButton);
             this.radioButton = this.querySelectorAll(customOrderSelectors.orderRadio);
+            this.orderControls = this.querySelectorAll(customOrderSelectors.orderControls);
             this.infoContent = this.querySelector(customOrderSelectors.orderInfoContent);
             this.orderButtons = this.querySelector(customOrderSelectors.orderButtons);
             this.orderDuration = this.querySelector(customOrderSelectors.orderDuration);
             this.calculatorButton = this.querySelector(customOrderSelectors.calculatorButton);
             this.calculator = this.querySelector(customOrderSelectors.calculator);
             this.deliveryDateEl = this.querySelector(customOrderSelectors.orderDeliveryDate);
+            this.errorMessage = this.querySelector(".error__message h1");
 
             this.endDay = this.deliveryDateEl.getAttribute("data-day");
             this.endTime = this.deliveryDateEl.getAttribute("data-time");
+            this.deliveryDay = this.deliveryDateEl.getAttribute("data-delivery-day");
 
             this.calculatorButton.addEventListener("click", () => this.calculator.classList.toggle("_active"));
-            this.productButtons.forEach((e) => {
-                e.addEventListener("click", this.productButtonHandle.bind(this));
-            });
-
-            this.updateDate();
+            this.productButtons.forEach((el) => el.addEventListener("click", this.productButtonHandler.bind(this)));
+            this.updateDates();
             this.interval = setInterval(this.intervalHandler.bind(this), 1000);
-        }
 
+            this.defaultProductButton = this.productButtons[0];
+            if (this.defaultProductButton) {
+                const buttonId = parseInt(this.defaultProductButton.getAttribute("data-product-id"));
+                this.defaultProductButton.checked = true;
+                this.setActiveControl(buttonId);
+            }
+        }
+        productButtonHandler(event) {
+            const button = event.currentTarget;
+            const buttonProductId = parseInt(button.getAttribute("data-product-id"));
+            this.setActiveControl(buttonProductId);
+        }
+        setActiveControl(buttonId) {
+            this.disableControls();
+
+            for (const el of this.orderControls) {
+                const productId = parseInt(el.getAttribute("data-product-id"));
+                if (productId === buttonId) {
+                    el.classList.add("_active");
+                    break;
+                }
+            }
+        }
+        disableControls() {
+            this.orderControls.forEach((el) => el.classList.remove("_active"));
+        }
         setDeliveryDate() {
-            const day = this.daysOfWeek[this.endDate.getDay()];
-            this.deliveryDateEl.textContent = `${day.slice(0, 2)} ${this.endDate.getDate()}.${this.endDate.getMonth() + 1}`
+            const deliveryDay = this.daysOfWeek[this.deliveryDate.getDay()];
+            this.deliveryDateEl.textContent = `${deliveryDay.slice(0, 2)} ${this.deliveryDate.getDate()}.${this.deliveryDate.getMonth() + 1}`;
         }
 
-        updateDate() {
-            this.endDate = this.time.getEndDate(this.endDay, this.endTime);
-            this.parsedDate = Date.parse(this.endDate);
+        updateDates() {
+            this.deliveryDate = this.time.getEndDate(this.deliveryDay);
+            this.dateToUpdate = this.time.getEndDate(this.endDay, this.endTime);
+            this.parsedUpdateDate = Date.parse(this.dateToUpdate);
+
+            this.deliveryDate = this.time.updateDeliveryDate(this.dateToUpdate, this.deliveryDay);
+            this.setDeliveryDate();
         }
 
         intervalHandler() {
             const currentDate = Date.now();
-            const difference = this.parsedDate - currentDate;
+            const difference = this.parsedUpdateDate - currentDate;
 
             if (difference <= 0) {
-                this.updateDate();
-                this.setDeliveryDate();
+                this.updateDates();
             }
-        }
-
-        productButtonHandle(e) {
-            const target = e.currentTarget;
-            this.productButtons.forEach((e) => {
-                e.classList.remove("_active");
-            });
-
-            target.classList.add("_active");
         }
 
         setButtonsMargin() {

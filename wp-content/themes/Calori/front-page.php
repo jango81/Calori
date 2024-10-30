@@ -10,7 +10,8 @@
                 <div class="cart__container _container">
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg"
+                                alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -22,7 +23,8 @@
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/delete-2-svgrepo-com.svg"
+                                            alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -48,7 +50,8 @@
                     </div>
                     <div class="cart__product cart-product">
                         <div class="cart-product__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg" alt="product image" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg"
+                                alt="product image" />
                         </div>
                         <div class="cart-product__details">
                             <h3 class="cart-product__name"><strong>Spaghetti</strong></h3>
@@ -60,7 +63,8 @@
                             <div class="cart-product__actions">
                                 <div class="cart-product__delete">
                                     <div class="icon">
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/delete-2-svgrepo-com.svg" alt="delete icon" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/delete-2-svgrepo-com.svg"
+                                            alt="delete icon" />
                                     </div>
                                 </div>
                                 <div class="cart-product__amount cart-amount">
@@ -148,7 +152,8 @@
                 <div class="swiper-slide info-swiper__slide info-slide">
                     <div class="info-slide__content">
                         <div class="info-slide__image info__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet-food.svg" alt="icon" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet-food.svg"
+                                alt="icon" />
                         </div>
                         <p class="info-slide__text">Suunniteltua, kokattua ja toimitettua</p>
                     </div>
@@ -156,7 +161,8 @@
                 <div class="swiper-slide info-slide">
                     <div class="info-slide__content">
                         <div class="info-slide__image info__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-bodybuilding.svg" alt="" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-bodybuilding.svg"
+                                alt="" />
                         </div>
                         <p class="info-slide__text">Ravitsemusasiantuntijoita tiimissä</p>
                     </div>
@@ -164,7 +170,8 @@
                 <div class="swiper-slide info-slide">
                     <div class="info-slide__content">
                         <div class="info-slide__image info__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-stopwatch.svg" alt="icon" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-stopwatch.svg"
+                                alt="icon" />
                         </div>
                         <p class="info-slide__text">Ruokalistat kehittyvät viikoittain</p>
                     </div>
@@ -172,7 +179,8 @@
                 <div class="swiper-slide info-slide">
                     <div class="info-slide__content">
                         <div class="info-slide__image info__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-salad.svg" alt="icon" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-salad.svg"
+                                alt="icon" />
                         </div>
                         <p class="info-slide__text">Ammattikokkien valmistamaa ruokaa</p>
                     </div>
@@ -180,7 +188,8 @@
                 <div class="swiper-slide info-slide">
                     <div class="info-slide__content">
                         <div class="info-slide__image info__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet.svg" alt="icon" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet.svg"
+                                alt="icon" />
                         </div>
                         <p class="info-slide__text">Yli 100 reseptiä reseptikirjassa</p>
                     </div>
@@ -188,7 +197,8 @@
                 <div class="swiper-slide info-slide">
                     <div class="info-slide__content">
                         <div class="info-slide__image info__image">
-                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-kettlebell.svg" alt="icon" />
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-kettlebell.svg"
+                                alt="icon" />
                         </div>
                         <p class="info-slide__text">Jostava kuljetus ja pakkaus</p>
                     </div>
@@ -200,37 +210,43 @@
             <div class="info__content">
                 <div class="info__item">
                     <div class="info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet-food.svg" alt="icon" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet-food.svg"
+                            alt="icon" />
                     </div>
                     <p class="info__text">Suunniteltua, kokattua ja toimitettua</p>
                 </div>
                 <div class="info__item">
                     <div class="info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-bodybuilding.svg" alt="icon" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-bodybuilding.svg"
+                            alt="icon" />
                     </div>
                     <p class="info__text">Ravitsemusasiantuntijoita tiimissä</p>
                 </div>
                 <div class="info__item">
                     <div class="info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-stopwatch.svg" alt="icon" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-stopwatch.svg"
+                            alt="icon" />
                     </div>
                     <p class="info__text">Ruokalistat kehittyvät viikoittain</p>
                 </div>
                 <div class="info__item">
                     <div class="info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-salad.svg" alt="icon" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-salad.svg"
+                            alt="icon" />
                     </div>
                     <p class="info__text">Ammattikokkien valmistamaa ruokaa</p>
                 </div>
                 <div class="info__item">
                     <div class="info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet.svg" alt="icon" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-diet.svg"
+                            alt="icon" />
                     </div>
                     <p class="info__text">Yli 100 reseptiä reseptikirjassa</p>
                 </div>
                 <div class="info__item">
                     <div class="info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-kettlebell.svg" alt="icon" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/calori-icon-kettlebell.svg"
+                            alt="icon" />
                     </div>
                     <p class="info__text">Jostava kuljetus ja pakkaus</p>
                 </div>
@@ -241,7 +257,7 @@
         <span></span>
     </div>
     <section id="meals">
-        <custom-meals class="meals">
+        <custom-meals class="meals" data-post-id="<?php echo get_option("page_on_front") ?>">
             <div class="meals__container _container">
                 <div class="meals__content">
                     <header class="meals__title section-title">
@@ -251,8 +267,12 @@
                 </div>
             </div>
             <div class="swiper meals-swiper">
+                <div class="loading-gif">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/loading-gif.gif"
+                        alt="loading">
+                </div>
                 <div class="swiper-wrapper meals-swiper__wrapper">
-                    <div class="swiper-slide meals-slide">
+                    <!-- <div class="swiper-slide meals-slide">
                         <div class="meals-slide__content">
                             <div class="meals-slide__image">
                                 <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg" alt="food image" />
@@ -311,7 +331,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="swiper-button-prev swiper-nav-button meals-swiper-prev"></div>
                 <div class="swiper-button-next swiper-nav-button meals-swiper-next"></div>
@@ -319,7 +339,7 @@
             </div>
             <div class="meals-popup">
                 <div class="meals-popup__image">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/" alt="food image" />
+                    <img src="" alt="food image" />
                 </div>
             </div>
         </custom-meals>
@@ -349,160 +369,126 @@
                             </svg>
                         </div>
                         <div class="order-delivery__text">
-                            <h3>Ensimmäinen toimitus:</h3>
+                            <p>Ensimmäinen toimitus:</p>
                         </div>
-                        <h3 class="order-delivery__date" data-day="tuesday" data-time="14:30"></h3>
+                        <p class="order-delivery__date" data-day="<?php echo get_field("order_end_day", "option") ?>"
+                            data-time="<?php echo get_field("order_end_time", "option") ?>"
+                            data-delivery-day="<?php echo get_field("first_delivery_days", "option") ?>"></p>
                     </div>
-                    <form class="order__form">
-                        <div class="order__products order-products order-block">
-                            <div class="order-products__product _active">
-                                <button type="button">
-                                    <strong>
-                                        <h3>Kalorilaskettu ruokavalio</h3>
-                                    </strong>
-                                </button>
+                    <?php
+                    $products = wc_get_products(array(
+                        "limit" => 2,
+                        "category" => array("tuote"),
+                    ));
+
+                    if (!empty($products)): ?>
+                        <form class="order__form">
+                            <div class="order__products order-products order-block">
+                                <?php foreach ($products as $product): ?>
+                                    <span class="order-products__product radio-sm">
+                                        <input type="radio" name="order-product" id="order-product"
+                                            data-product-id="<?php echo esc_attr($product->get_id()) ?>" />
+                                        <label
+                                            for="order-product"><strong><?php echo esc_html($product->get_name()); ?></strong></label>
+                                    </span>
+                                <?php endforeach; ?>
                             </div>
-                            <div class="order-products__product">
-                                <button type="button">
-                                    <strong>
-                                        <h3>Arjen helpotus ruokavalio</h3>
-                                    </strong>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="order__controls">
-                            <div class="order__settings">
-                                <fieldset class="order__type order-type order-block">
-                                    <legend class="order-type__title order-block-title">Ruokatilaus</legend>
-                                    <custom-select class="custom-select order-type__variants order-block-select"
-                                        data-heading="Valitse ruokatilauksesi">
-                                        <select name="order-variants"></select>
-                                        <div class="custom-select__wrapper">
-                                            <div class="custom-select__value">
-                                                <h5></h5>
-                                                <span></span>
+                            <?php foreach ($products as $product): ?>
+                                <div class="order__controls" data-product-id="<?php echo esc_attr($product->get_id()) ?>">
+                                    <?php
+                                    $product_attributes = $product->get_attributes();
+                                    if (!empty($product_attributes)): ?>
+                                        <div class="order__settings">
+                                            <?php foreach ($product_attributes as $attribute): ?>
+                                                <fieldset class="order-block">
+                                                    <legend class="order-block__title">
+                                                        <?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>
+                                                    </legend>
+                                                    <custom-select class="custom-select order-block__select"
+                                                        data-heading="<?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>">
+                                                        <select name="order-variants"></select>
+                                                        <div class="custom-select__wrapper">
+                                                            <div class="custom-select__value">
+                                                                <h5></h5>
+                                                                <span></span>
+                                                            </div>
+                                                            <div class="custom-select__options">
+                                                                <?php
+                                                                $attribute_options = $attribute->get_options();
+
+                                                                if (!empty($attribute_options)):
+                                                                    foreach ($attribute_options as $option):
+                                                                        $term = get_term_by('id', $option, $attribute->get_name());
+                                                                        ?>
+                                                                        <div class="custom-select__option"
+                                                                            data-value="<?php echo esc_attr($term->name) ?>">
+                                                                            <?php echo esc_attr($term->name) ?>
+                                                                        </div>
+                                                                    <?php endforeach; endif; ?>
+                                                            </div>
+                                                        </div>
+                                                    </custom-select>
+                                                    <div class="order-block__buttons _desktop">
+                                                        <?php
+                                                        $attribute_options = $attribute->get_options();
+
+                                                        if (!empty($attribute_options)):
+                                                            foreach ($attribute_options as $option):
+                                                                $term = get_term_by('id', $option, $attribute->get_name());
+                                                                ?>
+                                                                <span class="order-block__button radio-sm">
+                                                                    <input type="radio"
+                                                                        name="order-variants-<?php echo esc_attr($attribute->get_name()) ?>"
+                                                                        id="order-variants" />
+                                                                    <label for="order-variants"><?php echo esc_html($term->name); ?></label>
+                                                                </span>
+                                                            <?php endforeach; endif; ?>
+                                                    </div>
+                                                </fieldset>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="order__details">
+                                        <fieldset class="order__payment order-payment order-block">
+                                            <legend class="order-payment__title order-block-title">Maksun muoto</legend>
+                                            <div class="order-payment__radiobuttons">
+                                                <div class="custom-radio order-radio">
+                                                    <input type="radio" name="order-radio" />
+                                                    <div class="custom-radio__wrapper">
+                                                        <span class="custom-radio__bullet"></span>
+                                                        <h3 class="custom-radio__heading">Kertamaksu</h3>
+                                                        <h3 class="custom-radio__price"></h3>
+                                                    </div>
+                                                </div>
+                                                <div class="custom-radio order-radio">
+                                                    <input type="radio" name="order-radio" />
+                                                    <div class="custom-radio__wrapper">
+                                                        <span class="custom-radio__bullet"></span>
+                                                        <h3 class="custom-radio__heading">Uusiutuva</h3>
+                                                        <h3 class="custom-radio__price"></h3>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="custom-select__options">
-                                                <div class="custom-select__option" data-value="Lounas + Päivällinen">
-                                                    Lounas + Päivällinen</div>
-                                                <div class="custom-select__option" data-value="Aamupala + Lounas">
-                                                    Aamupala + Lounas</div>
-                                                <div class="custom-select__option" data-value="Aamupala + Päivällinen">
-                                                    Aamupala + Päivällinen</div>
-                                                <div class="custom-select__option" data-value="Päivällinen + Välipala">
-                                                    Päivällinen + Välipala</div>
-                                                <div class="custom-select__option"
-                                                    data-value="Aamupala + Lounas + Päivällinen">Aamupala + Lounas +
-                                                    Päivällinen</div>
-                                                <div class="custom-select__option"
-                                                    data-value="Lounas + Päivällinen + Välipala">Lounas + Päivällinen +
-                                                    Välipala</div>
+                                        </fieldset>
+                                        <div class="order__buttons">
+                                            <div class="order__button">
+                                                <a href="#" class="btn btn-solid btn-medium">
+                                                    <span class="btn-text">Lisää ostoskoriin</span>
+                                                </a>
                                             </div>
                                         </div>
-                                    </custom-select>
-                                    <div class="order-type__buttons _desktop">
-                                        <span class="order-type__button radio-sm">
-                                            <input type="radio" name="order-variants" id="order-variants" />
-                                            <label for="order-variants">1500 kcal</label>
-                                        </span>
-                                        <span class="order-type__button radio-sm">
-                                            <input type="radio" name="order-variants" id="order-variants" />
-                                            <label for="order-variants">1500 kcal</label>
-                                        </span>
-                                        <span class="order-type__button radio-sm">
-                                            <input type="radio" name="order-variants" id="order-variants" />
-                                            <label for="order-variants">1500 kcal</label>
-                                        </span>
-                                        <span class="order-type__button radio-sm">
-                                            <input type="radio" name="order-variants" id="order-variants" />
-                                            <label for="order-variants">1500 kcal</label>
-                                        </span>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="order__duration order-duration order-block">
-                                    <legend class="order-duration__title order-block-title">Tilauksen kesto</legend>
-                                    <custom-select class="custom-select order-type__durations order-block-select"
-                                        data-heading="Valitse tilauksen kesto">
-                                        <select name="order-variants"></select>
-                                        <div class="custom-select__wrapper">
-                                            <div class="custom-select__value">
-                                                <h5></h5>
-                                                <span></span>
-                                            </div>
-                                            <div class="custom-select__options">
-                                                <div class="custom-select__option" data-value="Lounas + Päivällinen">
-                                                    Lounas + Päivällinen<span class="price-tag">30€/pv</span></div>
-                                                <div class="custom-select__option" data-value="Aamupala + Lounas">
-                                                    Aamupala + Lounas<span class="price-tag">30€/pv</span></div>
-                                                <div class="custom-select__option" data-value="Aamupala + Päivällinen">
-                                                    Aamupala + Päivällinen<span class="price-tag">30€/pv</span></div>
-                                                <div class="custom-select__option" data-value="Päivällinen + Välipala">
-                                                    Päivällinen + Välipala<span class="price-tag">30€/pv</span></div>
-                                                <div class="custom-select__option"
-                                                    data-value="Aamupala + Lounas + Päivällinen">Aamupala + Lounas +
-                                                    Päivällinen<span class="price-tag">30€/pv</span></div>
-                                                <div class="custom-select__option"
-                                                    data-value="Lounas + Päivällinen + Välipala">Lounas + Päivällinen +
-                                                    Välipala<span class="price-tag">30€/pv</span></div>
-                                            </div>
-                                        </div>
-                                    </custom-select>
-                                    <div class="order-duration__buttons _desktop price-tag-margin">
-                                        <span class="order-duration__button radio-sm">
-                                            <input type="radio" name="order-duration" id="" />
-                                            <label for="order-duration">1500 kcal</label>
-                                            <span class="price-tag">30€/pv</span>
-                                        </span>
-                                        <span class="order-duration__button radio-sm">
-                                            <input type="radio" name="order-duration" id="" />
-                                            <label for="order-duration">1500 kcal</label>
-                                            <span class="price-tag">30€/pv</span>
-                                        </span>
-                                        <span class="order-duration__button radio-sm">
-                                            <input type="radio" name="order-duration" id="" />
-                                            <label for="order-duration">1500 kcal</label>
-                                            <span class="price-tag">30€/pv</span>
-                                        </span>
-                                        <span class="order-duration__button radio-sm">
-                                            <input type="radio" name="order-duration" id="" />
-                                            <label for="order-duration">1500 kcal</label>
-                                            <span class="price-tag">30€/pv</span>
-                                        </span>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="order__details">
-                                <fieldset class="order__payment order-payment order-block">
-                                    <legend class="order-payment__title order-block-title">Maksun muoto</legend>
-                                    <div class="order-payment__radiobuttons">
-                                        <div class="custom-radio order-radio">
-                                            <input type="radio" name="order-radio" />
-                                            <div class="custom-radio__wrapper">
-                                                <span class="custom-radio__bullet"></span>
-                                                <h3 class="custom-radio__heading">Kertamaksu</h3>
-                                                <h3 class="custom-radio__price"></h3>
-                                            </div>
-                                        </div>
-                                        <div class="custom-radio order-radio">
-                                            <input type="radio" name="order-radio" />
-                                            <div class="custom-radio__wrapper">
-                                                <span class="custom-radio__bullet"></span>
-                                                <h3 class="custom-radio__heading">Uusiutuva</h3>
-                                                <h3 class="custom-radio__price"></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <div class="order__buttons">
-                                    <div class="order__button">
-                                        <a href="#" class="btn btn-solid btn-medium">
-                                            <span class="btn-text">Lisää ostoskoriin</span>
-                                        </a>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endforeach; ?>
+                        </form>
+                    <?php else: ?>
+                        <div class="error__message">
+                            <h1>Tilaukset suljettu</h1>
                         </div>
-                    </form>
+                    <?php endif ?>
+                    <div class="error__message">
+                        <h1></h1>
+                    </div>
                     <div class="order__calculator order-calculator">
                         <p>Etkö tiedä mikä on kaloritarpeesi?</p>
                         <a class="btn btn-transparent btn-small order-calculator__button">Avaa kalorilaskuri</a>
@@ -617,7 +603,9 @@
                             </div>
                         </custom-spoiler>
                     </div>
-                    <custom-timer class="order__timer custom-timer" data-day="Tuesday" data-time="14:30">
+                    <custom-timer class="order__timer custom-timer"
+                        data-day="<?php echo get_field("order_end_day", "option") ?>"
+                        data-time="<?php echo get_field("order_end_time", "option") ?>">
                         <h4 class="custom-timer__title">Tilaukset sulkeutuvat tiistaisin klo 14.30</h4>
                         <div class="custom-timer__body">
                             <div class="custom-timer__time">
@@ -699,7 +687,8 @@
                             <div class="swiper-slide steps-slide">
                                 <div class="steps-slide__content">
                                     <div class="steps-slide__image">
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa.png" alt="bg image" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa.png"
+                                            alt="bg image" />
                                     </div>
                                     <header class="steps-slide__heading">
                                         <h3>Tilaa</h3>
@@ -711,7 +700,8 @@
                             <div class="swiper-slide steps-slide">
                                 <div class="steps-slide__content">
                                     <div class="steps-slide__image">
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png" alt="bg image" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                                            alt="bg image" />
                                     </div>
                                     <header class="steps-slide__heading">
                                         <h3>Vastaanota</h3>
@@ -723,7 +713,8 @@
                             <div class="swiper-slide steps-slide swiper-no-swiping">
                                 <div class="steps-slide__content">
                                     <div class="steps-slide__image">
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/nauti.png" alt="bg image" />
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/nauti.png"
+                                            alt="bg image" />
                                     </div>
                                     <header class="steps-slide__heading">
                                         <h3>Nauti</h3>
@@ -762,7 +753,8 @@
                     <div class="swiper-slide why-slide">
                         <div class="why-slide__content">
                             <div class="why-slide__icon">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg" alt="icon" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg"
+                                    alt="icon" />
                             </div>
                             <header class="why-slide__heading">
                                 <h3>Maukasta ja terveellistä ruokaa</h3>
@@ -774,7 +766,8 @@
                     <div class="swiper-slide why-slide">
                         <div class="why-slide__content">
                             <div class="why-slide__icon">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg" alt="icon" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg"
+                                    alt="icon" />
                             </div>
                             <header class="why-slide__heading">
                                 <h3>Pidät taukoa kokkaamisesta</h3>
@@ -786,7 +779,8 @@
                     <div class="swiper-slide why-slide">
                         <div class="why-slide__content">
                             <div class="why-slide__icon">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg" alt="icon" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg"
+                                    alt="icon" />
                             </div>
                             <header class="why-slide__heading">
                                 <h3>Tasapainoa ja helpoutta elämääsi</h3>
@@ -798,7 +792,8 @@
                     <div class="swiper-slide why-slide">
                         <div class="why-slide__content">
                             <div class="why-slide__icon">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg" alt="icon" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets//images/icons/star.svg"
+                                    alt="icon" />
                             </div>
                             <header class="why-slide__heading">
                                 <h3>Saavutat kaikki tavoitteesi</h3>
@@ -831,7 +826,8 @@
                 </div>
             </div>
             <div class="quote__image">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/quoteImage (2).png" alt="quote image" />
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/quoteImage (2).png"
+                    alt="quote image" />
             </div>
         </div>
     </section>
@@ -921,7 +917,8 @@
                             <h3 class="banner-slide__heading">Perinteiset raaka-aineet</h3>
                             <p class="banner-slide__text">Joka päivä jotain uutta sinulle tutuista raaka-aineista.</p>
                             <div class="banner-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner-table.png" alt="banner image" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner-table.png"
+                                    alt="banner image" />
                             </div>
                         </div>
                     </div>
@@ -931,7 +928,8 @@
                             <p class="banner-slide__text">Yli 50 tuntia lisää vapaata aikaa kuukaudessa. Voit kokeilla
                                 uutta harrastusta, käyttää aikaa tavoitteiden saavuttamiseen tai rentoutua kotona.</p>
                             <div class="banner-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner-breakfast.png" alt="banner image" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner-breakfast.png"
+                                    alt="banner image" />
                             </div>
                         </div>
                     </div>
@@ -941,7 +939,8 @@
                             <p class="banner-slide__text">Pidämme huolen, että voit nauttia ruoasta yhdessä seurasi
                                 kanssa.</p>
                             <div class="banner-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner-couple.png" alt="banner image" />
+                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner-couple.png"
+                                    alt="banner image" />
                             </div>
                         </div>
                     </div>
@@ -960,47 +959,56 @@
             <div class="swiper-wrapper cooperation-swiper__wrapper">
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kmarket.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kmarket.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kcitymarket.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kcitymarket.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/T4U 1.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/T4U 1.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kmarket.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kmarket.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kcitymarket.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kcitymarket.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/T4U 1.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/T4U 1.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kmarket.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kmarket.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kcitymarket.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/kcitymarket.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
                 <div class="swiper-slide cooperation-slide">
                     <div class="cooperation-slide__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/T4U 1.png" alt="cooperation company logo" />
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/T4U 1.png"
+                            alt="cooperation company logo" />
                     </div>
                 </div>
             </div>
