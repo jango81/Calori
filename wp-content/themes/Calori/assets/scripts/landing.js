@@ -324,14 +324,26 @@ document.addEventListener("DOMContentLoaded", () => {
         orderDeliveryDate: ".order-delivery__date",
         orderInfoHeading: ".infos-order__heading",
         orderInfoContent: ".infos-order__content",
+        orderVariantButtons: ".order-block__button input[id='order-variants']",
         orderButtons: ".order__buttons",
+        orderVariantBlock: ".order__variant",
         orderBlock: ".order-block",
-        orderDuration: ".order__duration",
+        orderPaymentBlock: ".order-payment",
+        orderSettings: ".order__settings",
         orderRadio: ".order-radio",
         orderControls: ".order__controls",
         priceElement: ".custom-radio__price",
         calculatorButton: ".order-calculator__button",
         calculator: ".calculator",
+    };
+    const customOrderAttributes = {
+        dataDay: "data-day",
+        dataTime: "data-time",
+        dataDeliveryTime: "data-delivery-day",
+        dataProductId: "data-product-id",
+        dataValue: "data-value",
+        dataCurrentVariant: "data-current-variant",
+        dataAttributes: "data-attributes",
     };
     class CustomOrder extends HTMLElement {
         constructor() {
@@ -348,48 +360,111 @@ document.addEventListener("DOMContentLoaded", () => {
             this.productButtons = this.querySelectorAll(customOrderSelectors.productButton);
             this.radioButton = this.querySelectorAll(customOrderSelectors.orderRadio);
             this.orderControls = this.querySelectorAll(customOrderSelectors.orderControls);
+            this.variantButtons = this.querySelectorAll(customOrderSelectors.orderVariantButtons);
+            this.paymentBlock = this.querySelectorAll(customOrderSelectors.orderPaymentBlock);
+            this.orderVariantBlocks = this.querySelectorAll(`${customOrderSelectors.orderSettings} > ${customOrderSelectors.orderBlock}`);
             this.infoContent = this.querySelector(customOrderSelectors.orderInfoContent);
             this.orderButtons = this.querySelector(customOrderSelectors.orderButtons);
-            this.orderDuration = this.querySelector(customOrderSelectors.orderDuration);
             this.calculatorButton = this.querySelector(customOrderSelectors.calculatorButton);
             this.calculator = this.querySelector(customOrderSelectors.calculator);
             this.deliveryDateEl = this.querySelector(customOrderSelectors.orderDeliveryDate);
             this.errorMessage = this.querySelector(".error__message h1");
 
-            this.endDay = this.deliveryDateEl.getAttribute("data-day");
-            this.endTime = this.deliveryDateEl.getAttribute("data-time");
-            this.deliveryDay = this.deliveryDateEl.getAttribute("data-delivery-day");
+            this.endDay = this.deliveryDateEl.getAttribute(customOrderAttributes.dataDay);
+            this.endTime = this.deliveryDateEl.getAttribute(customOrderAttributes.dataTime);
+            this.deliveryDay = this.deliveryDateEl.getAttribute(customOrderAttributes.dataDeliveryTime);
 
             this.calculatorButton.addEventListener("click", () => this.calculator.classList.toggle("_active"));
             this.productButtons.forEach((el) => el.addEventListener("click", this.productButtonHandler.bind(this)));
+            this.variantButtons.forEach((el) => el.addEventListener("change", this.variantButtonHandler.bind(this)));
+
             this.updateDates();
             this.interval = setInterval(this.intervalHandler.bind(this), 1000);
 
             this.defaultProductButton = this.productButtons[0];
             if (this.defaultProductButton) {
-                const buttonId = parseInt(this.defaultProductButton.getAttribute("data-product-id"));
+                const buttonId = parseInt(this.defaultProductButton.getAttribute(customOrderAttributes.dataProductId));
                 this.defaultProductButton.checked = true;
                 this.setActiveControl(buttonId);
             }
         }
+        resetClasses(element, className) {
+            if (typeof element === "object") {
+                element.forEach((el) => el.classList.remove(className));
+            } else {
+                element.classList.remove(className);
+            }
+        }
+        checkVariantBlocks() {
+            const attributes = [];
+            for (const el of this.orderVariantBlocks) {
+                const currentAttribute = el.getAttribute(customOrderAttributes.dataCurrentVariant);
+            
+                if (!currentAttribute) {
+                    continue;
+                }
+
+                attributes.push(currentAttribute);
+            }
+            
+            if(attributes.length <= 0) return false;
+
+            return attributes.map(el => Number(el));
+        }
+        variantButtonHandler(event) {
+            this.resetClasses(this.orderVariantBlocks, "_active");
+            const currentButton = event.currentTarget;
+            const buttonAttribute = currentButton.getAttribute(customOrderAttributes.dataValue);
+            const variantBlock = currentButton.closest(customOrderSelectors.orderVariantBlock);
+            variantBlock.setAttribute(customOrderAttributes.dataCurrentVariant, buttonAttribute);
+
+            this.getPaymentBlock();
+        }
+        getPaymentBlock() {
+            const attributes = this.checkVariantBlocks();
+            if (!attributes) return;
+
+            this.resetClasses(this.paymentBlock, "_active");
+            let status = false;
+
+            for (const el of this.paymentBlock) {
+                const elementAttributes = el
+                    .getAttribute(customOrderAttributes.dataAttributes)
+                    .split(";")
+                    .filter((attr) => attr !== "")
+                    .map((el) => Number(el.trim()));
+
+                if(attributes.length === elementAttributes.length) {
+                    for (const attr of attributes) {
+                        if (!elementAttributes.includes(attr)) {1
+                            status = false;
+                            break;
+                        }
+                        status = true;
+                    }
+                }
+                
+                if(status) {
+                    el.classList.add("_active");
+                    return;
+                }
+            }
+        }
         productButtonHandler(event) {
             const button = event.currentTarget;
-            const buttonProductId = parseInt(button.getAttribute("data-product-id"));
+            const buttonProductId = parseInt(button.getAttribute(customOrderAttributes.dataProductId));
             this.setActiveControl(buttonProductId);
         }
         setActiveControl(buttonId) {
-            this.disableControls();
+            this.resetClasses(this.orderControls, "_active");
 
             for (const el of this.orderControls) {
-                const productId = parseInt(el.getAttribute("data-product-id"));
+                const productId = parseInt(el.getAttribute(customOrderAttributes.dataProductId));
                 if (productId === buttonId) {
                     el.classList.add("_active");
                     break;
                 }
             }
-        }
-        disableControls() {
-            this.orderControls.forEach((el) => el.classList.remove("_active"));
         }
         setDeliveryDate() {
             const deliveryDay = this.daysOfWeek[this.deliveryDate.getDay()];

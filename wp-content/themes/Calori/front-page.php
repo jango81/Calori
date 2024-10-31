@@ -393,14 +393,19 @@
                                     </span>
                                 <?php endforeach; ?>
                             </div>
-                            <?php foreach ($products as $product): ?>
+                            <?php foreach ($products as $product):
+                                $product_attributes = $product->get_attributes();
+                                $product_variations = $product->get_available_variations();
+                                ?>
                                 <div class="order__controls" data-product-id="<?php echo esc_attr($product->get_id()) ?>">
                                     <?php
                                     $product_attributes = $product->get_attributes();
                                     if (!empty($product_attributes)): ?>
                                         <div class="order__settings">
-                                            <?php foreach ($product_attributes as $attribute): ?>
-                                                <fieldset class="order-block">
+                                            <?php foreach ($product_attributes as $attribute):
+                                                if ($attribute->get_name() === "pa_maksu-tyyppi")
+                                                    continue; ?>
+                                                <fieldset class="order-block order__variant" data-curret-variant="">
                                                     <legend class="order-block__title">
                                                         <?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>
                                                     </legend>
@@ -439,7 +444,8 @@
                                                                 <span class="order-block__button radio-sm">
                                                                     <input type="radio"
                                                                         name="order-variants-<?php echo esc_attr($attribute->get_name()) ?>"
-                                                                        id="order-variants" />
+                                                                        id="order-variants"
+                                                                        data-value="<?php echo esc_html($term->term_id); ?>" />
                                                                     <label for="order-variants"><?php echo esc_html($term->name); ?></label>
                                                                 </span>
                                                             <?php endforeach; endif; ?>
@@ -449,7 +455,67 @@
                                         </div>
                                     <?php endif; ?>
                                     <div class="order__details">
-                                        <fieldset class="order__payment order-payment order-block">
+                                        <?php
+                                        foreach ($product_variations as $variant):
+                                            $has_subscription_type = true;
+                                            $variation_id = $variant["variation_id"];
+                                            $variation_obj = wc_get_product($variation_id);
+                                            $variation_attributes = $variation_obj->get_attributes();
+                                            $attribute_names = "";
+                                            foreach ($variation_attributes as $attr_key => $attr_value):
+                                                $term = get_term_by('slug', $attr_value, $attr_key);
+
+                                                if ($term) {
+                                                    if ($attr_key === "pa_maksu-tyyppi") {
+                                                        $has_subscription_type = false;
+                                                        continue;
+                                                    }
+
+                                                    $attribute_names .= $term->term_id . ";";
+                                                }
+                                            endforeach;
+                                            ?>
+                                            <fieldset class="order__payment order-payment order-block"
+                                                data-variant-id="<?php echo esc_attr($variation_obj->get_id()) ?>"
+                                                data-attributes="<?php echo esc_attr($attribute_names) ?>">
+                                                <legend class="order-payment__title order-block-title">Maksun muoto</legend>
+                                                <div class="order-payment__radiobuttons">
+                                                    <?php if (!$has_subscription_type): ?>
+                                                        <div class="custom-radio order-radio">
+                                                            <input type="radio" name="order-radio" />
+                                                            <div class="custom-radio__wrapper">
+                                                                <span class="custom-radio__bullet"></span>
+                                                                <h3 class="custom-radio__heading"><?php echo esc_html($term->name) ?>
+                                                                </h3>
+                                                                <h3 class="custom-radio__price">
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    <?php else:
+                                                        if (!empty($product_attributes)):
+                                                            foreach ($product_attributes as $product_attr):
+                                                                if ($product_attr->get_name() === "pa_maksu-tyyppi"):
+                                                                    $attribute_options = $product_attr->get_options();
+                                                                    foreach ($attribute_options as $option):
+                                                                        $term = get_term_by("id", $option, $product_attr->get_name());
+                                                                        if ($term):
+                                                                            ?>
+                                                                            <div class="custom-radio order-radio">
+                                                                                <input type="radio" name="order-radio" />
+                                                                                <div class="custom-radio__wrapper">
+                                                                                    <span class="custom-radio__bullet"></span>
+                                                                                    <h3 class="custom-radio__heading"><?php echo esc_html($term->name) ?>
+                                                                                    </h3>
+                                                                                    <h3 class="custom-radio__price">
+                                                                                    </h3>
+                                                                                </div>
+                                                                            </div>
+                                                                        <?php endif; endforeach; endif; endforeach; endif ?>
+                                                    <?php endif ?>
+                                                </div>
+                                            </fieldset>
+                                        <?php endforeach; ?>
+                                        <!-- <fieldset class="order__payment order-payment order-block">
                                             <legend class="order-payment__title order-block-title">Maksun muoto</legend>
                                             <div class="order-payment__radiobuttons">
                                                 <div class="custom-radio order-radio">
@@ -469,7 +535,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </fieldset>
+                                        </fieldset> -->
                                         <div class="order__buttons">
                                             <div class="order__button">
                                                 <a href="#" class="btn btn-solid btn-medium">

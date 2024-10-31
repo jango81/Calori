@@ -1735,6 +1735,12 @@ body {
 .order-payment {
     align-items: start;
 }
+.order-payment.order-block {
+    display: none;
+}
+.order-payment._active.order-block {
+    display: flex;
+}
 .order-payment__radiobuttons {
     display: flex;
     align-items: center;
@@ -1947,9 +1953,6 @@ body {
     }
     .order-block:not(:first-child) {
         margin-top: 10px;
-    }
-    .order-block {
-        display: flex;
     }
     .order-block > custom-select {
         display: none;
