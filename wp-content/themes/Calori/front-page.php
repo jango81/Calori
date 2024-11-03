@@ -405,7 +405,7 @@
                                             <?php foreach ($product_attributes as $attribute):
                                                 if ($attribute->get_name() === "pa_maksu-tyyppi")
                                                     continue; ?>
-                                                <fieldset class="order-block order__variant" data-curret-variant="">
+                                                <fieldset class="order-block order__variant" data-current-variant="">
                                                     <legend class="order-block__title">
                                                         <?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>
                                                     </legend>
@@ -436,14 +436,15 @@
                                                     <div class="order-block__buttons _desktop">
                                                         <?php
                                                         $attribute_options = $attribute->get_options();
-
+                                                        $count = 0;
                                                         if (!empty($attribute_options)):
                                                             foreach ($attribute_options as $option):
+                                                                $count++;
                                                                 $term = get_term_by('id', $option, $attribute->get_name());
                                                                 ?>
                                                                 <span class="order-block__button radio-sm">
                                                                     <input type="radio"
-                                                                        name="order-variants-<?php echo esc_attr($attribute->get_name()) ?>"
+                                                                        name="order-variants-<?php echo esc_attr($attribute->get_name()) . esc_attr($product->get_id()) ?>"
                                                                         id="order-variants"
                                                                         data-value="<?php echo esc_html($term->term_id); ?>" />
                                                                     <label for="order-variants"><?php echo esc_html($term->name); ?></label>

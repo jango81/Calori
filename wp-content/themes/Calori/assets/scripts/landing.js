@@ -332,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         orderSettings: ".order__settings",
         orderRadio: ".order-radio",
         orderControls: ".order__controls",
+        orderControlsActive: ".order__controls._active",
         priceElement: ".custom-radio__price",
         calculatorButton: ".order-calculator__button",
         calculator: ".calculator",
@@ -382,11 +383,20 @@ document.addEventListener("DOMContentLoaded", () => {
             this.interval = setInterval(this.intervalHandler.bind(this), 1000);
 
             this.defaultProductButton = this.productButtons[0];
+
             if (this.defaultProductButton) {
                 const buttonId = parseInt(this.defaultProductButton.getAttribute(customOrderAttributes.dataProductId));
                 this.defaultProductButton.checked = true;
                 this.setActiveControl(buttonId);
             }
+
+            this.orderVariantBlocks.forEach((el) => {
+                const variantButtons = el.querySelectorAll(customOrderSelectors.orderVariantButtons);
+                if (variantButtons.length > 0) {
+                    variantButtons[0].checked = true;
+                    this.getPaymentBlock(variantButtons[0]);
+                }
+            });
         }
         resetClasses(element, className) {
             if (typeof element === "object") {
@@ -395,33 +405,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.classList.remove(className);
             }
         }
-        checkVariantBlocks() {
+        checkVariantBlocks(button) {
+            this.setAttributes(button);
+            const activeVariantBlocks = this.querySelectorAll(`${customOrderSelectors.orderControlsActive} ${customOrderSelectors.orderVariantBlock}`);
             const attributes = [];
-            for (const el of this.orderVariantBlocks) {
+
+            for (const el of activeVariantBlocks) {
                 const currentAttribute = el.getAttribute(customOrderAttributes.dataCurrentVariant);
-            
+
                 if (!currentAttribute) {
                     continue;
                 }
 
                 attributes.push(currentAttribute);
             }
-            
-            if(attributes.length <= 0) return false;
 
-            return attributes.map(el => Number(el));
+            if (attributes.length <= 0) return false;
+
+            return attributes.map((el) => Number(el));
+        }
+        setAttributes(button) {
+            const buttonAttribute = button.getAttribute(customOrderAttributes.dataValue);
+            const variantBlock = button.closest(customOrderSelectors.orderVariantBlock);
+            variantBlock.setAttribute(customOrderAttributes.dataCurrentVariant, buttonAttribute);
         }
         variantButtonHandler(event) {
             this.resetClasses(this.orderVariantBlocks, "_active");
             const currentButton = event.currentTarget;
-            const buttonAttribute = currentButton.getAttribute(customOrderAttributes.dataValue);
-            const variantBlock = currentButton.closest(customOrderSelectors.orderVariantBlock);
-            variantBlock.setAttribute(customOrderAttributes.dataCurrentVariant, buttonAttribute);
-
-            this.getPaymentBlock();
+            this.getPaymentBlock(currentButton);
         }
-        getPaymentBlock() {
-            const attributes = this.checkVariantBlocks();
+        getPaymentBlock(button) {
+            const attributes = this.checkVariantBlocks(button);
             if (!attributes) return;
 
             this.resetClasses(this.paymentBlock, "_active");
@@ -434,17 +448,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     .filter((attr) => attr !== "")
                     .map((el) => Number(el.trim()));
 
-                if(attributes.length === elementAttributes.length) {
+                if (attributes.length === elementAttributes.length) {
                     for (const attr of attributes) {
-                        if (!elementAttributes.includes(attr)) {1
+                        if (!elementAttributes.includes(attr)) {
                             status = false;
                             break;
                         }
                         status = true;
                     }
                 }
-                
-                if(status) {
+
+                if (status) {
                     el.classList.add("_active");
                     return;
                 }
