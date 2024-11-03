@@ -352,173 +352,181 @@ document.addEventListener("DOMContentLoaded", () => {
             this.daysOfWeek = ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"];
             this.time = new Time();
         }
-
+    
         connectedCallback() {
             this.init();
         }
-
+    
         init() {
-            this.productButtons = this.querySelectorAll(customOrderSelectors.productButton);
-            this.radioButton = this.querySelectorAll(customOrderSelectors.orderRadio);
-            this.orderControls = this.querySelectorAll(customOrderSelectors.orderControls);
-            this.variantButtons = this.querySelectorAll(customOrderSelectors.orderVariantButtons);
-            this.paymentBlock = this.querySelectorAll(customOrderSelectors.orderPaymentBlock);
-            this.orderVariantBlocks = this.querySelectorAll(`${customOrderSelectors.orderSettings} > ${customOrderSelectors.orderBlock}`);
-            this.infoContent = this.querySelector(customOrderSelectors.orderInfoContent);
-            this.orderButtons = this.querySelector(customOrderSelectors.orderButtons);
-            this.calculatorButton = this.querySelector(customOrderSelectors.calculatorButton);
-            this.calculator = this.querySelector(customOrderSelectors.calculator);
-            this.deliveryDateEl = this.querySelector(customOrderSelectors.orderDeliveryDate);
-            this.errorMessage = this.querySelector(".error__message h1");
+            const selectors = customOrderSelectors;
+            const attributes = customOrderAttributes;
 
-            this.endDay = this.deliveryDateEl.getAttribute(customOrderAttributes.dataDay);
-            this.endTime = this.deliveryDateEl.getAttribute(customOrderAttributes.dataTime);
-            this.deliveryDay = this.deliveryDateEl.getAttribute(customOrderAttributes.dataDeliveryTime);
-
-            this.calculatorButton.addEventListener("click", () => this.calculator.classList.toggle("_active"));
-            this.productButtons.forEach((el) => el.addEventListener("click", this.productButtonHandler.bind(this)));
-            this.variantButtons.forEach((el) => el.addEventListener("change", this.variantButtonHandler.bind(this)));
-
+            this.elements = {
+                productButtons: this.querySelectorAll(selectors.productButton),
+                radioButtons: this.querySelectorAll(selectors.orderRadio),
+                orderControls: this.querySelectorAll(selectors.orderControls),
+                variantButtons: this.querySelectorAll(selectors.orderVariantButtons),
+                paymentBlock: this.querySelectorAll(selectors.orderPaymentBlock),
+                orderVariantBlocks: this.querySelectorAll(`${selectors.orderSettings} > ${selectors.orderBlock}`),
+                infoContent: this.querySelector(selectors.orderInfoContent),
+                orderButtons: this.querySelector(selectors.orderButtons),
+                calculatorButton: this.querySelector(selectors.calculatorButton),
+                calculator: this.querySelector(selectors.calculator),
+                deliveryDateEl: this.querySelector(selectors.orderDeliveryDate),
+                errorMessage: this.querySelector(".error__message h1")
+            };
+    
+            this.endDay = this.elements.deliveryDateEl.getAttribute(attributes.dataDay);
+            this.endTime = this.elements.deliveryDateEl.getAttribute(attributes.dataTime);
+            this.deliveryDay = this.elements.deliveryDateEl.getAttribute(attributes.dataDeliveryTime);
+    
+            this.attachEventListeners();
             this.updateDates();
-            this.interval = setInterval(this.intervalHandler.bind(this), 1000);
-
-            this.defaultProductButton = this.productButtons[0];
-
+            this.startInterval();
+    
+            this.initializeDefaultButton();
+            this.initilizePaymentBlocks();
+        }
+    
+        attachEventListeners() {
+            const { productButtons, calculatorButton, variantButtons } = this.elements;
+            
+            calculatorButton.addEventListener("click", () => this.elements.calculator.classList.toggle("_active"));
+            productButtons.forEach((button) => button.addEventListener("click", this.productButtonHandler.bind(this)));
+            variantButtons.forEach((button) => button.addEventListener("change", this.variantButtonHandler.bind(this)));
+        }
+    
+        initializeDefaultButton() {
+            const { productButtons } = this.elements;
+            this.defaultProductButton = productButtons[0];
+    
             if (this.defaultProductButton) {
                 const buttonId = parseInt(this.defaultProductButton.getAttribute(customOrderAttributes.dataProductId));
                 this.defaultProductButton.checked = true;
                 this.setActiveControl(buttonId);
             }
-
-            this.orderVariantBlocks.forEach((el) => {
-                const variantButtons = el.querySelectorAll(customOrderSelectors.orderVariantButtons);
+        }
+    
+        initializeVariantBlocks() {
+            this.elements.orderVariantBlocks.forEach((block) => {
+                const variantButtons = block.querySelectorAll(customOrderSelectors.orderVariantButtons);
                 if (variantButtons.length > 0) {
                     variantButtons[0].checked = true;
                     this.getPaymentBlock(variantButtons[0]);
                 }
             });
         }
-        resetClasses(element, className) {
-            if (typeof element === "object") {
-                element.forEach((el) => el.classList.remove(className));
-            } else {
-                element.classList.remove(className);
-            }
+        
+        initilizePaymentBlocks() {
+            const { orderVariantBlocks } = this.elements;
+
+            orderVariantBlocks.forEach((block) => {
+                const variantButtons = block.querySelectorAll(customOrderSelectors.orderVariantButtons);
+                if (variantButtons.length > 0) {
+                    variantButtons[0].checked = true;
+                    this.getPaymentBlock(variantButtons[0]);
+                }
+            });
         }
+
+        resetClasses(elements, className) {
+            elements.forEach((el) => el.classList.remove(className));
+        }
+    
         checkVariantBlocks(button) {
             this.setAttributes(button);
-            const activeVariantBlocks = this.querySelectorAll(`${customOrderSelectors.orderControlsActive} ${customOrderSelectors.orderVariantBlock}`);
-            const attributes = [];
-
-            for (const el of activeVariantBlocks) {
-                const currentAttribute = el.getAttribute(customOrderAttributes.dataCurrentVariant);
-
-                if (!currentAttribute) {
-                    continue;
-                }
-
-                attributes.push(currentAttribute);
-            }
-
-            if (attributes.length <= 0) return false;
-
-            return attributes.map((el) => Number(el));
+            const currentControl = button.closest(customOrderSelectors.orderControls);
+            const currentVariantBlocks = currentControl.querySelectorAll(customOrderSelectors.orderVariantBlock);
+            
+            const attributes = Array.from(currentVariantBlocks )
+                .map((el) => el.getAttribute(customOrderAttributes.dataCurrentVariant))
+                .filter(Boolean);
+    
+            return attributes.length > 0 ? attributes.map(Number) : false;
         }
+    
         setAttributes(button) {
             const buttonAttribute = button.getAttribute(customOrderAttributes.dataValue);
             const variantBlock = button.closest(customOrderSelectors.orderVariantBlock);
             variantBlock.setAttribute(customOrderAttributes.dataCurrentVariant, buttonAttribute);
         }
+    
         variantButtonHandler(event) {
-            this.resetClasses(this.orderVariantBlocks, "_active");
-            const currentButton = event.currentTarget;
-            this.getPaymentBlock(currentButton);
+            this.resetClasses(this.elements.orderVariantBlocks, "_active");
+            this.getPaymentBlock(event.currentTarget);
         }
+    
         getPaymentBlock(button) {
             const attributes = this.checkVariantBlocks(button);
+            const currentPaymentBlocks = button.closest(customOrderSelectors.orderControls).querySelectorAll(customOrderSelectors.orderPaymentBlock);
             if (!attributes) return;
-
-            this.resetClasses(this.paymentBlock, "_active");
-            let status = false;
-
-            for (const el of this.paymentBlock) {
-                const elementAttributes = el
-                    .getAttribute(customOrderAttributes.dataAttributes)
+    
+            this.resetClasses(currentPaymentBlocks, "_active");
+    
+            for (const el of this.elements.paymentBlock) {
+                const elementAttributes = el.getAttribute(customOrderAttributes.dataAttributes)
                     .split(";")
-                    .filter((attr) => attr !== "")
-                    .map((el) => Number(el.trim()));
-
-                if (attributes.length === elementAttributes.length) {
-                    for (const attr of attributes) {
-                        if (!elementAttributes.includes(attr)) {
-                            status = false;
-                            break;
-                        }
-                        status = true;
-                    }
-                }
-
-                if (status) {
+                    .filter(Boolean)
+                    .map(Number);
+    
+                if (attributes.every(attr => elementAttributes.includes(attr))) {
                     el.classList.add("_active");
                     return;
                 }
             }
         }
+    
         productButtonHandler(event) {
-            const button = event.currentTarget;
-            const buttonProductId = parseInt(button.getAttribute(customOrderAttributes.dataProductId));
-            this.setActiveControl(buttonProductId);
+            const buttonId = parseInt(event.currentTarget.getAttribute(customOrderAttributes.dataProductId));
+            this.setActiveControl(buttonId);
         }
+    
         setActiveControl(buttonId) {
-            this.resetClasses(this.orderControls, "_active");
-
-            for (const el of this.orderControls) {
-                const productId = parseInt(el.getAttribute(customOrderAttributes.dataProductId));
-                if (productId === buttonId) {
+            this.resetClasses(this.elements.orderControls, "_active");
+    
+            for (const el of this.elements.orderControls) {
+                if (parseInt(el.getAttribute(customOrderAttributes.dataProductId)) === buttonId) {
                     el.classList.add("_active");
                     break;
                 }
             }
         }
+    
         setDeliveryDate() {
             const deliveryDay = this.daysOfWeek[this.deliveryDate.getDay()];
-            this.deliveryDateEl.textContent = `${deliveryDay.slice(0, 2)} ${this.deliveryDate.getDate()}.${this.deliveryDate.getMonth() + 1}`;
+            this.elements.deliveryDateEl.textContent = `${deliveryDay.slice(0, 2)} ${this.deliveryDate.getDate()}.${this.deliveryDate.getMonth() + 1}`;
         }
-
+    
         updateDates() {
             this.deliveryDate = this.time.getEndDate(this.deliveryDay);
             this.dateToUpdate = this.time.getEndDate(this.endDay, this.endTime);
             this.parsedUpdateDate = Date.parse(this.dateToUpdate);
-
+    
             this.deliveryDate = this.time.updateDeliveryDate(this.dateToUpdate, this.deliveryDay);
             this.setDeliveryDate();
         }
-
+    
+        startInterval() {
+            this.interval = setInterval(this.intervalHandler.bind(this), 1000);
+        }
+    
         intervalHandler() {
-            const currentDate = Date.now();
-            const difference = this.parsedUpdateDate - currentDate;
-
-            if (difference <= 0) {
+            if (Date.now() >= this.parsedUpdateDate) {
                 this.updateDates();
             }
         }
-
+    
         setButtonsMargin() {
-            const orderDurationMargin = parseInt(window.getComputedStyle(this.orderDuration).marginTop);
-            const orderBlockHeight = this.orderDuration.offsetHeight + orderDurationMargin;
-            const orderButtonsHeight = this.orderButtons.offsetHeight;
-
-            console.log(orderDurationMargin);
-
-            console.log("block height: " + orderBlockHeight);
-            console.log("buttons height: " + orderButtonsHeight);
-
-            const margin = orderBlockHeight - orderButtonsHeight;
-
-            this.orderButtons.style.marginTop = margin + "px";
+            const orderDurationMargin = parseInt(window.getComputedStyle(this.elements.orderDuration).marginTop);
+            const orderBlockHeight = this.elements.orderDuration.offsetHeight + orderDurationMargin;
+            const orderButtonsHeight = this.elements.orderButtons.offsetHeight;
+    
+            this.elements.orderButtons.style.marginTop = `${orderBlockHeight - orderButtonsHeight}px`;
         }
     }
+    
     customElements.define("custom-order", CustomOrder);
+    
 
     const stepsSelectors = {
         stepsPoint: ".steps__point",
