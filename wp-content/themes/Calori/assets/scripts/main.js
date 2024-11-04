@@ -249,9 +249,14 @@ document.addEventListener("DOMContentLoaded", () => {
     customElements.define("custom-header", CustomHeader);
 
     const cartSelectors = {
+        product: ".cart__product",
         closeButton: ".cart__close",
         amountSelect: ".cart-amount__select",
+        deleteProduct: ".cart-product__delete",
     };
+    const cartAttributes =  {
+        dataProductKey: "data-product-key",
+    }
     class CustomCart extends HTMLElement {
         constructor() {
             super();
@@ -266,14 +271,51 @@ document.addEventListener("DOMContentLoaded", () => {
             this.amountSelect = this.querySelector(cartSelectors.amountSelect);
             this.mainDark = document.querySelector(".main__dark");
             this.cart = document.querySelector("#cart");
+            this.deleteProductBtn = this.querySelectorAll(cartSelectors.deleteProduct);
+
+            this.attachEvents();
+        }
+        attachEvents() {
+            this.deleteProductBtn.forEach((el) => el.addEventListener("click", this.deleteProduct.bind(this)));
+
+            document.addEventListener("cartUpdate", this.updateCart.bind(this));
 
             this.closeButton.addEventListener("click", this.closeHandle.bind(this));
+
             this.mainDark.addEventListener("click", () => {
                 this.mainDark.classList.remove("_active");
                 this.classList.remove("_active");
             });
         }
+        deleteProduct(event) {
+            const target = event.currentTarget;
+            const parent = target.closest(cartSelectors.product);
+            const productCartKey = parent.getAttribute(cartAttributes.dataProductKey);
 
+            const response = this.fetchDeleteProduct(productCartKey, parent);
+        }
+        async fetchDeleteProduct(key, parent)  {
+            try {
+                const response = await fetch(ajax_object.ajax_url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({action: "delete_product_cart", product_key: key}),
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                parent.remove();
+                console.log(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        updateCart() {}
         closeHandle() {
             this.classList.remove("_active");
             this.mainDark.classList.remove("_active");

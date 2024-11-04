@@ -534,7 +534,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: params,
                 });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const data = await response.json();
+                const cartEvent = new CustomEvent("cartUpdated", {detail: data});
+                document.dispatchEvent(cartEvent);
                 return data;
             } catch (error) {
                 console.error(error);
