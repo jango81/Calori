@@ -1954,9 +1954,6 @@ body {
     .order-block:not(:first-child) {
         margin-top: 10px;
     }
-    .order-block > custom-select {
-        display: none;
-    }
     .order-block__buttons {
         display: flex;
         flex-wrap: wrap;

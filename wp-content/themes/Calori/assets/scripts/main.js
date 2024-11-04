@@ -305,7 +305,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             this.customSelectValue.addEventListener("click", this.selectClickHandle.bind(this));
             this.customSelectOption.forEach((el) => el.addEventListener("click", this.setSelectData.bind(this)));
-            this.defaultSelect.selectedIndex = -1;
+
+            this.setAttribute("data-value", this.customSelectOption[0].getAttribute("data-value"));
         }
 
         changeHeading() {
@@ -347,24 +348,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!dataValue) throw new Error("data-value attribute is undefined");
 
             this.setAttribute("data-value", dataValue);
-            this.defaultSelect.value = dataValue;
-            this.heading = currentOption.textContent;
-
-            this.setDefaultSelect(dataValue);
+            this.heading = currentOption.outerText;
 
             this.changeHeading();
             this.closeSelectOptions();
-        }
-
-        setDefaultSelect(value) {
-            const options = this.defaultSelect.options;
-            const event = new Event("change");
-            this.defaultSelect.dispatchEvent(event);
-            for (let i = 0; i < this.defaultSelect.options.length; i++) {
-                if (options[i].value === value) {
-                    this.defaultSelect.selectedIndex = i;
-                }
-            }
+            this.dispatchEvent(new Event("change"));
         }
     }
 

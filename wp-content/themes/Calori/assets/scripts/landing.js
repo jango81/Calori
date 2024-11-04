@@ -324,18 +324,24 @@ document.addEventListener("DOMContentLoaded", () => {
         orderDeliveryDate: ".order-delivery__date",
         orderInfoHeading: ".infos-order__heading",
         orderInfoContent: ".infos-order__content",
-        orderVariantButtons: ".order-block__button input[id='order-variants']",
         orderButtons: ".order__buttons",
         orderVariantBlock: ".order__variant",
         orderBlock: ".order-block",
         orderPaymentBlock: ".order-payment",
         orderSettings: ".order__settings",
+        orderPaymentRadio: ".order-payment__radio",
+        orderPaymentRadioInput: ".order-payment__radio input[type='radio']",
         orderRadio: ".order-radio",
         orderControls: ".order__controls",
         orderControlsActive: ".order__controls._active",
+        orderSelectVariant: ".order-block__select",
+        orderSelectOptions: ".order-block__select .custom-select__option",
+        orderSelectDefault: ".order-block__select select",
+        orderCartButton: ".order-cart__button",
         priceElement: ".custom-radio__price",
         calculatorButton: ".order-calculator__button",
         calculator: ".calculator",
+        orderForm: "#add-to-cart-form",
     };
     const customOrderAttributes = {
         dataDay: "data-day",
@@ -344,6 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
         dataProductId: "data-product-id",
         dataValue: "data-value",
         dataCurrentVariant: "data-current-variant",
+        dataVariantId: "data-variant-id",
         dataAttributes: "data-attributes",
     };
     class CustomOrder extends HTMLElement {
@@ -352,11 +359,11 @@ document.addEventListener("DOMContentLoaded", () => {
             this.daysOfWeek = ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"];
             this.time = new Time();
         }
-    
+
         connectedCallback() {
             this.init();
         }
-    
+
         init() {
             const selectors = customOrderSelectors;
             const attributes = customOrderAttributes;
@@ -365,125 +372,182 @@ document.addEventListener("DOMContentLoaded", () => {
                 productButtons: this.querySelectorAll(selectors.productButton),
                 radioButtons: this.querySelectorAll(selectors.orderRadio),
                 orderControls: this.querySelectorAll(selectors.orderControls),
-                variantButtons: this.querySelectorAll(selectors.orderVariantButtons),
                 paymentBlock: this.querySelectorAll(selectors.orderPaymentBlock),
+                paymentRadios: this.querySelectorAll(selectors.orderPaymentRadioInput),
                 orderVariantBlocks: this.querySelectorAll(`${selectors.orderSettings} > ${selectors.orderBlock}`),
+                variantSelect: this.querySelectorAll(selectors.orderSelectVariant),
+                variantOptions: this.querySelectorAll(selectors.orderSelectOptions),
+                variantDefaultSelect: this.querySelectorAll(selectors.orderSelectDefault),
+                orderForm: this.querySelector(selectors.orderForm),
                 infoContent: this.querySelector(selectors.orderInfoContent),
                 orderButtons: this.querySelector(selectors.orderButtons),
                 calculatorButton: this.querySelector(selectors.calculatorButton),
                 calculator: this.querySelector(selectors.calculator),
                 deliveryDateEl: this.querySelector(selectors.orderDeliveryDate),
-                errorMessage: this.querySelector(".error__message h1")
+                orderPaymentRadio: this.querySelector(selectors.orderPaymentRadio),
+                cartButton: this.querySelector(selectors.orderCartButton),
+                errorMessage: this.querySelector(".error__message h1"),
             };
-    
+
             this.endDay = this.elements.deliveryDateEl.getAttribute(attributes.dataDay);
             this.endTime = this.elements.deliveryDateEl.getAttribute(attributes.dataTime);
             this.deliveryDay = this.elements.deliveryDateEl.getAttribute(attributes.dataDeliveryTime);
-    
+
             this.attachEventListeners();
             this.updateDates();
             this.startInterval();
-    
+
             this.initializeDefaultButton();
             this.initilizePaymentBlocks();
+            this.initilizePaymentRadio();
         }
-    
+
         attachEventListeners() {
-            const { productButtons, calculatorButton, variantButtons } = this.elements;
-            
+            const { productButtons, calculatorButton, variantSelect, orderForm } = this.elements;
+
             calculatorButton.addEventListener("click", () => this.elements.calculator.classList.toggle("_active"));
             productButtons.forEach((button) => button.addEventListener("click", this.productButtonHandler.bind(this)));
-            variantButtons.forEach((button) => button.addEventListener("change", this.variantButtonHandler.bind(this)));
+            variantSelect.forEach((select) => select.addEventListener("change", this.variantSelectHandler.bind(this)));
+            orderForm.addEventListener("submit", (e) => this.cartButtonHandler(e));
         }
-    
+
         initializeDefaultButton() {
             const { productButtons } = this.elements;
             this.defaultProductButton = productButtons[0];
-    
+
             if (this.defaultProductButton) {
                 const buttonId = parseInt(this.defaultProductButton.getAttribute(customOrderAttributes.dataProductId));
                 this.defaultProductButton.checked = true;
                 this.setActiveControl(buttonId);
             }
         }
-    
-        initializeVariantBlocks() {
-            this.elements.orderVariantBlocks.forEach((block) => {
-                const variantButtons = block.querySelectorAll(customOrderSelectors.orderVariantButtons);
-                if (variantButtons.length > 0) {
-                    variantButtons[0].checked = true;
-                    this.getPaymentBlock(variantButtons[0]);
-                }
-            });
-        }
-        
+
         initilizePaymentBlocks() {
-            const { orderVariantBlocks } = this.elements;
+            const { orderControls } = this.elements;
 
-            orderVariantBlocks.forEach((block) => {
-                const variantButtons = block.querySelectorAll(customOrderSelectors.orderVariantButtons);
-                if (variantButtons.length > 0) {
-                    variantButtons[0].checked = true;
-                    this.getPaymentBlock(variantButtons[0]);
+            orderControls.forEach((control) =>  {
+                const currentVariantBlocks = control.querySelectorAll(customOrderSelectors.orderVariantBlock);
+                if (currentVariantBlocks.length > 0) {
+                    currentVariantBlocks.forEach((block) => {
+                        const currentSelect = block.querySelector(customOrderSelectors.orderSelectVariant);
+                        const currentOptions = block.querySelectorAll(customOrderSelectors.orderSelectOptions);
+
+                        currentSelect.setAttribute("data-heading", currentOptions[0].outerText);
+                        currentSelect.setAttribute(customOrderAttributes.dataValue, currentOptions[0].getAttribute(customOrderAttributes.dataValue));
+                        this.getPaymentBlock(currentSelect);
+                    })
+                }
+            })
+            
+        }
+
+        initilizePaymentRadio() {
+            const { paymentBlock } = this.elements;
+            paymentBlock.forEach((block) => {
+                const radioButtons = block.querySelectorAll(customOrderSelectors.orderPaymentRadio);
+
+                if (radioButtons.length > 0) {
+                    radioButtons[0].checked = true;
                 }
             });
         }
-
         resetClasses(elements, className) {
             elements.forEach((el) => el.classList.remove(className));
         }
-    
-        checkVariantBlocks(button) {
-            this.setAttributes(button);
-            const currentControl = button.closest(customOrderSelectors.orderControls);
+
+        checkVariantBlocks(select) {
+            this.setAttributes(select);
+            const currentControl = select.closest(customOrderSelectors.orderControls);
             const currentVariantBlocks = currentControl.querySelectorAll(customOrderSelectors.orderVariantBlock);
-            
-            const attributes = Array.from(currentVariantBlocks )
+
+            const attributes = Array.from(currentVariantBlocks)
                 .map((el) => el.getAttribute(customOrderAttributes.dataCurrentVariant))
                 .filter(Boolean);
-    
+
             return attributes.length > 0 ? attributes.map(Number) : false;
         }
-    
-        setAttributes(button) {
-            const buttonAttribute = button.getAttribute(customOrderAttributes.dataValue);
-            const variantBlock = button.closest(customOrderSelectors.orderVariantBlock);
-            variantBlock.setAttribute(customOrderAttributes.dataCurrentVariant, buttonAttribute);
+
+        setAttributes(select) {
+            const selectAttribute = select.getAttribute(customOrderAttributes.dataValue);
+            const variantBlock = select.closest(customOrderSelectors.orderVariantBlock);
+            variantBlock.setAttribute(customOrderAttributes.dataCurrentVariant, selectAttribute);
         }
-    
-        variantButtonHandler(event) {
+
+        variantSelectHandler(event) {
             this.resetClasses(this.elements.orderVariantBlocks, "_active");
             this.getPaymentBlock(event.currentTarget);
         }
-    
-        getPaymentBlock(button) {
-            const attributes = this.checkVariantBlocks(button);
-            const currentPaymentBlocks = button.closest(customOrderSelectors.orderControls).querySelectorAll(customOrderSelectors.orderPaymentBlock);
+
+        getPaymentBlock(select) {
+            const attributes = this.checkVariantBlocks(select);
+            const currentPaymentBlocks = select.closest(customOrderSelectors.orderControls).querySelectorAll(customOrderSelectors.orderPaymentBlock);  
             if (!attributes) return;
-    
+
             this.resetClasses(currentPaymentBlocks, "_active");
-    
+
             for (const el of this.elements.paymentBlock) {
-                const elementAttributes = el.getAttribute(customOrderAttributes.dataAttributes)
-                    .split(";")
-                    .filter(Boolean)
-                    .map(Number);
-    
-                if (attributes.every(attr => elementAttributes.includes(attr))) {
+                const elementAttributes = el.getAttribute(customOrderAttributes.dataAttributes).split(";").filter(Boolean).map(Number);
+
+                if (attributes.every((attr) => elementAttributes.includes(attr))) {
                     el.classList.add("_active");
                     return;
                 }
             }
         }
-    
+
+        cartButtonHandler(event)  {
+            event.preventDefault();
+            const {paymentBlock, orderControls } = this.elements;
+
+            const activeControl = Array.from(orderControls).find((el) => el.classList.contains("_active"));
+            const activePaymentBlock = Array.from(paymentBlock).find((el) => el.classList.contains("_active"));
+            const paymentRadios = Array.from(activePaymentBlock.querySelectorAll("input[type='radio']"));
+
+            console.log("activeControl", activeControl);
+            
+
+            const productId = parseInt(activeControl.getAttribute(customOrderAttributes.dataProductId)) ?? 0;
+            const variantId = parseInt(activePaymentBlock.getAttribute(customOrderAttributes.dataVariantId)) ?? 0;
+            const paymentType = paymentRadios.find((el) => el.checked).value;
+
+            const formData = { 
+                action: "add_to_cart",
+                product_id: productId,
+                variant_id: variantId,
+                payment_type: paymentType,
+            };
+
+            const params = new URLSearchParams(formData).toString();
+            const data = this.fetchData(params);
+            
+            console.log("formData", formData);  
+            console.log("params", params);
+            console.log("data", data);
+        }
+        async fetchData(params) {
+            try {
+                const response = await fetch(ajax_object.ajax_url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: params,
+                });
+
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
         productButtonHandler(event) {
             const buttonId = parseInt(event.currentTarget.getAttribute(customOrderAttributes.dataProductId));
             this.setActiveControl(buttonId);
         }
-    
+
         setActiveControl(buttonId) {
             this.resetClasses(this.elements.orderControls, "_active");
-    
+
             for (const el of this.elements.orderControls) {
                 if (parseInt(el.getAttribute(customOrderAttributes.dataProductId)) === buttonId) {
                     el.classList.add("_active");
@@ -491,42 +555,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         }
-    
+
         setDeliveryDate() {
             const deliveryDay = this.daysOfWeek[this.deliveryDate.getDay()];
             this.elements.deliveryDateEl.textContent = `${deliveryDay.slice(0, 2)} ${this.deliveryDate.getDate()}.${this.deliveryDate.getMonth() + 1}`;
         }
-    
+
         updateDates() {
             this.deliveryDate = this.time.getEndDate(this.deliveryDay);
             this.dateToUpdate = this.time.getEndDate(this.endDay, this.endTime);
             this.parsedUpdateDate = Date.parse(this.dateToUpdate);
-    
+
             this.deliveryDate = this.time.updateDeliveryDate(this.dateToUpdate, this.deliveryDay);
             this.setDeliveryDate();
         }
-    
+
         startInterval() {
             this.interval = setInterval(this.intervalHandler.bind(this), 1000);
         }
-    
+
         intervalHandler() {
             if (Date.now() >= this.parsedUpdateDate) {
                 this.updateDates();
             }
         }
-    
-        setButtonsMargin() {
-            const orderDurationMargin = parseInt(window.getComputedStyle(this.elements.orderDuration).marginTop);
-            const orderBlockHeight = this.elements.orderDuration.offsetHeight + orderDurationMargin;
-            const orderButtonsHeight = this.elements.orderButtons.offsetHeight;
-    
-            this.elements.orderButtons.style.marginTop = `${orderBlockHeight - orderButtonsHeight}px`;
-        }
     }
-    
+
     customElements.define("custom-order", CustomOrder);
-    
 
     const stepsSelectors = {
         stepsPoint: ".steps__point",

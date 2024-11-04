@@ -76,3 +76,4 @@ add_filter('script_loader_tag', function ($tag, $handle, $src) {
 
 require_once get_template_directory() . "/incs/calori-nav-menu.php";
 require_once get_template_directory() . "/incs/calori-get-meal-menu.php";
+require_once get_template_directory() . "/incs/calori-add-to-cart.php";

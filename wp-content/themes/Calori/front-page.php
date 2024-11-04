@@ -382,7 +382,7 @@
                     ));
 
                     if (!empty($products)): ?>
-                        <form class="order__form">
+                        <form class="order__form" id="add-to-cart-form">
                             <div class="order__products order-products order-block">
                                 <?php foreach ($products as $product): ?>
                                     <span class="order-products__product radio-sm">
@@ -409,8 +409,8 @@
                                                     <legend class="order-block__title">
                                                         <?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>
                                                     </legend>
-                                                    <custom-select class="custom-select order-block__select"
-                                                        data-heading="<?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>">
+                                                    <custom-select class="custom-select order-block__select" data-heading=""
+                                                        data-value="">
                                                         <select name="order-variants"></select>
                                                         <div class="custom-select__wrapper">
                                                             <div class="custom-select__value">
@@ -426,30 +426,15 @@
                                                                         $term = get_term_by('id', $option, $attribute->get_name());
                                                                         ?>
                                                                         <div class="custom-select__option"
-                                                                            data-value="<?php echo esc_attr($term->name) ?>">
-                                                                            <?php echo esc_attr($term->name) ?>
+                                                                            data-value="<?php echo esc_attr($term->term_id); ?>">
+                                                                            <?php echo esc_html($term->name) ?>
                                                                         </div>
                                                                     <?php endforeach; endif; ?>
                                                             </div>
                                                         </div>
                                                     </custom-select>
                                                     <div class="order-block__buttons _desktop">
-                                                        <?php
-                                                        $attribute_options = $attribute->get_options();
-                                                        $count = 0;
-                                                        if (!empty($attribute_options)):
-                                                            foreach ($attribute_options as $option):
-                                                                $count++;
-                                                                $term = get_term_by('id', $option, $attribute->get_name());
-                                                                ?>
-                                                                <span class="order-block__button radio-sm">
-                                                                    <input type="radio"
-                                                                        name="order-variants-<?php echo esc_attr($attribute->get_name()) . esc_attr($product->get_id()) ?>"
-                                                                        id="order-variants"
-                                                                        data-value="<?php echo esc_html($term->term_id); ?>" />
-                                                                    <label for="order-variants"><?php echo esc_html($term->name); ?></label>
-                                                                </span>
-                                                            <?php endforeach; endif; ?>
+
                                                     </div>
                                                 </fieldset>
                                             <?php endforeach; ?>
@@ -482,8 +467,11 @@
                                                 <legend class="order-payment__title order-block-title">Maksun muoto</legend>
                                                 <div class="order-payment__radiobuttons">
                                                     <?php if (!$has_subscription_type): ?>
-                                                        <div class="custom-radio order-radio">
-                                                            <input type="radio" name="order-radio" />
+                                                        <div class="custom-radio order-payment__radio order-radio">
+                                                            <input type="radio" checked
+                                                                name="<?php echo "payment-radio_" . esc_attr($variation_obj->get_id()) ?>"
+                                                                value="<?php echo esc_attr($term->name) ?>"
+                                                                />
                                                             <div class="custom-radio__wrapper">
                                                                 <span class="custom-radio__bullet"></span>
                                                                 <h3 class="custom-radio__heading"><?php echo esc_html($term->name) ?>
@@ -494,15 +482,20 @@
                                                         </div>
                                                     <?php else:
                                                         if (!empty($product_attributes)):
+                                                            $count = 0;
                                                             foreach ($product_attributes as $product_attr):
                                                                 if ($product_attr->get_name() === "pa_maksu-tyyppi"):
                                                                     $attribute_options = $product_attr->get_options();
                                                                     foreach ($attribute_options as $option):
+                                                                        $count++;
                                                                         $term = get_term_by("id", $option, $product_attr->get_name());
                                                                         if ($term):
                                                                             ?>
-                                                                            <div class="custom-radio order-radio">
-                                                                                <input type="radio" name="order-radio" />
+                                                                            <div class="custom-radio order-payment__radio order-radio">
+                                                                                <input type="radio" <?php echo $count === 1 ? "checked" : null ?>
+                                                                                    name="<?php echo "payment-radio_" . esc_attr($variation_obj->get_id()) ?>" 
+                                                                                    value="<?php echo esc_attr($term->name) ?>"
+                                                                                    />
                                                                                 <div class="custom-radio__wrapper">
                                                                                     <span class="custom-radio__bullet"></span>
                                                                                     <h3 class="custom-radio__heading"><?php echo esc_html($term->name) ?>
@@ -538,11 +531,9 @@
                                             </div>
                                         </fieldset> -->
                                         <div class="order__buttons">
-                                            <div class="order__button">
-                                                <a href="#" class="btn btn-solid btn-medium">
-                                                    <span class="btn-text">Lisää ostoskoriin</span>
-                                                </a>
-                                            </div>
+                                            <button class="btn btn-solid btn-medium order-cart__button" type="submit">
+                                                <span class="btn-text">Lisää ostoskoriin</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
