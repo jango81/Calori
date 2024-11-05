@@ -1,6 +1,9 @@
 <?php get_header() ?>
 <main id="main">
     <?php get_template_part("cart") ?>
+    <div class="loading" id="loading">
+        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/loading-gif.gif" alt="loading">
+    </div>
     <section class="head-section">
         <div class="head-section__container _container">
             <div class="head-section__wrapper">

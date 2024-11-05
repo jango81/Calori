@@ -24,7 +24,9 @@ function add_to_cart()
 
     $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id, $variation, $sanitized_data);
 
-
+    $subtotal = WC()->cart->get_subtotal();
+    $delivery_fee = WC()->cart->get_shipping_total();
+    $total = WC()->cart->get_total();
 
     if ($cart_item_key) {
         $cart_item = WC()->cart->get_cart_item($cart_item_key);
@@ -58,6 +60,9 @@ function add_to_cart()
             "cart_item_key" => $cart_item_key,
             "cart_url" => wc_get_cart_url(),
             "cart_count" => WC()->cart->get_cart_contents_count(),
+            "cart_subtotal" => $subtotal,
+            "cart_delivery_fee" => $delivery_fee,
+            "cart_total" => $total,
             "current_product_data" => $data,
         ));
     } else {
@@ -75,13 +80,49 @@ function delete_product_cart()
     $cart_item_key = isset($_POST["product_key"]) ? sanitize_text_field($_POST["product_key"]) : "";
     $removed = WC()->cart->remove_cart_item($cart_item_key);
 
+    $subtotal = WC()->cart->get_cart_subtotal();
+    $delivery_fee = WC()->cart->get_cart_shipping_total();
+    $total = WC()->cart->get_cart_total();
+
     if ($removed) {
         wp_send_json_success(array(
             "cart_url" => wc_get_cart_url(),
             "cart_count" => WC()->cart->get_cart_contents_count(),
+            "cart_subtotal" => $subtotal,
+            "cart_delivery_fee" => $delivery_fee,
+            "cart_total" => $total,
         ));
     } else {
         wp_send_json_error("Failed to remove product from cart");
+    }
+
+    wp_die();
+}
+
+add_action("wp_ajax_update_product_amount", "update_product_amount");
+add_action("wp_ajax_nopriv_update_product_amount", "update_product_amount");
+
+function update_product_amount() {
+    $cart_item_key = isset($_POST["product_key"]) ? sanitize_text_field($_POST["product_key"]) : "";
+    $new_amount = isset($_POST["product_amount"]) ? absint($_POST["product_amount"]) : 0;
+
+    $updated = WC()->cart->set_quantity($cart_item_key, $new_amount);
+
+    $subtotal = WC()->cart->get_cart_subtotal();
+    $delivery_fee = WC()->cart->get_cart_shipping_total();
+    $total = WC()->cart->get_cart_total();
+
+    if ($updated) {
+        wp_send_json_success(array(
+            "cart_url" => wc_get_cart_url(),
+            "cart_count" => WC()->cart->get_cart_contents_count(),
+            "cart_subtotal" => $subtotal,
+            "cart_delivery_fee" => $delivery_fee,
+            "cart_total" => $total,
+            "product_new_amount" => WC()->cart->get_cart_item($cart_item_key)["quantity"],
+        ));
+    } else {
+        wp_send_json_error("Failed to update product amount");
     }
 
     wp_die();

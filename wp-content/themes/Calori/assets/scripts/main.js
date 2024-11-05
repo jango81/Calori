@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.siteWrapper = document.querySelector("#wrapper");
             this.headerTag = document.querySelector("#header");
             this.mainDark = document.querySelector(".main__dark");
-
+            this.cart = document.querySelector("#cart");
             this.burgerMenu = this.querySelector(headerSelectors.burgerMenu);
             this.navigationButton = this.querySelector(headerSelectors.navButton);
             this.drawer = this.querySelector(headerSelectors.drawer);
@@ -142,8 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         showCart() {
-            document.querySelector("#cart").classList.add("_active");
-            this.mainDark.classList.add("_active");
+            document.dispatchEvent(new Event("showCart"));
         }
         showHeaderScrolled() {
             const rect = this.headerTag.getBoundingClientRect();
@@ -250,13 +249,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cartSelectors = {
         product: ".cart__product",
+        productName: ".cart-product__name",
+        productOptions: ".cart-product__options",
+        productPrice: ".cart-product__price",
+        productAmount: ".cart-product__amount .amount",
+        productAmountSelect: ".cart-amount__select",
         closeButton: ".cart__close",
-        amountSelect: ".cart-amount__select",
         deleteProduct: ".cart-product__delete",
+        productContainer: ".cart__container",
+        cartSubtotal: ".cart-subtotal__price",
+        cartDelivery: ".cart-delivery__price",
+        cartTotal: ".cart-total__price",
     };
-    const cartAttributes =  {
+    const cartAttributes = {
         dataProductKey: "data-product-key",
-    }
+    };
     class CustomCart extends HTMLElement {
         constructor() {
             super();
@@ -267,18 +274,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         init() {
+            this.loading = document.querySelector("#loading");
             this.closeButton = this.querySelector(cartSelectors.closeButton);
-            this.amountSelect = this.querySelector(cartSelectors.amountSelect);
+            this.productContainer = this.querySelector(cartSelectors.productContainer);
+            this.subtotal = this.querySelector(cartSelectors.cartSubtotal);
+            this.delivery = this.querySelector(cartSelectors.cartDelivery);
+            this.total = this.querySelector(cartSelectors.cartTotal);
             this.mainDark = document.querySelector(".main__dark");
             this.cart = document.querySelector("#cart");
+            this.amountSelects = this.querySelectorAll(cartSelectors.productAmountSelect);
             this.deleteProductBtn = this.querySelectorAll(cartSelectors.deleteProduct);
 
             this.attachEvents();
         }
         attachEvents() {
             this.deleteProductBtn.forEach((el) => el.addEventListener("click", this.deleteProduct.bind(this)));
+            this.amountSelects.forEach((el) => el.addEventListener("change", this.updateAmount.bind(this)));
 
-            document.addEventListener("cartUpdate", this.updateCart.bind(this));
+            document.addEventListener("showCart", this.open.bind(this));
+            //document.addEventListener("cartUpdated", this.updateCart.bind(this));
 
             this.closeButton.addEventListener("click", this.closeHandle.bind(this));
 
@@ -287,35 +301,96 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.classList.remove("_active");
             });
         }
-        deleteProduct(event) {
+        async updateAmount(event)  {
             const target = event.currentTarget;
             const parent = target.closest(cartSelectors.product);
             const productCartKey = parent.getAttribute(cartAttributes.dataProductKey);
+            const amount = target.value;
 
-            const response = this.fetchDeleteProduct(productCartKey, parent);
+            const response = await this.fetchUpdateAmount(productCartKey, amount, parent);
+
+            this.setSummary(response);
         }
-        async fetchDeleteProduct(key, parent)  {
+        async fetchUpdateAmount(key, amount, parent) {
             try {
+                this.loading.classList.add("_active");
                 const response = await fetch(ajax_object.ajax_url, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                     },
-                    body: new URLSearchParams({action: "delete_product_cart", product_key: key}),
+                    body: new URLSearchParams({ action: "update_product_amount", product_key: key, product_amount: amount }),
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
-                parent.remove();
-                console.log(data);
+
+                if (data.success) {
+                    this.loading.classList.remove("_active");
+                    parent.querySelector(cartSelectors.productAmount).textContent = data.data.product_new_amount;
+                }
+
+                return data.data;
             } catch (error) {
                 console.error(error);
             }
         }
-        updateCart() {}
+        setSummary(data) {
+            this.subtotal.innerHTML = data.cart_subtotal;
+            this.delivery.innerHTML = data.cart_delivery_fee;
+            this.total.innerHTML = `<b>${data.cart_total}</b>`;
+        }
+        updateCart(event) {
+            this.setSummary(event.detail);
+        }
+        async deleteProduct(event) {
+            const target = event.currentTarget;
+            const parent = target.closest(cartSelectors.product);
+            const productCartKey = parent.getAttribute(cartAttributes.dataProductKey);
+
+            const response = await this.fetchDeleteProduct(productCartKey, parent);
+
+            if (response.cart_count <= 0) {
+                this.productContainer.innerHTML = '<p class="cart__empty">Ostoskorisi on tyhjä</p>';
+            }
+
+            this.setSummary(response);
+        }
+        async fetchDeleteProduct(key, parent) {
+            try {
+                this.loading.classList.add("_active");
+                const response = await fetch(ajax_object.ajax_url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({ action: "delete_product_cart", product_key: key }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    this.loading.classList.remove("_active");
+                }
+
+                parent.remove();
+
+                return data.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        open() {
+            this.classList.add("_active");
+            this.mainDark.classList.add("_active");
+        }
         closeHandle() {
             this.classList.remove("_active");
             this.mainDark.classList.remove("_active");
@@ -546,4 +621,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     disableDoubleTouchZoom();
+
+    if (localStorage.getItem("cartUpdated") === "true") {
+        localStorage.removeItem("cartUpdated");
+        document.querySelector("#cart").open();
+    }
 });

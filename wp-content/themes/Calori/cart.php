@@ -59,7 +59,7 @@
                                             <option value="9">9</option>
                                             <option value="10">10</option>
                                         </select>
-                                        <span class="cart-amount__heading">Määrä: 1 <span></span></span>
+                                        <span class="cart-amount__heading">Määrä: <span class="amount"><?php echo esc_html($product_quantity) ?></span><span class="arrow"></span></span>
                                     </div>
                                 </div>
                             </div>
@@ -148,6 +148,11 @@
             <span></span>
         </div>
         <div class="cart__bottom">
+            <?php 
+            $subtotal = WC()->cart->get_cart_subtotal();
+            $delivery_fee = WC()->cart->get_cart_shipping_total();
+            $total = WC()->cart->get_cart_total();
+            ?>
             <div class="cart__summary cart-summary">
                 <div class="cart__container _container">
                     <div class="cart__subtotal cart-subtotal cart-summary__block">
@@ -155,7 +160,7 @@
                             <p>Välisumma</p>
                         </div>
                         <div class="cart-subtotal__price">
-                            <p>€50</p>
+                            <p><?php echo $subtotal ?></p>
                         </div>
                     </div>
                     <div class="cart__delivery cart-delivery cart-summary__block">
@@ -163,7 +168,7 @@
                             <p>Toimitus</p>
                         </div>
                         <div class="cart-delivery__price">
-                            <p>Ilmainen</p>
+                            <p><?php echo $delivery_fee ?></p>
                         </div>
                     </div>
                     <div class="cart__total cart-total cart-summary__block">
@@ -171,7 +176,7 @@
                             <p><b>Yhteensä</b></p>
                         </div>
                         <div class="cart-total__price">
-                            <p><b>€50</b></p>
+                            <p><b><?php echo $subtotal ?></b></p>
                         </div>
                     </div>
                 </div>

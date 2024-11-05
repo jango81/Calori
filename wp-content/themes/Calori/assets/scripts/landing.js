@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         swiper.update();
     };
-
     const infoSwiper = new Swiper(".info-swiper", {
         loop: true,
         slidesPerView: 2,
@@ -425,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
         initilizePaymentBlocks() {
             const { orderControls } = this.elements;
 
-            orderControls.forEach((control) =>  {
+            orderControls.forEach((control) => {
                 const currentVariantBlocks = control.querySelectorAll(customOrderSelectors.orderVariantBlock);
                 if (currentVariantBlocks.length > 0) {
                     currentVariantBlocks.forEach((block) => {
@@ -435,10 +434,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         currentSelect.setAttribute("data-heading", currentOptions[0].outerText);
                         currentSelect.setAttribute(customOrderAttributes.dataValue, currentOptions[0].getAttribute(customOrderAttributes.dataValue));
                         this.getPaymentBlock(currentSelect);
-                    })
+                    });
                 }
-            })
-            
+            });
         }
 
         initilizePaymentRadio() {
@@ -480,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         getPaymentBlock(select) {
             const attributes = this.checkVariantBlocks(select);
-            const currentPaymentBlocks = select.closest(customOrderSelectors.orderControls).querySelectorAll(customOrderSelectors.orderPaymentBlock);  
+            const currentPaymentBlocks = select.closest(customOrderSelectors.orderControls).querySelectorAll(customOrderSelectors.orderPaymentBlock);
             if (!attributes) return;
 
             this.resetClasses(currentPaymentBlocks, "_active");
@@ -495,34 +493,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        cartButtonHandler(event)  {
+        cartButtonHandler(event) {
             event.preventDefault();
-            const {paymentBlock, orderControls } = this.elements;
+            const { paymentBlock, orderControls } = this.elements;
 
             const activeControl = Array.from(orderControls).find((el) => el.classList.contains("_active"));
-            const activePaymentBlock = Array.from(paymentBlock).find((el) => el.classList.contains("_active"));
+            const activePaymentBlock = Array.from(paymentBlock).find((el) => el.classList.contains("_active") && activeControl.contains(el));
             const paymentRadios = Array.from(activePaymentBlock.querySelectorAll("input[type='radio']"));
-
-            console.log("activeControl", activeControl);
-            
 
             const productId = parseInt(activeControl.getAttribute(customOrderAttributes.dataProductId)) ?? 0;
             const variantId = parseInt(activePaymentBlock.getAttribute(customOrderAttributes.dataVariantId)) ?? 0;
             const paymentType = paymentRadios.find((el) => el.checked).value;
 
-            const formData = { 
+            const formData = {
                 action: "add_to_cart",
                 product_id: productId,
                 variant_id: variantId,
                 payment_type: paymentType,
             };
+            console.log(formData);
 
             const params = new URLSearchParams(formData).toString();
             const data = this.fetchData(params);
-            
-            console.log("formData", formData);  
-            console.log("params", params);
-            console.log("data", data);
         }
         async fetchData(params) {
             try {
@@ -539,8 +531,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 const data = await response.json();
-                const cartEvent = new CustomEvent("cartUpdated", {detail: data});
-                document.dispatchEvent(cartEvent);
+                console.log(data);
+
+                if (data.success) {
+                    localStorage.setItem("cartUpdated", "true");
+                    const cartEvent = new CustomEvent("cartUpdated", { detail: data });
+                    document.dispatchEvent(cartEvent);
+                }
+
+                location.reload();
+
                 return data;
             } catch (error) {
                 console.error(error);

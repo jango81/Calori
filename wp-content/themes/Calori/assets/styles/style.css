@@ -76,6 +76,35 @@ body {
     height: 50px;
 }
 
+.loading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center
+}
+.loading::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999990;
+}
+.loading img {
+    width: 50px;
+    height: 50px;
+}
+.loading._active {
+    display: flex;
+}
+
 .error__message {
     display: none;
     width: 100%;
@@ -674,8 +703,17 @@ body {
 .cart._active {
     bottom: 0;
 }
+.cart__empty {
+    text-align: center,
+}
 
 .cart__container {
+}
+.cart__container:has(.cart__empty) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%
 }
 .cart__body {
     display: flex;
@@ -798,13 +836,18 @@ body {
     display: flex;
     font-weight: 600;
 }
-.cart-amount__heading span {
+
+.cart-amount__heading .amount {
+    margin-left: 5px;
+}
+
+.cart-amount__heading .arrow{
     position: relative;
     margin-left: 10px;
     width: 20px;
     min-height: 100%;
 }
-.cart-amount__heading span::before {
+.cart-amount__heading .arrow::before {
     content: "";
     position: absolute;
     left: 5px;
@@ -814,7 +857,7 @@ body {
     height: 10px;
     background: #000;
 }
-.cart-amount__heading span::after {
+.cart-amount__heading .arrow::after {
     content: "";
     position: absolute;
     right: 7px;
