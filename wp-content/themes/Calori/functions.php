@@ -23,7 +23,9 @@ add_action("wp_enqueue_scripts", function () {
         ));
         wp_enqueue_style("calori-swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css");
     }
-
+    if(is_checkout()) {
+        wp_enqueue_style("calori-checkout", get_template_directory_uri() . "/assets/styles/checkout.css");
+    }
     //------Meistä page-----
     if (is_page(214)) {
         wp_enqueue_script("calori-about", get_template_directory_uri() . "/assets/scripts/about.js", array(), false, true);
@@ -77,3 +79,4 @@ add_filter('script_loader_tag', function ($tag, $handle, $src) {
 require_once get_template_directory() . "/incs/calori-nav-menu.php";
 require_once get_template_directory() . "/incs/calori-get-meal-menu.php";
 require_once get_template_directory() . "/incs/calori-cart.php";
+require_once get_template_directory() . "/incs/calori-checkout.php";

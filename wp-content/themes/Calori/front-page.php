@@ -1,6 +1,6 @@
 <?php get_header() ?>
 <main id="main">
-    <?php get_template_part("cart") ?>
+    <?php get_template_part("mini-cart") ?>
     <div class="loading" id="loading">
         <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/loading-gif.gif" alt="loading">
     </div>
