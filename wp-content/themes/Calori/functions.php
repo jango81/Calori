@@ -51,6 +51,9 @@ add_action("wp_enqueue_scripts", function () {
     if (is_page(222)) {
         wp_enqueue_script("calori-swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js");
         wp_enqueue_script("calori-menu", get_template_directory_uri() . "/assets/scripts/menu.js", array(), false, true);
+        wp_localize_script("calori-menu", "ajax_object", array(
+            "ajax_url" => admin_url("admin-ajax.php"),
+        ));
 
         wp_enqueue_style("calori-menu", get_template_directory_uri() . "/assets/styles/menu.css");
         wp_enqueue_style("calori-swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css");
@@ -80,3 +83,4 @@ require_once get_template_directory() . "/incs/calori-nav-menu.php";
 require_once get_template_directory() . "/incs/calori-get-meal-menu.php";
 require_once get_template_directory() . "/incs/calori-cart.php";
 require_once get_template_directory() . "/incs/calori-checkout.php";
+require_once get_template_directory() . "/incs/calori-landing-order.php";

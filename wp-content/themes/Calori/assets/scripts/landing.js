@@ -30,38 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
             el: ".info-swiper__pagination",
         },
     });
-    const mealsSwiper = new Swiper(".meals-swiper", {
-        loop: false,
-        speed: swipersSettings.speed,
-        breakpoints: {
-            550: {
-                slidesPerView: 2,
-            },
-            980: {
-                slidesPerView: 3,
-            },
-            1080: {
-                navigation: {
-                    enabled: true,
-                    prevEl: ".meals-swiper-prev",
-                    nextEl: ".meals-swiper-next",
-                },
-                slidesPerView: 3,
-            },
-            1340: {
-                slidesPerView: 4,
-            },
-        },
-        pagination: {
-            el: ".meals-swiper__pagination",
-        },
-        navigation: {
-            enabled: false,
-        },
-        on: {
-            init: (swiper) => {},
-        },
-    });
     const stepsSwiper = new Swiper(".steps-swiper", {
         direction: "vertical",
         spaceBetween: 50,
@@ -173,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mealsPopupImage: ".meals-popup__image",
         mealsSlideImage: ".meals-slide__image",
         mealsSwiperWrapper: ".meals-swiper__wrapper",
+        mealsSwiper: ".meals-swiper",
     };
     class CustomMeals extends HTMLElement {
         constructor() {
@@ -191,21 +160,18 @@ document.addEventListener("DOMContentLoaded", () => {
         connectedCallback() {
             this.init();
             this.addDays();
-
-            this.defaultButton = this.dayButtons[0];
-            this.defaultButton.classList.add("_active");
-
-            this.currentDay = this.defaultButton.getAttribute("data-value");
-
-            if (this.defaultButton) this.fetchData(this.currentDay);
+            this.attachDefaultDay();
         }
         init() {
             this.daysElement = this.querySelector(mealsSelectors.mealsDays);
             this.mealsPopup = this.querySelector(mealsSelectors.mealsPopup);
             this.mealsPopupImage = this.querySelector(mealsSelectors.mealsPopupImage);
             this.mealsSlideImages = this.querySelectorAll(mealsSelectors.mealsSlideImage);
-            this.mealsSwiperWrapper = this.querySelector(mealsSelectors.mealsSwiperWrapper);
+            this.swiperWrappers = this.querySelectorAll(".meals-swiper__wrapper");
             this.loadingElement = document.querySelector(".loading-gif");
+
+            this.mealsSlideImages.forEach((el) => el.addEventListener("click", this.openPopup.bind(this)));
+            this.mealsPopup.addEventListener("click", this.closePopup.bind(this));
         }
 
         openPopup(e) {
@@ -216,85 +182,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
             this.mealsPopup.classList.add("_active");
             this.mealsPopupImage.querySelector("img").setAttribute("src", imagePath);
-            this.mealsPopup.addEventListener("click", this.closePopup.bind(this));
         }
 
         closePopup(e) {
             this.mealsPopup.classList.remove("_active");
         }
+        attachDefaultDay() {
+            this.defaultButton = this.dayButtons[0];
+            this.defaultButton.classList.add("_active");
+            this.currentDay = this.defaultButton.dataset.value;
 
+            this.showSwiperWrappers();
+        }
         buttonClickHandle(event) {
             const currentBtn = event.currentTarget;
-
             this.dayButtons.forEach((el) => el.classList.remove("_active"));
-
             currentBtn.classList.add("_active");
+            this.currentDay = currentBtn.dataset.value;
 
-            this.fetchData(currentBtn.getAttribute("data-value"));
+            this.showSwiperWrappers();
         }
-        async fetchData(day) {
-            this.loadingElement.style.display = "flex";
-            this.mealsSwiperWrapper.innerHTML = "";
-            try {
-                const response = await fetch(ajax_object.ajax_url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams({
-                        action: "get_meal_menu",
-                    }),
-                });
-                const data = await response.json();
 
-                this.fetchedData = data;
-                this.printData(day);
-                this.loadingElement.style.display = "none";
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        printData(day) {
-            const meals = this.getDataValues(this.fetchedData, day);
+        showSwiperWrappers() {
+            this.swiperWrappers.forEach(el => {
+                if(el.dataset.day === this.currentDay) {
+                    el.classList.add("_active");
 
-            for (const meal of meals) {
-                this.mealsSwiperWrapper.innerHTML += `
-                <div class="swiper-slide meals-slide">
-                        <div class="meals-slide__content">
-                            <div class="meals-slide__image">
-                                <img src="${meal.meal_image}" alt="food image" />
-                            </div>
-                            <div class="meals-slide__info">
-                                <header class="meals-slide__title">
-                                    <h2>${meal.meal_name}</h2>
-                                </header>
-                                <div class="meals-slide__description">
-                                    <p>${meal.meal_of_day}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
+                    this.initSwiper(el.classList.value)
 
-            this.mealsSlideImages = this.querySelectorAll(mealsSelectors.mealsSlideImage);
-            if (this.mealsSlideImages && this.mealsSlideImages.length > 0 && this.mealsPopup) {
-                this.mealsSlideImages.forEach((el) => el.addEventListener("click", this.openPopup.bind(this)));
-            }
-        }
-        getDataValues(obj, keyToFind) {
-            for (const key in obj) {
-                if (key === keyToFind) {
-                    return obj[key];
-                }
-                if (typeof obj[key] === "object" && obj[key] !== null) {
-                    const result = this.getDataValues(obj[key], keyToFind);
-                    if (result !== undefined) {
-                        return result;
+                    if(el.classList.contains("no-meals")) {
+                        this.mealsSwiper.pagination.el.style.display = "none";
+                    } else {
+                        this.mealsSwiper.pagination.el.style.display = "block";
                     }
+                    
+                } else {
+                    el.classList.remove("_active");
                 }
-            }
+            })
         }
+
+        initSwiper(wrapperClass) {
+            if(this.mealsSwiper) this.mealsSwiper.destroy(); 
+
+            this.mealsSwiper = new Swiper(mealsSelectors.mealsSwiper, {
+                loop: false,
+                wrapperClass: wrapperClass,
+                speed: swipersSettings.speed,
+                breakpoints: {
+                    550: {
+                        slidesPerView: 2,
+                    },
+                    980: {
+                        slidesPerView: 3,
+                    },
+                    1080: {
+                        navigation: {
+                            enabled: true,
+                            prevEl: ".meals-swiper-prev",
+                            nextEl: ".meals-swiper-next",
+                        },
+                        slidesPerView: 3,
+                    },
+                    1340: {
+                        slidesPerView: 4,
+                    },
+                },
+                pagination: {
+                    el: ".meals-swiper__pagination",
+                },
+                navigation: {
+                    enabled: false,
+                },
+            });
+        }
+    
         addDays() {
             this.daysElement.innerHTML = "";
 
@@ -557,6 +519,7 @@ document.addEventListener("DOMContentLoaded", () => {
             for (const el of this.elements.orderControls) {
                 if (parseInt(el.getAttribute(customOrderAttributes.dataProductId)) === buttonId) {
                     el.classList.add("_active");
+                    this.currentProductId = buttonId;
                     break;
                 }
             }

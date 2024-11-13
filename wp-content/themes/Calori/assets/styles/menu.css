@@ -3,6 +3,13 @@
 #menu {
     padding-bottom: var(--calori-sections-padding);
 }
+.menu__loading {
+    display: none;
+}
+.menu__loading._active {
+    display: block;
+}
+
 .day-card {
     border-radius: 15px;
     overflow: hidden;
@@ -50,7 +57,6 @@
 .menu__body {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 .menu__title h3 {
     font-size: 16px;
@@ -72,24 +78,46 @@
     font-size: 20px;
 }
 .menu__buttons {
+    display: flex;
+    align-items: stretch;
     margin-top: 15px;
 }
-.menu__buttons button {
+.menu__button:not(:first-child) {
+    position: relative;
+    margin-left: 10px;
+}
+.menu__button input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    z-index: 2;
+}
+.menu__button label {
+    display: block;
+    padding: 10px 15px;
+    height: 100%;
+    width: 100%;
     background: #ffff;
     color: var(--calori-color-text-secondary);
-    padding: 10px 15px;
     border: 1px solid #000;
     border-radius: 6px;
     transition: background 0.3s ease, color 0.3s ease;
     font-size: 17px;
 }
-.menu__buttons button._active,
-.menu__buttons button:hover {
+.menu__button input:checked + label {
     border: 1px solid var(--calori-color-bg-primary);
     background: var(--calori-color-bg-primary);
     color: var(--calori-color-text-third);
 }
 
+.no-menu-notify {
+    text-align: center;
+    padding: 50px 0;
+}
 .day-menu {
     width: 100%;
     margin-top: 30px;
@@ -112,6 +140,7 @@
     max-width: 400px;
     border: 2px solid var(--calori-color-bg-fourth);
     box-shadow: 0px 0px 19px -8px rgba(0, 0, 0, 0.75);
+    width: 100%;
 }
 
 .menu-popup__meal {
@@ -124,7 +153,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
+
 .menu-popup__meal::before {
     content: "";
     position: absolute;
@@ -142,7 +173,6 @@
     background: #ffff;
     max-width: 600px;
     width: 100%;
-    
     border-radius: 15px;
     transform: scale(0.5);
     opacity: 0;

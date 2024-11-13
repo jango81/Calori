@@ -10,12 +10,21 @@ function get_meal_menu()
     
     $query = new WP_Query($args);
 
+    $weeks = array();
+
     if ( $query->have_posts() ) {
         while ( $query->have_posts() ) {
             $query->the_post();
             $fields = get_fields();
+            array_push($weeks, $fields);
         }
     }
 
-    wp_send_json_success($fields);
+    if(!empty($weeks)) {
+        wp_send_json_success($weeks);
+    } else {
+        wp_send_json_error("No meals found");
+    }
+
+    wp_die();
 }

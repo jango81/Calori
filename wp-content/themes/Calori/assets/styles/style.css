@@ -1577,6 +1577,17 @@ input[type="checkbox"] {
 .meals-swiper {
     padding: 30px 0;
 }
+.meals-swiper__wrapper {
+    display: none;
+}
+.meals-swiper__wrapper._active {
+    display: flex;
+}
+.no-meals-message {
+    text-align: center;
+    width: 100%;
+    padding: 50px 0;
+}
 .meals-swiper__pagination {
     margin-top: 20px;
 }

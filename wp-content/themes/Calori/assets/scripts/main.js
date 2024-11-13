@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.classList.remove("_active");
             });
         }
-        async updateAmount(event)  {
+        async updateAmount(event) {
             const target = event.currentTarget;
             const parent = target.closest(cartSelectors.product);
             const productCartKey = parent.getAttribute(cartAttributes.dataProductKey);

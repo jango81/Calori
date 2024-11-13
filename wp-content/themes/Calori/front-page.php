@@ -137,10 +137,93 @@
     </div>
     <section id="meals">
         <custom-meals class="meals" data-post-id="<?php echo get_option("page_on_front") ?>">
+            <?php
+
+            function find_key_recursive($array, $key)
+            {
+                $results = [];
+
+                foreach ($array as $k => $value) {
+                    // Если найден нужный ключ, добавляем его значение в результаты
+                    if ($k === $key) {
+                        $results[] = $value;
+                    }
+
+                    // Если значение — массив, рекурсивно ищем в нем
+                    if (is_array($value)) {
+                        $results = array_merge($results, find_key_recursive($value, $key));
+                    }
+                }
+
+                return $results;
+            }
+
+            function isCurrentDateInRange($start, $end)
+            {
+                $currentDate = new DateTime();
+                $currentDate->setTime(0, 0, 0);
+
+                $startDate = DateTime::createFromFormat('m/d/Y', $start);
+                $endDate = DateTime::createFromFormat('m/d/Y', $end);
+                $startDate->setTime(0, 0, 0);
+                $endDate->setTime(0, 0, 0);
+
+                if ($startDate === false || $endDate === false) {
+                    return false;
+                }
+
+                return $currentDate >= $startDate && $currentDate <= $endDate;
+            }
+            function convertDateRange($dateRange)
+            {
+                list($start, $end) = explode(' - ', $dateRange);
+
+                $startDate = DateTime::createFromFormat('m/d/Y', trim($start));
+                $endDate = DateTime::createFromFormat('m/d/Y', trim($end));
+
+                if ($startDate && $endDate) {
+                    return $startDate->format('d.m') . ' - ' . $endDate->format('d.m');
+                }
+
+                return $dateRange;
+            }
+            $args = array(
+                'post_type' => 'ruokalistat',
+                'posts_per_page' => -1,
+            );
+
+            $query = new WP_Query($args);
+
+            $weeks = array();
+            $is_current_week_menu = false;
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                    $query->the_post();
+                    $post_id = get_the_ID();
+                    $fields = get_fields();
+                    if ($fields && isCurrentDateInRange($fields["start_date"], $fields["end_date"])) {
+                        $week_menu = $fields;
+                        $is_current_week_menu = true;
+                        break;
+                    } else {
+                        $post_props = array("post_id" => $post_id, "fields" => $fields);
+                        array_push($weeks, $post_props);
+                    }
+                }
+
+                if (!$is_current_week_menu) {
+                    $week_menu = $weeks[0]["fields"];
+                    $post_id = $weeks[0]["post_id"];
+                }
+                
+                $converted_date = convertDateRange($week_menu["start_date"] . " - " . $week_menu["end_date"]);
+            }
+
+            ?>
             <div class="meals__container _container">
                 <div class="meals__content">
                     <header class="meals__title section-title">
-                        <h1>Tämän viikon ruokalista</h1>
+                        <h1><?php echo $is_current_week_menu ? "Tämän viikon ruokalista" : $converted_date ?></h1>
                     </header>
                     <ul class="meals__days"></ul>
                 </div>
@@ -150,71 +233,47 @@
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/loading-gif.gif"
                         alt="loading">
                 </div>
-                <div class="swiper-wrapper meals-swiper__wrapper">
-                    <!-- <div class="swiper-slide meals-slide">
-                        <div class="meals-slide__content">
-                            <div class="meals-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg" alt="food image" />
-                            </div>
-                            <div class="meals-slide__info">
-                                <header class="meals-slide__title">
-                                    <h2>Double touch fixes v1</h2>
-                                </header>
-                                <div class="meals-slide__description">
-                                    <p>Ateria 1</p>
+                <?php
+                if (have_rows("this_week_whole_menu", $post_id)):
+                    while (have_rows("this_week_whole_menu", $post_id)):
+                        the_row();
+                        $row = get_row(true);
+                        foreach ($row as $key => $value):
+                            $meals = find_key_recursive($value, "meals");
+                            
+                            if (!empty($meals[0])): ?>
+                                <div class="swiper-wrapper meals-swiper__wrapper" data-day="<?php echo esc_attr($key)?>">
+                                    <?php foreach ($meals[0] as $meal):
+                                        ?>
+                                        <div class="swiper-slide meals-slide">
+                                            <div class="meals-slide__content">
+                                                <div class="meals-slide__image">
+                                                    <img src="<?php echo esc_attr($meal["meal_image"]) ?>" alt="food image" />
+                                                </div>
+                                                <div class="meals-slide__info">
+                                                    <header class="meals-slide__title">
+                                                        <h2><?php echo esc_html($meal["meal_name"]) ?></h2>
+                                                    </header>
+                                                    <div class="meals-slide__description">
+                                                        <p><?php echo esc_html($meal["meal_of_day"]) ?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide meals-slide">
-                        <div class="meals-slide__content">
-                            <div class="meals-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal2.jpg " alt="food image" />
-                            </div>
-                            <div class="meals-slide__info">
-                                <header class="meals-slide__title">
-                                    <h2>Dish name</h2>
-                                </header>
-                                <div class="meals-slide__description">
-                                    <p>Ateria 1</p>
+                            <?php else: ?>
+                                <div class="swiper-wrapper meals-swiper__wrapper no-meals" data-day="<?php echo esc_attr($key)?>">
+                                    <div class="no-meals-message">
+                                        <h1>Ei ruokia tälle päivälle</h1>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide meals-slide">
-                        <div class="meals-slide__content">
-                            <div class="meals-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal3.jpg" alt="food image" />
-                            </div>
-                            <div class="meals-slide__info">
-                                <header class="meals-slide__title">
-                                    <h2>Dish name</h2>
-                                </header>
-                                <div class="meals-slide__description">
-                                    <p>Ateria 1</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide meals-slide">
-                        <div class="meals-slide__content">
-                            <div class="meals-slide__image">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal4.jpg" alt="food image" />
-                            </div>
-                            <div class="meals-slide__info">
-                                <header class="meals-slide__title">
-                                    <h2>Dish name</h2>
-                                </header>
-                                <div class="meals-slide__description">
-                                    <p>Ateria 1</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-                <div class="swiper-button-prev swiper-nav-button meals-swiper-prev"></div>
-                <div class="swiper-button-next swiper-nav-button meals-swiper-next"></div>
-                <div class="swiper-pagination meals-swiper__pagination"></div>
+                            <?php endif ?>
+                        <?php endforeach; endwhile; ?>
+                    <div class="swiper-button-prev swiper-nav-button meals-swiper-prev"></div>
+                    <div class="swiper-button-next swiper-nav-button meals-swiper-next"></div>
+                    <div class="swiper-pagination meals-swiper__pagination"></div>
+                <?php endif; ?>
             </div>
             <div class="meals-popup">
                 <div class="meals-popup__image">
@@ -255,6 +314,7 @@
                             data-delivery-day="<?php echo get_field("first_delivery_days", "option") ?>"></p>
                     </div>
                     <?php
+
                     $products = wc_get_products(array(
                         "limit" => 2,
                         "category" => array("tuote"),
@@ -282,14 +342,17 @@
                                     if (!empty($product_attributes)): ?>
                                         <div class="order__settings">
                                             <?php foreach ($product_attributes as $attribute):
+                                                $current_select_class = $attribute->get_name() !== "pa_tilauksen-kesto" ? "variant-select" : "show-price-tags";
                                                 if ($attribute->get_name() === "pa_maksu-tyyppi")
                                                     continue; ?>
                                                 <fieldset class="order-block order__variant" data-current-variant="">
                                                     <legend class="order-block__title">
                                                         <?php echo esc_html(wc_attribute_label($attribute->get_name())); ?>
                                                     </legend>
-                                                    <custom-select class="custom-select order-block__select" data-heading=""
-                                                        data-value="">
+                                                    <custom-select
+                                                        class="custom-select order-block__select <?php echo $current_select_class ?>"
+                                                        data-heading="" data-value=""
+                                                        data-variant-name="<?php echo $attribute->get_name() ?>">
                                                         <select name="order-variants"></select>
                                                         <div class="custom-select__wrapper">
                                                             <div class="custom-select__value">
@@ -298,6 +361,7 @@
                                                             </div>
                                                             <div class="custom-select__options">
                                                                 <?php
+
                                                                 $attribute_options = $attribute->get_options();
 
                                                                 if (!empty($attribute_options)):
