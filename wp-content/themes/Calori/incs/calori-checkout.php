@@ -122,7 +122,7 @@ add_filter("woocoomerce_checkout_fields", function ($fields) {
 });
 
 
-add_action("woocommerce_after_order_notes", function ($checkout) {
+add_action("woocommerce_before_order_notes", function ($checkout) {
     echo "<div class='checkout-field-inputs'>";
     woocommerce_form_field("delivery_outdoor", array(
         "type" => "checkbox",
@@ -130,24 +130,35 @@ add_action("woocommerce_after_order_notes", function ($checkout) {
         "label" => "Paketin saa jättää oven eteen",
         "required" => false
     ), $checkout->get_value("delivery_outdoor"));
+    woocommerce_form_field("delivery_time", array(
+        "type" => "select",
+        "options" => array(
+            "Toimitus aikaikkuna 15:30-18:00" => "Toimitus aikaikkuna 15:30-18:00",
+            "Toimitus aikaikkuna 17:00-21:00" => "Toimitus aikaikkuna 17:00-21:00",
+            "Toimitus aikaikkuna 19:00-22:00" => "Toimitus aikaikkuna 19:00-22:00"
+        ),
+        "class" => array("checkout-field-select"),
+        "label" => "Valitse toimitusaikaikkuna",
+        "required" => true
+    ), $checkout->get_value("delivery_time"));
     echo "</div>";
 
 });
 
 add_action("woocommerce_checkout_update_order_meta", function ($order_id) {
-    if (!empty($_POST["delivery_outdoor"])) {
-        $result = sanitize_text_field($_POST["delivery_outdoor"]);
-        error_log($result);
-        $order = wc_get_order($order_id);
-        $order->update_meta_data("delivery_outdoor", $result === "1" ? "yes" : "no");
-        $order->save_meta_data();
-    }
+    $delivery_time = isset($_POST["delivery_time"]) ? sanitize_text_field($_POST["delivery_time"]) : "";
+    $is_checked = isset($_POST["delivery_outdoor"]) ? "YES" : "NO";
+    $order = wc_get_order($order_id);
+    $order->update_meta_data("delivery_outdoor", $is_checked);
+    $order->update_meta_data("delivery_time", $delivery_time);
+    $order->save_meta_data();
 });
 
 
-add_action( 'woocommerce_admin_order_data_after_shipping_address', function( $order ) {
-    echo '<p><strong>' . esc_html__( 'Delivery outdoor' ) . ':</strong> ' . esc_html( $order->get_meta( 'delivery_outdoor', true ) ) . '</p>';
-}, 10, 1 );
+add_action('woocommerce_admin_order_data_after_shipping_address', function ($order) {
+    echo '<p><strong>' . esc_html__('Delivery outdoor') . ':</strong> ' . esc_html($order->get_meta('delivery_outdoor', true)) . '</p>';
+    echo '<p><strong>' . esc_html__('Delivery time') . ':</strong> ' . esc_html($order->get_meta('delivery_time', true)) . '</p>';
+}, 10, 1);
 
 
 add_action('wp_footer', 'hide_checkout_error_messages');

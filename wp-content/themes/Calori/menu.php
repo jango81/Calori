@@ -1,9 +1,12 @@
 <?php
 /* Template Name: Ruokalista */
-get_header();
-?>
+get_header(null, array("announcement" => false, "show_cart" => true))
+    ?>
 <main id="main">
-    <?php get_template_part("mini-cart"); ?>
+    <?php get_template_part("mini-cart") ?>
+    <div class="loading" id="loading">
+        <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/loading-gif.gif" alt="loading">
+    </div>
     <section id="menu">
         <div class="menu__banner section-banner">
             <div class="menu-banner__wrapper section-banner__wrapper _container">
@@ -67,17 +70,17 @@ get_header();
                                 $query->the_post();
                                 $fields = get_fields();
 
+                                $date_string = $fields['start_date'] . ' - ' . $fields['end_date'];
+                                $converted_date = convertDateRange($date_string);
+
                                 if (isCurrentDateInRange($fields['start_date'], $fields['end_date'])) {
-
-                                    $date_string = $fields['start_date'] . ' - ' . $fields['end_date'];
-                                    $converted_date = convertDateRange($date_string);
                                     $has_same_week = true;
-
-                                    echo '<time class="menu__date"><strong>' . $converted_date . '</strong></time>';
                                 } else {
                                     $next_week = $fields['start_date'] . ' - ' . $fields['end_date'];
                                 }
                             }
+
+                            echo '<time class="menu__date"><strong>' . $converted_date . '</strong></time>';
                         }
                         ?>
                         <div class="menu__buttons">
@@ -95,7 +98,8 @@ get_header();
                     </div>
                     <div class="menu__wrapper">
                         <div class="menu__loading loading-gif">
-                            <img src="<?php echo get_template_directory_uri() . "/assets/images/icons/loading-gif.gif"?>" alt="loading">
+                            <img src="<?php echo get_template_directory_uri() . "/assets/images/icons/loading-gif.gif" ?>"
+                                alt="loading">
                         </div>
                     </div>
                 </div>
@@ -115,7 +119,7 @@ get_header();
                             <h3 class="popup-meal__meal day-card-meal"></h3>
                             <h2 class="popup-meal__name day-card-meal-name"></h2>
                             <div class="popup-meal__block popup-block">
-                                
+
                             </div>
                         </div>
                     </div>

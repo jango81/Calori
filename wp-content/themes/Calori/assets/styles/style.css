@@ -2010,9 +2010,6 @@ input[type="checkbox"] {
     .order-products {
         max-width: 50%;
     }
-    .order-block:not(:first-child) {
-        margin-top: 10px;
-    }
     .order-block__buttons {
         display: flex;
         flex-wrap: wrap;

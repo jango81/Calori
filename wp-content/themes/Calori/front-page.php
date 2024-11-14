@@ -1,4 +1,4 @@
-<?php get_header() ?>
+<?php get_header(null, array("announcement" => true, "show_cart" => true)) ?>
 <main id="main">
     <?php get_template_part("mini-cart") ?>
     <div class="loading" id="loading">
@@ -144,12 +144,9 @@
                 $results = [];
 
                 foreach ($array as $k => $value) {
-                    // Если найден нужный ключ, добавляем его значение в результаты
                     if ($k === $key) {
                         $results[] = $value;
                     }
-
-                    // Если значение — массив, рекурсивно ищем в нем
                     if (is_array($value)) {
                         $results = array_merge($results, find_key_recursive($value, $key));
                     }
@@ -215,7 +212,7 @@
                     $week_menu = $weeks[0]["fields"];
                     $post_id = $weeks[0]["post_id"];
                 }
-                
+
                 $converted_date = convertDateRange($week_menu["start_date"] . " - " . $week_menu["end_date"]);
             }
 
@@ -239,10 +236,11 @@
                         the_row();
                         $row = get_row(true);
                         foreach ($row as $key => $value):
-                            $meals = find_key_recursive($value, "meals");
-                            
-                            if (!empty($meals[0])): ?>
-                                <div class="swiper-wrapper meals-swiper__wrapper" data-day="<?php echo esc_attr($key)?>">
+
+                            if (!empty($value)):
+                                $meals = find_key_recursive($value, "meals"); ?>
+
+                                <div class="swiper-wrapper meals-swiper__wrapper" data-day="<?php echo esc_attr($key) ?>">
                                     <?php foreach ($meals[0] as $meal):
                                         ?>
                                         <div class="swiper-slide meals-slide">
@@ -263,7 +261,7 @@
                                     <?php endforeach; ?>
                                 </div>
                             <?php else: ?>
-                                <div class="swiper-wrapper meals-swiper__wrapper no-meals" data-day="<?php echo esc_attr($key)?>">
+                                <div class="swiper-wrapper meals-swiper__wrapper no-meals" data-day="<?php echo esc_attr($key) ?>">
                                     <div class="no-meals-message">
                                         <h1>Ei ruokia tälle päivälle</h1>
                                     </div>
@@ -362,15 +360,14 @@
                                                             <div class="custom-select__options">
                                                                 <?php
 
-                                                                $attribute_options = $attribute->get_options();
-
+                                                                $attribute_options = wc_get_product_terms($product->get_id(), $attribute->get_name(), ['orderby' => 'menu_order']);
+                                                                ;
                                                                 if (!empty($attribute_options)):
                                                                     foreach ($attribute_options as $option):
-                                                                        $term = get_term_by('id', $option, $attribute->get_name());
                                                                         ?>
                                                                         <div class="custom-select__option"
-                                                                            data-value="<?php echo esc_attr($term->term_id); ?>">
-                                                                            <?php echo esc_html($term->name) ?>
+                                                                            data-value="<?php echo esc_attr($option->term_id); ?>">
+                                                                            <?php echo esc_html($option->name) ?>
                                                                         </div>
                                                                     <?php endforeach; endif; ?>
                                                             </div>
@@ -419,6 +416,10 @@
                                                                 <h3 class="custom-radio__heading"><?php echo esc_html($term->name) ?>
                                                                 </h3>
                                                                 <h3 class="custom-radio__price">
+                                                                    <?php
+                                                                    $price = $variation_obj->get_price();
+                                                                    echo wc_price($price)
+                                                                        ?>
                                                                 </h3>
                                                             </div>
                                                         </div>
@@ -450,27 +451,6 @@
                                                 </div>
                                             </fieldset>
                                         <?php endforeach; ?>
-                                        <!-- <fieldset class="order__payment order-payment order-block">
-                                            <legend class="order-payment__title order-block-title">Maksun muoto</legend>
-                                            <div class="order-payment__radiobuttons">
-                                                <div class="custom-radio order-radio">
-                                                    <input type="radio" name="order-radio" />
-                                                    <div class="custom-radio__wrapper">
-                                                        <span class="custom-radio__bullet"></span>
-                                                        <h3 class="custom-radio__heading">Kertamaksu</h3>
-                                                        <h3 class="custom-radio__price"></h3>
-                                                    </div>
-                                                </div>
-                                                <div class="custom-radio order-radio">
-                                                    <input type="radio" name="order-radio" />
-                                                    <div class="custom-radio__wrapper">
-                                                        <span class="custom-radio__bullet"></span>
-                                                        <h3 class="custom-radio__heading">Uusiutuva</h3>
-                                                        <h3 class="custom-radio__price"></h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset> -->
                                         <div class="order__buttons">
                                             <button class="btn btn-solid btn-medium order-cart__button" type="submit">
                                                 <span class="btn-text">Lisää ostoskoriin</span>

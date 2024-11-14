@@ -1,12 +1,3 @@
-<?php
-
-/* $menu_name = 'header_menu';
-$locations = get_nav_menu_locations();
-print_r($locations);
-$menu_id = $locations[$menu_name];
-$menu_items = wp_get_nav_menu_items($menu_id); */
-
-?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -23,11 +14,13 @@ $menu_items = wp_get_nav_menu_items($menu_id); */
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
     <div id="wrapper">
+        <?php if($args["announcement"] !== false): ?>
         <announcement-bar class="announcement"
             data-icon="<?php echo get_template_directory_uri() ?>/assets/images/icons/truck.svg"
             data-heading="Toimitukset vain PK seudulla">
             <div class="announcement__content" id="announcement__content"></div>
         </announcement-bar>
+        <?php endif; ?>
         <header id="header" class="">
             <custom-header class="header">
                 <div class="header__container _container">
@@ -48,6 +41,7 @@ $menu_items = wp_get_nav_menu_items($menu_id); */
                             </a>
                         </div>
                         <div class="header__icons">
+                        <?php if($args["show_cart"] !== false): ?>
                             <div class="header__icon header__cart-icon">
                                 <svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -66,6 +60,7 @@ $menu_items = wp_get_nav_menu_items($menu_id); */
                                     </g>
                                 </svg>
                             </div>
+                        <?php endif; ?>
                         </div>
                     </div>
                 </div>

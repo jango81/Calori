@@ -23,7 +23,7 @@ add_action("wp_enqueue_scripts", function () {
         ));
         wp_enqueue_style("calori-swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css");
     }
-    if(is_checkout()) {
+    if (is_checkout()) {
         wp_enqueue_style("calori-checkout", get_template_directory_uri() . "/assets/styles/checkout.css");
     }
     //------Meistä page-----
@@ -76,7 +76,46 @@ add_filter('script_loader_tag', function ($tag, $handle, $src) {
     return $tag;
 }, 10, 3);
 
+add_action('admin_head', 'custom_changes_css');
 
+function custom_changes_css()
+{
+    echo '<style>
+    #order_line_items .name .display_meta {
+        width: 100%;
+    }
+    #order_line_items .name .display_meta tr {
+        display: flex;
+    }
+    #order_line_items .name .display_meta td p {
+        display: block;
+        width: auto !important;
+        font-size: 16px;
+    }
+    #order_line_items .name .display_meta th {
+        display: block;
+        width: auto !important;
+        font-size: 16px;
+    }
+    #order_line_items .item_cost, 
+    #order_line_items .quantity, 
+    #order_line_items .line_cost {
+        font-size: 18px;
+    }
+    #order_line_items .name .wc-order-item-name {
+        font-size: 18px;
+    }
+    #order_data h3 {
+        color: #000;
+        font-weight: 600;
+        font-size: 17px;
+    }
+    #order_data p {
+        color: #000;
+        font-size: 15px;
+    }
+    </style>';
+}
 
 
 require_once get_template_directory() . "/incs/calori-nav-menu.php";
