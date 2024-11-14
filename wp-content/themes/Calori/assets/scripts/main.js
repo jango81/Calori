@@ -123,7 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         addListeners() {
-            this.cartIcon.addEventListener("click", this.showCart.bind(this));
+            if(this.cartIcon) this.cartIcon.addEventListener("click", this.showCart.bind(this));
+
             this.siteWrapper.addEventListener("scroll", this.showHeaderScrolled.bind(this));
             this.burgerMenu.addEventListener("click", this.setNavigationClass.bind(this));
             this.navigationButton.addEventListener("click", this.removeNavigationClass.bind(this));

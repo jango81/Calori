@@ -93,6 +93,12 @@
     width: 100%;
 }
 
+.woocommerce-notice {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
 @media (min-width: 1080px) {
     .checkout.woocommerce-checkout {
         display: flex;
