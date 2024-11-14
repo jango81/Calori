@@ -1,4 +1,4 @@
-<?php get_header(null, array("announcement" => true, "show_cart" => true)) ?>
+<?php #get_header(null, array("announcement" => true, "show_cart" => true)) ?>
 <main id="main">
     <?php get_template_part("mini-cart") ?>
     <div class="loading" id="loading">
