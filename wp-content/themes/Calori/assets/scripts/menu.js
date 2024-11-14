@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             this.attachEventsAfterFetch();
             this.mealPopup.addEventListener("click", this.closePopup.bind(this));
-            console.log("Day cards", this.dayCards);
         }
         attachEventsAfterFetch() {
             this.removeEvents();
@@ -100,11 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
             searchRecursive(obj);
             return findOne ? results[0] : results;
         }
+        menuButtonsStatus(isDisabled) {
+            this.menuButtons.forEach((el) => el.disabled = isDisabled);
+        }
         async fetchMealMenu() {
+            console.clear();
             try {
+                this.menuButtonsStatus(true);
                 this.menuLoading.classList.add("_active");
-                console.log(this.menuLoading);
-                
+
                 const response = await fetch(ajax_object.ajax_url, {
                     method: "POST",
                     headers: {
@@ -116,8 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 const data = await response.json();
 
-                if(data.success) this.menuLoading.classList.remove("_active");
+                if (data.success) this.menuLoading.classList.remove("_active");
 
+                this.menuButtonsStatus(false);
                 return data;
             } catch (error) {
                 console.error("Error:", error);
@@ -129,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("No checked button");
                 return;
             }
-            
+
             this.cardId = 0;
 
             this.clearMenuWrapper();
@@ -140,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const dates = week.split("-").map((el) => new Date(el));
 
             const fields = this.getFieldsByDate(dates, data);
-            console.log("Fields", fields);
 
             this.printDayBlocks(fields);
 
@@ -170,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         printDayBlocks(fields) {
             const { this_week_whole_menu } = fields;
-            console.log(this.checkMenuEmpty(this_week_whole_menu));
 
             if (!this.checkMenuEmpty(this_week_whole_menu)) {
                 this.menuWrapper.innerHTML += "<h1 class='no-menu-notify'>Ei ruokalistaa tälle viikolle</h1>";
@@ -206,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("No meals found");
                 return;
             }
-            console.log("Day meals", dayMeals);
 
             for (const mealFields of dayMeals) {
                 this.cardData[this.cardId] = mealFields;
@@ -236,13 +237,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         clearMenuWrapper() {
-            const meals = this.menuWrapper.children;
-            console.log(customMenuSelectors.menuLoading.slice(1));
-            for (const el of meals) {
-                if(el.classList.contains(customMenuSelectors.menuLoading.slice(1))) continue;
-
-                el.remove();
-            }
+            const meals = Array.from(this.menuWrapper.children);
+            if (meals.length <= 0) return;
+            meals.forEach((el) => el.remove());
         }
         checkMenuEmpty(weekMenu) {
             const meals = this.findAllValuesByKey(weekMenu, "meals");
@@ -258,20 +255,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             swipers.forEach((el) => {
                 const swiper = new Swiper(el, {
+                    speed: swipersSettings.speed,
+                    spaceBetween: 20,
+                    centeredSlides: false,
+                    freeMode: true,
                     slidesPerView: "auto",
                     paggination: {
                         el: ".swiper-pagination",
-                    },
-                    breakpoints: {
-                        730: {
-                            slidesPerView: 2,
-                        },
-                        1100: {
-                            slidesPerView: 3,
-                        },
-                        1580: {
-                            slidesPerView: 4,
-                        },
                     },
 
                     on: {
@@ -298,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         printPopupInfo(cardId) {
             const cardData = this.getCardData(cardId);
-            console.log("Card data", cardData);
+
             if (!cardData) {
                 console.error("No card data found");
                 return;
@@ -331,8 +321,10 @@ document.addEventListener("DOMContentLoaded", () => {
             this.cardId = card.dataset.cardId;
             this.printPopupInfo(this.cardId);
 
-            this.mealPopup.classList.add("_active");
             this.mealPopup.style.visibility = "visible";
+            setTimeout(() => {
+                this.mealPopup.classList.add("_active");
+            }, 10);
         }
         closePopup() {
             const popupCard = this.mealPopup.querySelector(customMenuSelectors.dayCard);

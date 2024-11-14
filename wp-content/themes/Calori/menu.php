@@ -96,11 +96,11 @@ get_header(null, array("announcement" => false, "show_cart" => true))
                             </div>
                         </div>
                     </div>
+                    <div class="menu__loading loading-gif">
+                        <img src="<?php echo get_template_directory_uri() . "/assets/images/icons/loading-gif.gif" ?>"
+                            alt="loading">
+                    </div>
                     <div class="menu__wrapper">
-                        <div class="menu__loading loading-gif">
-                            <img src="<?php echo get_template_directory_uri() . "/assets/images/icons/loading-gif.gif" ?>"
-                                alt="loading">
-                        </div>
                     </div>
                 </div>
             </div>

@@ -229,7 +229,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 loop: false,
                 wrapperClass: wrapperClass,
                 speed: swipersSettings.speed,
-                breakpoints: {
+                spaceBetween: 20,
+                centeredSlides: false,
+                freeMode: true,
+                slidesPerView: "auto",
+                /* breakpoints: {
                     550: {
                         slidesPerView: 2,
                     },
@@ -247,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     1340: {
                         slidesPerView: 4,
                     },
-                },
+                }, */
                 pagination: {
                     el: ".meals-swiper__pagination",
                 },
@@ -766,4 +770,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     customElements.define("custom-calculator", CustomCalculator);
+
+    //Head section button
+    const headSectionButton = document.querySelector(".head-section .main-buttons__item");
+    headSectionButton.onclick = () => {
+        const orderSection = document.querySelector("#order");
+        if(orderSection) {
+            orderSection.scrollIntoView({behavior: "smooth"});
+        }
+    }
 });

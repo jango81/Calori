@@ -7,9 +7,10 @@
     display: none;
 }
 .menu__loading._active {
-    display: block;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
-
 .day-card {
     border-radius: 15px;
     overflow: hidden;
@@ -50,7 +51,9 @@
 .day-card-meal-name {
     margin-top: 10px;
 }
-
+.day-slide {
+    width: auto !important;
+}
 .menu {
     width: 100%;
 }
@@ -118,9 +121,22 @@
     text-align: center;
     padding: 50px 0;
 }
+
 .day-menu {
     width: 100%;
     margin-top: 30px;
+    animation: forwards 0.5s fadeIn;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 .day-menu__heading {
     text-align: center;
@@ -153,7 +169,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .menu-popup__meal::before {

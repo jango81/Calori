@@ -15,9 +15,6 @@
                     <div class="main-buttons__item">
                         <a class="btn btn-solid btn-medium" href="#"><span class="btn-text">Valitse menu</span></a>
                     </div>
-                    <div class="main-buttons__item">
-                        <a class="btn btn-transparent btn-small" href="#">Tutustu lisää</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -813,7 +810,7 @@
     <div class="decor-line _container">
         <span></span>
     </div>
-    <section id="reviews">
+    <!-- <section id="reviews">
         <custom-reviews class="reviews" data-text-initial-height="100px">
             <div class="reviews__container _container">
                 <header class="reviews__title section-title">
@@ -883,7 +880,7 @@
                 </div>
             </div>
         </custom-reviews>
-    </section>
+    </section> -->
     <div class="decor-line _container">
         <span></span>
     </div>
