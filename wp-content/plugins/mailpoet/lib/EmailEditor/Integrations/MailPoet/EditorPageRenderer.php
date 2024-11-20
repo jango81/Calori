@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace MailPoet\AdminPages\Pages;
+namespace MailPoet\EmailEditor\Integrations\MailPoet;
 
 if (!defined('ABSPATH')) exit;
 
@@ -18,7 +18,7 @@ use MailPoet\Util\CdnAssetUrl;
 use MailPoet\Util\License\Features\Subscribers as SubscribersFeature;
 use MailPoet\WP\Functions as WPFunctions;
 
-class EmailEditor {
+class EditorPageRenderer {
   private WPFunctions $wp;
 
   private Settings_Controller $settingsController;
@@ -56,13 +56,14 @@ class EmailEditor {
   }
 
   public function render() {
-    $postId = isset($_GET['postId']) ? intval($_GET['postId']) : 0;
+    $postId = isset($_GET['post']) ? intval($_GET['post']) : 0;
     $post = $this->wp->getPost($postId);
     if (!$post instanceof \WP_Post || $post->post_type !== EditorInitController::MAILPOET_EMAIL_POST_TYPE) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
       return;
     }
 
-    $assetsParams = require_once Env::$assetsPath . '/dist/js/email-editor/email_editor.asset.php';
+    $assetsParams = require Env::$assetsPath . '/dist/js/email-editor/email_editor.asset.php';
+
     $this->wp->wpEnqueueScript(
       'mailpoet_email_editor',
       Env::$assetsUrl . '/dist/js/email-editor/email_editor.js',
@@ -136,6 +137,7 @@ class EmailEditor {
     // Enqueue media library scripts
     $this->wp->wpEnqueueMedia();
 
+    require_once ABSPATH . 'wp-admin/admin-header.php';
     echo '<div id="mailpoet-email-editor" class="block-editor block-editor__container hide-if-no-js"></div>';
   }
 }
