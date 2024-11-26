@@ -78,6 +78,11 @@ add_filter('script_loader_tag', function ($tag, $handle, $src) {
 
 add_action('admin_head', 'custom_changes_css');
 
+add_filter( 'woocommerce_webhook_payload', function($payload, $resource, $resource_id, $id) {
+    $payload["webhook_id"] = $id;
+    return $payload;
+}, 10, 4);
+
 function custom_changes_css()
 {
     echo '<style>

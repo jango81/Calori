@@ -31,7 +31,6 @@ function add_to_cart()
     if ($cart_item_key) {
         $cart_item = WC()->cart->get_cart_item($cart_item_key);
         if ($cart_item) {
-            error_log(print_r($cart_item, true));
             $product = $cart_item["data"];
             $product_name = $product->get_name();
             $product_price = $product->get_price();

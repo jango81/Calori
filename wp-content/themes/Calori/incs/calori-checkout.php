@@ -1,5 +1,6 @@
 <?php
 
+require_once "class-calori-calc-time.php";
 
 add_filter("woocommerce_default_address_fields", function ($fields) {
     $labels = [
@@ -142,22 +143,57 @@ add_action("woocommerce_before_order_notes", function ($checkout) {
         "required" => true
     ), $checkout->get_value("delivery_time"));
     echo "</div>";
-
 });
 
 add_action("woocommerce_checkout_update_order_meta", function ($order_id) {
+    $order = wc_get_order($order_id);
+    $order_date = $order->get_date_created();
+    $formatted_order_date = $order_date->format("Y-m-d H:i:s");
+    $calc_delivery_obj = new Calori_Calc_Time();
+
     $delivery_time = isset($_POST["delivery_time"]) ? sanitize_text_field($_POST["delivery_time"]) : "";
     $is_checked = isset($_POST["delivery_outdoor"]) ? "YES" : "NO";
-    $order = wc_get_order($order_id);
+
     $order->update_meta_data("delivery_outdoor", $is_checked);
     $order->update_meta_data("delivery_time", $delivery_time);
+    $order->update_meta_data("first_delivery_date", $calc_delivery_obj->calculate_delivery_date($formatted_order_date));
+
     $order->save_meta_data();
 });
 
+add_action('woocommerce_checkout_order_processed', function ($order_id, $posted_data, $order) {
+    $order = wc_get_order($order_id);
+
+    $order_date = $order->get_date_created();
+    $formatted_order_date = $order_date->format("Y-m-d H:i:s");
+
+    foreach ($order->get_items() as $item_id => $item) {
+        $meta_data = $item->get_formatted_meta_data();
+        foreach ($meta_data as $meta) {
+            $key = $meta->key;
+            $display_value = wp_strip_all_tags($meta->display_value);
+
+            if ($key === "pa_tilauksen-kesto") {
+                $calc_delivery_obj = new Calori_Calc_Time($display_value);
+                preg_match('/\d+/', $display_value, $matches);
+                $days = (int) $matches[0];
+            }
+        }
+
+        $subs_duration_dates = $calc_delivery_obj->calculate_subs_duration($formatted_order_date, $days ? $days : 0);
+        $subs_duration = $subs_duration_dates["start_date"] . " - " . $subs_duration_dates["end_date"];
+
+        $item->add_meta_data('subscription_duration', $subs_duration, true);
+        $item->save_meta_data();
+    }
+
+    $order->save_meta_data();
+}, 10, 3);
 
 add_action('woocommerce_admin_order_data_after_shipping_address', function ($order) {
     echo '<p><strong>' . esc_html__('Delivery outdoor') . ':</strong> ' . esc_html($order->get_meta('delivery_outdoor', true)) . '</p>';
     echo '<p><strong>' . esc_html__('Delivery time') . ':</strong> ' . esc_html($order->get_meta('delivery_time', true)) . '</p>';
+    echo '<p><strong>' . esc_html__('First delivery date') . ':</strong> ' . esc_html($order->get_meta('first_delivery_date', true)) . '</p>';
 }, 10, 1);
 
 
