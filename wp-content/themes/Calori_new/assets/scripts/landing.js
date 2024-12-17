@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 orderForm: this.querySelector(selectors.orderForm),
                 infoContent: this.querySelector(selectors.orderInfoContent),
                 orderButtons: this.querySelector(selectors.orderButtons),
-                calculatorButton: this.querySelector(selectors.calculatorButton),
+                // calculatorButton: this.querySelector(selectors.calculatorButton),
                 calculator: this.querySelector(selectors.calculator),
                 deliveryDateEl: this.querySelector(selectors.orderDeliveryDate),
                 orderPaymentRadio: this.querySelector(selectors.orderPaymentRadio),
@@ -370,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
         attachEventListeners() {
             const { productButtons, calculatorButton, variantSelect, orderForm } = this.elements;
 
-            calculatorButton.addEventListener("click", () => this.elements.calculator.classList.toggle("_active"));
+            // calculatorButton.addEventListener("click", () => this.elements.calculator.classList.toggle("_active"));
             productButtons.forEach((button) => button.addEventListener("click", this.productButtonHandler.bind(this)));
             variantSelect.forEach((select) => select.addEventListener("change", this.variantSelectHandler.bind(this)));
             orderForm.addEventListener("submit", (e) => this.cartButtonHandler(e));
@@ -459,6 +459,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
+        getExclusionIngredients() {
+            const activeCheckBoxes = Array.from(this.querySelectorAll('.order-block input[type="checkbox"][name="exclusion-ingredients"]:checked'));
+            console.log("activeCheckBoxes", activeCheckBoxes);
+            
+            console.log("values", activeCheckBoxes.map((el) => el.getAttribute("data-ingredient")));
+            
+            return activeCheckBoxes.map((el) => el.getAttribute("data-ingredient").trim()).join(", ");
+        }
+
+        getDeliveryDay() {
+            return this.querySelector(".delivery-time-select").getAttribute("data-value").trim();
+        }
+
         cartButtonHandler(event) {
             event.preventDefault();
             const { paymentBlock, orderControls } = this.elements;
@@ -476,8 +489,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 product_id: productId,
                 variant_id: variantId,
                 payment_type: paymentType,
+                // delivery_day:  this.getDeliveryDay(),
+                excluded_ingredients: this.getExclusionIngredients(),
             };
-            console.log(formData);
 
             const params = new URLSearchParams(formData).toString();
             const data = this.fetchData(params);

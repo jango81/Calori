@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Meistä */
-get_header(null, array("announcement" => false, "show_cart" => true))
+get_header(null, array("announcement" => true, "show_cart" => true))
     ?>
 <main id="main">
     <?php get_template_part("mini-cart") ?>
@@ -10,10 +10,10 @@ get_header(null, array("announcement" => false, "show_cart" => true))
     <div class="breadcrumbs">
         <ul>
             <li>
-                <a href="/">Home</a>
+                <a href="/">Kotisivu</a>
             </li>
             <li>
-            Meistä
+                Meistä
             </li>
         </ul>
     </div>
@@ -21,63 +21,65 @@ get_header(null, array("announcement" => false, "show_cart" => true))
 
     <article id="about">
         <section class="section mb0">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="menu-page">
-                    <h1 class="h1">
-                    Meistä
-                    </h1>
-                    <p class="menu-page-text">
-                    Missiomme on tehdä terveellisestä syömisestä helppoa ja maukasta
-                    </p>
+            <div class="container">
+                <div class="section-wrapper">
+                    <div class="menu-page">
+                        <h1 class="h1">
+                            Meistä
+                        </h1>
+                        <p class="menu-page-text">
+                            Missiomme on tehdä terveellisestä syömisestä helppoa ja maukasta
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
         <section id="about-quote">
-            <custom-quote class="about-quote">
-                <div class="about-quote__container _container">
-                    <div class="about-quote__body">
-                        <div class="about-quote__quotes">
-                            <div class="about-quote__text">
-                                <p>
-                                    "Calorin ruokavalio vastaa täydellisesti kehosi tarpeita. Tarjoamme kaikki
-                                    tarvittavat ravintoaineet, jotka pitävät sinut energisenä päivittäin. Calori
-                                    yhdistää terveellisen ja herkullisen ruoan ainutlaatuisella
-                                    tavalla." Mari Lahti, Helsingin yliopiston ravitsemusvalmentaja, ETM"
-                                </p>
-                            </div>
-                            <div class="about-quote__text">
-                                <p>"Minulle on ollut sydämen asia olla mukana kehittämässä ruokakulttuuria, jossa
-                                    terveellinen ruoka tulee sujuvasti pöytään, tiedän syöväni hyvin ja hyvällä
-                                    omallatunnolla." Pia Alanko.</p>
-                            </div>
-                        </div>
-                        <div class="about-quote__icons">
-                            <div class="about-quote__icon">
-                                <div class="about-quote__image">
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/quote-icon.png"
-                                        alt="quote icon" />
+            <div class="container">
+                <custom-quote class="about-quote">
+                    <div class="about-quote__container _container">
+                        <div class="about-quote__body">
+                            <div class="about-quote__quotes">
+                                <div class="about-quote__text">
+                                    <p>
+                                        "Calorin ruokavalio vastaa täydellisesti kehosi tarpeita. Tarjoamme kaikki
+                                        tarvittavat ravintoaineet, jotka pitävät sinut energisenä päivittäin. Calori
+                                        yhdistää terveellisen ja herkullisen ruoan ainutlaatuisella
+                                        tavalla." Mari Lahti, Helsingin yliopiston ravitsemusvalmentaja, ETM"
+                                    </p>
                                 </div>
-                                <span></span>
-                            </div>
-                            <div class="about-quote__icon">
-                                <div class="about-quote__image">
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/quote-icon.png"
-                                        alt="quote icon" />
+                                <div class="about-quote__text">
+                                    <p>"Minulle on ollut sydämen asia olla mukana kehittämässä ruokakulttuuria, jossa
+                                        terveellinen ruoka tulee sujuvasti pöytään, tiedän syöväni hyvin ja hyvällä
+                                        omallatunnolla." Pia Alanko.</p>
                                 </div>
-                                <span></span>
+                            </div>
+                            <div class="about-quote__icons">
+                                <div class="about-quote__icon">
+                                    <div class="about-quote__image">
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/meista1.png"
+                                            alt="quote icon" />
+                                    </div>
+                                    <span></span>
+                                </div>
+                                <div class="about-quote__icon">
+                                    <div class="about-quote__image">
+                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/meista2.png"
+                                            alt="quote icon" />
+                                    </div>
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </custom-quote>
+                </custom-quote>
+            </div>
         </section>
         <section id="about-info">
-            <div class="about-info__container _container">
+            <div class="about-info__container container">
                 <div class="about-info__body">
                     <div class="about-info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/meista3.png"
                             alt="about image" />
                     </div>
                     <div class="about-info__content">
@@ -96,23 +98,27 @@ get_header(null, array("announcement" => false, "show_cart" => true))
                 </div>
             </div>
         </section>
+
         <section id="about-info">
-            <div class="about-info__container _container">
+            <div class="about-info__container container">
                 <div class="about-info__body">
                     <div class="about-info__image">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/meista4.png"
                             alt="about image" />
                     </div>
                     <div class="about-info__content">
                         <header class="about-info__heading">
-                            <h3><strong>Näkemyksemme</strong></h3>
+                            <h3><strong>Tehtävämme</strong></h3>
                         </header>
                         <div class="about-info__text">
                             <p>
-                                Me Calorilla näemme maailman, jossa terveellisten ruokavalintojen tekeminen on
-                                jännittävää ja vaivatonta. Pyrimme olemaan edelläkävijöitä, jotka tarjoavat
-                                tasapainoisia aterioita yhdistäen kotiruokien periaatteet ja
-                                ravintolatason laatustandardit, mikä kannustaa kaikkia terveellisempään elämään.
+                                Calori on omistautunut tuottamaan tasapainoisia ja ravitsevia aterioita, jotka vastaavat
+                                erilaisiin ruokavaliotarpeisiin mausta tai laadusta tinkimättä. Tehtävänämme on tehdä
+                                terveellisestä syömisestä yksinkertaista ja nautinnollista tarjoamalla monipuolisia
+                                ruokalistoja, joissa yhdistyvät suomalaisten ruokien tutut mukavuudet ja globaalit
+                                ruokatyylit. Teemme terveellisestä syömisestä vaivatonta valmistamalla herkullisia
+                                ruokia, joista asiakkaamme voivat nauttia ilman ruoanlaiton vaivaa ja varmistaen, että
+                                jokainen ateria on ihastuttava ja ravitseva kokemus.
                             </p>
                         </div>
                     </div>
@@ -120,7 +126,7 @@ get_header(null, array("announcement" => false, "show_cart" => true))
             </div>
         </section>
         <section id="about-info">
-            <div class="about-info__container _container">
+            <div class="about-info__container container">
                 <div class="about-info__body">
                     <div class="about-info__image">
                         <img src="<?php echo get_template_directory_uri() ?>/assets/images/vastaanota.png"
@@ -128,38 +134,39 @@ get_header(null, array("announcement" => false, "show_cart" => true))
                     </div>
                     <div class="about-info__content">
                         <header class="about-info__heading">
-                            <h3><strong>Näkemyksemme</strong></h3>
+                            <h3><strong>Keittiö</strong></h3>
                         </header>
                         <div class="about-info__text">
                             <p>
-                                Me Calorilla näemme maailman, jossa terveellisten ruokavalintojen tekeminen on
-                                jännittävää ja vaivatonta. Pyrimme olemaan edelläkävijöitä, jotka tarjoavat
-                                tasapainoisia aterioita yhdistäen kotiruokien periaatteet ja
-                                ravintolatason laatustandardit, mikä kannustaa kaikkia terveellisempään elämään.
+                                Keittiö-operaatioidemme johtajalla on yli 10 vuoden kokemus keittiötyöstä ja hän on
+                                työskennellyt pääkokkina erilaisissa suomalaisissa ravintoloissa. Calorin keittiössä hän
+                                levittää "hitaan ja hyvän ruoan" periaatetta työssään, yhdistäen intohimonsa
+                                laadukkaisiin ainesosiin ja monipuoliseen kokkaamiseen, luoden ainutlaatuisia ja
+                                terveellisiä aterioita, jotka ilahduttavat asiakkaitamme päivittäin. Valitessasi
+                                Calorin, voit olla varma, että syöt terveellisesti, turvallisesti ja ilman
+                                kompromisseja.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="about__button">
-            <a class="btn btn-solid btn-medium" href="#"><span class="btn-text">Tilaa nyt</span></a>
-        </div>
+
     </article>
     <div class="main__dark">
     </div>
 
-    <section class="bigbanner timer mb0">
+    <section class="bigbanner timer">
         <div class="timer-wrap">
             <div class="banner-title">
-                Lähin toimitus
+                Ehdi tehdä tilaus
             </div>
             <div class="banner-text">
-                Huomaa-lähin toimitus on <span class="nextdate"><?php echo get_field("order_end_day", "option") ?></span>. <br>
+                Huomaa-lähin toimitus on <span
+                    class="nextdate"><?php echo get_field("order_end_day", "option") ?></span>. <br>
                 Tilausten vastaanottamisen päättymiseen asti tänä päivänä:
             </div>
-            <custom-timer class=" custom-timer"
-                data-day="<?php echo get_field("order_end_day", "option") ?>"
+            <custom-timer class=" custom-timer" data-day="<?php echo get_field("order_end_day", "option") ?>"
                 data-time="<?php echo get_field("order_end_time", "option") ?>">
 
                 <div class="custom-timer__body">
@@ -181,58 +188,84 @@ get_header(null, array("announcement" => false, "show_cart" => true))
                     </div>
                 </div>
             </custom-timer>
-
             <a href="<?php echo get_home_url(); ?>#order" class="btn green">Tee tilaus</a>
+
         </div>
-        <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
+        <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner"
+            class="bigbanner-bg abs">
     </section>
-    <section class="section grey ">
-    <div class="container">
-      <div class="section-wrapper">
-        <div class="whywe swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
-  
-                <span class="whywe_item_text">
-                  Вкусная и полезная еда
-                </span>
-</div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
 
-                <span class="whywe_item_text">
-                Сделай паузу от готовки
-                </span>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
 
-                <span class="whywe_item_text">
-                  Баланс и легкость в жизнь
-                </span>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
+    <section class="section">
+        <div class="container">
+            <div class="section-wrapper">
+                <div class="h2-wrapper">
+                    <h2 class="h2">
+                        Meidän edut
+                    </h2>
+                </div>
 
-                <span class="whywe_item_text">
-                Достигнешь все свои цели
-                </span>
-              </div>
+                <div class="advantages">
+                    <div class="advantages_item">
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico05.svg"
+                            class="advantages_item_ico">
+
+
+
+                        <div class="advantages_item_text">
+                            Suunniteltua ja kokattua puolestasi
+                        </div>
+                    </div>
+                    <div class="advantages_item">
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico06.svg"
+                            class="advantages_item_ico">
+
+
+
+                        <div class="advantages_item_text">
+                            Ravitsemusasiantuntijoita tiimissä
+                        </div>
+                    </div>
+                    <div class="advantages_item">
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico07.svg"
+                            class="advantages_item_ico">
+
+
+                        <div class="advantages_item_text">
+                            Ruokalistat kehittyvät viikoittain
+                        </div>
+                    </div>
+                    <div class="advantages_item">
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico08.svg"
+                            class="advantages_item_ico">
+
+
+                        <div class="advantages_item_text">
+                            Ammattikokkien valmistamaa ruokaa
+                        </div>
+                    </div>
+                    <div class="advantages_item">
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg"
+                            class="advantages_item_ico">
+
+
+                        <div class="advantages_item_text">
+                            Yli 60 reseptiä reseptikirjassa
+                        </div>
+                    </div>
+                    <div class="advantages_item">
+                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg"
+                            class="advantages_item_ico">
+
+
+                        <div class="advantages_item_text">
+                            Joustava kylmäkuljetus kotiovellesi
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
+    </section>
     <section class="section">
         <div class="container">
             <div class="section-wrapper">
@@ -243,11 +276,16 @@ get_header(null, array("announcement" => false, "show_cart" => true))
                 </div>
 
                 <div class="partners">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt=""
+                        class="partners-item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt=""
+                        class="partners-item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt=""
+                        class="partners-item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt=""
+                        class="partners-item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt=""
+                        class="partners-item">
                 </div>
             </div>
         </div>

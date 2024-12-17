@@ -16,28 +16,42 @@
                         $product_quantity = $cart_item['quantity'];
                         $product_total = wc_price($cart_item['line_total']);
                         ?>
-                        <div class="cart__product cart-product" data-product-key="<?php echo $cart_item_key?>">
+                        <div class="cart__product cart-product" data-product-key="<?php echo $cart_item_key ?>">
                             <div class="cart-product__image">
                                 <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu/meal1.jpg"
                                     alt="product image" />
                             </div>
                             <div class="cart-product__details">
                                 <h3 class="cart-product__name"><strong><?php echo esc_html($product_name) ?></strong></h3>
-                                <?php if (isset($cart_item["variation"]) && !empty($cart_item["variation"])): ?>
-                                    <ul class="cart-product__options">
-                                        <?php foreach ($cart_item["variation"] as $attr_name => $attr_value):
+                                <ul class="cart-product__options">
+                                    <?php if (isset($cart_item["variation"]) && !empty($cart_item["variation"])):
+                                        foreach ($cart_item["variation"] as $attr_name => $attr_value):
                                             $clean_attr_name = str_replace("attribute_", "", $attr_name);
                                             $attr_label = wc_attribute_label($clean_attr_name);
                                             $term = get_term_by('slug', $attr_value, $clean_attr_name);
                                             $attr_value_label = $term ? $term->name : $attr_value;
                                             ?>
                                             <li>
-                                                <span><?php echo esc_html($attr_label) . ":"?></span>
+                                                <span><?php echo esc_html($attr_label) . ":" ?></span>
                                                 <span><?php echo esc_html($attr_value_label) ?></span>
                                             </li>
                                         <?php endforeach; ?>
-                                    </ul>
-                                <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if (isset($cart_item["delivery_day"]) && !empty($cart_item["delivery_day"])): ?>
+                                        <li>
+                                            <span>Toimituspäivä:</span>
+                                            <span><?php echo esc_html($cart_item["delivery_day"]) ?></span>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if (isset($cart_item["excluded_ingredients"]) && !empty($cart_item["excluded_ingredients"])): ?>
+                                        <li>
+                                            <span>Poistetut ainesosat:</span>
+                                            <span>
+                                                <?php echo esc_html($cart_item["excluded_ingredients"]) ?>
+                                            </span>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
                                 <h4 class="cart-product__price"><b><?php echo $product_price ?></b></h4>
                                 <div class="cart-product__actions">
                                     <button class="cart-product__delete">
@@ -59,7 +73,9 @@
                                             <option value="9">9</option>
                                             <option value="10">10</option>
                                         </select>
-                                        <span class="cart-amount__heading">Määrä: <span class="amount"><?php echo esc_html($product_quantity) ?></span><span class="arrow"></span></span>
+                                        <span class="cart-amount__heading">Määrä: <span
+                                                class="amount"><?php echo esc_html($product_quantity) ?></span><span
+                                                class="arrow"></span></span>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +87,7 @@
             <span></span>
         </div>
         <div class="cart__bottom">
-            <?php 
+            <?php
             $subtotal = WC()->cart->get_cart_subtotal();
             $delivery_fee = WC()->cart->get_cart_shipping_total();
             $total = WC()->cart->get_cart_total();
@@ -88,7 +104,7 @@
                     </div>
                     <div class="cart__delivery cart-delivery cart-summary__block">
                         <div class="cart-delivery__text">
-                            <p>Toimitus</p>
+                            <p>Kylmä kotiinkuljetus</p>
                         </div>
                         <div class="cart-delivery__price">
                             <p><?php echo $delivery_fee ?></p>
@@ -105,7 +121,8 @@
                 </div>
             </div>
             <div class="cart__button">
-                <a class="btn btn-solid btn-medium" href="<?php echo wc_get_checkout_url()?>"><span class="btn-text">Maksamaan</span></a>
+                <a class="btn btn-solid btn-medium" href="<?php echo wc_get_checkout_url() ?>"><span
+                        class="btn-text">Maksamaan</span></a>
             </div>
         </div>
     </div>

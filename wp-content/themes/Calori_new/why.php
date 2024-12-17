@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Miksi Calori? */
-get_header(null, array("announcement" => false, "show_cart" => true))
+get_header(null, array("announcement" => true, "show_cart" => true))
 ?>
 <main id="main">
 
@@ -12,7 +12,7 @@ get_header(null, array("announcement" => false, "show_cart" => true))
     <div class="breadcrumbs">
         <ul>
             <li>
-                <a href="/">Home</a>
+                <a href="/">Kotisivu</a>
             </li>
             <li>
             Miksi Calori?
@@ -34,55 +34,61 @@ get_header(null, array("announcement" => false, "show_cart" => true))
             <div class="how-it-works" style="margin-top: 40px;">
                 <div class="how-it-works_item">
                     <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa.png"
+                    src="<?php echo get_template_directory_uri() ?>/assets/images/why1.png"
                     alt="how1"
                     class="how-it-works_item_img" />
 
                     <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Tilaa</div>
+                    <div class="how-it-works_item_text_title">Miltä kuulostaa jos sinulla olisi oma kokki?</div>
                     <div class="how-it-works_item_text_text">
-                        Valitse tavoitteellesi sopiva menu ja tilaa itsellesi tai
-                        paritilaus
+                    ✔ Huipputiimissämme on ammattilaiset kokit laajan kokemuksen kanssa <br>
+                    ✔ Helsingin yliopiston ravitsemusopettaja ravistemusasiantuntijana
                     </div>
                     </div>
                 </div>
                 <div class="how-it-works_item">
                     <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa1.png"
+                    src="<?php echo get_template_directory_uri() ?>/assets/images/why2.png"
                     alt="how1"
                     class="how-it-works_item_img" />
 
                     <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Vastaanota</div>
+                    <div class="how-it-works_item_text_title">Säästä aikaa ja vaivaa</div>
                     <div class="how-it-works_item_text_text">
-                        Toimitamme sinulle kotiin 2-4 ateriaa valitsemillesi päiville
+                    ✔ Säästät yli 7 tuntia aikaa viikossa, kun sinun ei tarvitse huolehtia ruokailusta <br>
+                    ✔ Me suunnittelemme, kokkaamme ja toimitamme ruoat kotiovelle
                     </div>
                     </div>
                 </div>
                 <div class="how-it-works_item">
                     <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa2.png"
+                    src="<?php echo get_template_directory_uri() ?>/assets/images/why3.png"
                     alt="how1"
                     class="how-it-works_item_img" />
 
                     <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Nauti</div>
+                    <div class="how-it-works_item_text_title">Tiedät mitä syöt</div>
                     <div class="how-it-works_item_text_text">
-                        Syö terveellisesti päivittäin, nauti ja säästä aikaasi
+                    ✔ Kalorit koostuvat (20%pr/30%rs/50%hl) <br>
+                    ✔ 15% kovia rasvoja ja 85% pehmeitä <br>
+                    ✔ Energiantarve ja -saanti kohtaavat <br>
+                    ✔ Paljon piristävää vaihtelua ruokailussa <br>
+                    ✔ Yli 60 reseptiä reseptikirjassa
                     </div>
                     </div>
                 </div>
                 <div class="how-it-works_item">
                     <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa.png"
+                    src="<?php echo get_template_directory_uri() ?>/assets/images/why4.png"
                     alt="how1"
                     class="how-it-works_item_img" />
 
                     <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Tilaa</div>
+                    <div class="how-it-works_item_text_title">Ylläpidä säännöllistä ruokailua</div>
                     <div class="how-it-works_item_text_text">
-                        Valitse tavoitteellesi sopiva menu ja tilaa itsellesi tai
-                        paritilaus
+                    ✔ 2-5 ravitsevaa ateriaa päiväksi <br>
+                    ✔ Optimaalinen ravintoainejakauma <br>
+                    ✔ Hallitse painoa, syö terveellisesti, kasvata lihasmassaa
                     </div>
                     </div>
                 </div>
@@ -134,46 +140,65 @@ get_header(null, array("announcement" => false, "show_cart" => true))
         </div>
         <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
     </section>
-    <section class="section grey ">
+
+    <section class="section">
     <div class="container">
       <div class="section-wrapper">
-        <div class="whywe swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
-  
-                <span class="whywe_item_text">
-                  Вкусная и полезная еда
-                </span>
-</div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
+        <div class="h2-wrapper">
+          <h2 class="h2">
+            Meidän edut
+          </h2>
+        </div>
 
-                <span class="whywe_item_text">
-                Сделай паузу от готовки
-                </span>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
+        <div class="advantages">
+          <div class="advantages_item">
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico05.svg" class="advantages_item_ico">
 
-                <span class="whywe_item_text">
-                  Баланс и легкость в жизнь
-                </span>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
 
-                <span class="whywe_item_text">
-                Достигнешь все свои цели
-                </span>
-              </div>
+
+            <div class="advantages_item_text">
+            Suunniteltua ja kokattua puolestasi
+            </div>
+          </div>
+          <div class="advantages_item">
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico06.svg" class="advantages_item_ico">
+
+
+
+            <div class="advantages_item_text">
+            Ravitsemusasiantuntijoita tiimissä
+            </div>
+          </div>
+          <div class="advantages_item">
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico07.svg" class="advantages_item_ico">
+
+
+            <div class="advantages_item_text">
+            Ruokalistat kehittyvät viikoittain
+            </div>
+          </div>
+          <div class="advantages_item">
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico08.svg" class="advantages_item_ico">
+
+
+            <div class="advantages_item_text">
+            Ammattikokkien valmistamaa ruokaa
+            </div>
+          </div>
+          <div class="advantages_item">
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg" class="advantages_item_ico">
+
+
+            <div class="advantages_item_text">
+            Yli 60 reseptiä reseptikirjassa
+            </div>
+          </div>
+          <div class="advantages_item">
+            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg" class="advantages_item_ico">
+
+
+            <div class="advantages_item_text">
+            Joustava kylmäkuljetus kotiovellesi
             </div>
           </div>
         </div>
@@ -181,24 +206,6 @@ get_header(null, array("announcement" => false, "show_cart" => true))
     </div>
   </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="h2-wrapper">
-                    <h2 class="h2">
-                        Teemme yhteistyötä
-                    </h2>
-                </div>
-
-                <div class="partners">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
 <?php get_footer() ?>

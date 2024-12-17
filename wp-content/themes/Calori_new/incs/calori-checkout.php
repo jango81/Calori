@@ -1,5 +1,6 @@
 <?php
 
+require_once "class-calori-calc-time.php";
 
 add_filter("woocommerce_default_address_fields", function ($fields) {
     $labels = [
@@ -159,6 +160,7 @@ add_action('woocommerce_admin_order_data_after_shipping_address', function ($ord
     echo '<p><strong>' . esc_html__('Delivery outdoor') . ':</strong> ' . esc_html($order->get_meta('delivery_outdoor', true)) . '</p>';
     echo '<p><strong>' . esc_html__('Delivery time') . ':</strong> ' . esc_html($order->get_meta('delivery_time', true)) . '</p>';
 }, 10, 1);
+
 
 
 add_action('wp_footer', 'hide_checkout_error_messages');

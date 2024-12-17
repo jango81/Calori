@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Ota yhteyttä */
-get_header(null, array("announcement" => false, "show_cart" => true))
+get_header(null, array("announcement" => true, "show_cart" => true))
     ?>
 <main id="main">
     <?php get_template_part("mini-cart") ?>
@@ -11,7 +11,7 @@ get_header(null, array("announcement" => false, "show_cart" => true))
     <div class="breadcrumbs">
         <ul>
             <li>
-                <a href="/">Home</a>
+                <a href="/">Kotisivu</a>
             </li>
             <li>
             Yhteystiedot
@@ -36,6 +36,8 @@ get_header(null, array("announcement" => false, "show_cart" => true))
         <section class="contact-info">
             <div class="contact-info__text"></div>
         </section>
+
+        
         <form class="contact-form">
             <div class="contact-form__container _container">
                 <header class="contact-form__heading">
@@ -56,6 +58,26 @@ get_header(null, array("announcement" => false, "show_cart" => true))
                 </div>
             </div>
         </form>
+        
+        <section id="about-info">
+            <div class="about-info__container container">
+                <div class="about-info__body" >
+                    
+                    
+                        <div class="about-info__text">
+                            <p>
+                            Yritys: Lagom Food Oy (3165571-2) <br>
+                            Keittiön ja toimiston osoite: Sörnäisten rantatie 27 A, 00500 Helsinki. <br>
+                            Asiakaspalvelun puhelinnumero: <a href="tel:+358402160180">+358402160180</a><br>
+                            Sähköposti: <a href="mailto:info@calori.fi">info@calori.fi</a> <br>
+                            Logistiikan puhelinnumero: <a href="tel:+358442477829">+358442477829</a><br>
+                            Sähköposti: <a href="mailto:asiakaspalvelu@priima.fi">asiakaspalvelu@priima.fi</a> 
+                            </p>
+                        </div>
+                    
+                </div>
+            </div>
+        </section>
     </article>
     <div class="main__dark">
     </div>
@@ -63,7 +85,7 @@ get_header(null, array("announcement" => false, "show_cart" => true))
     <section class="bigbanner timer mb0">
         <div class="timer-wrap">
             <div class="banner-title">
-                Lähin toimitus
+            Ehdi tehdä tilaus
             </div>
             <div class="banner-text">
                 Huomaa-lähin toimitus on <span class="nextdate"><?php echo get_field("order_end_day", "option") ?></span>. <br>
@@ -100,44 +122,48 @@ get_header(null, array("announcement" => false, "show_cart" => true))
     <section class="section grey ">
     <div class="container">
       <div class="section-wrapper">
-        <div class="whywe swiper">
+      <div class="whywe swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <div class="whywe_item">
                 <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
-  
+
                 <span class="whywe_item_text">
-                  Вкусная и полезная еда
+                Maukasta ja terveellistä ruokaa
                 </span>
-                </div>
+                </img>
+              </div>
             </div>
             <div class="swiper-slide">
               <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
 
                 <span class="whywe_item_text">
-                Сделай паузу от готовки
+                Säästät yli 8 tuntia viikossa kokkaamisella
                 </span>
               </div>
             </div>
+
             <div class="swiper-slide">
               <div class="whywe_item">
                 <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
 
                 <span class="whywe_item_text">
-                  Баланс и легкость в жизнь
+                Tasapainoa ja helpoutta elämääsi
                 </span>
               </div>
             </div>
+
             <div class="swiper-slide">
               <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
 
                 <span class="whywe_item_text">
-                Достигнешь все свои цели
+                Saavutat kaikki tavoitteesi
                 </span>
               </div>
             </div>
+
           </div>
         </div>
       </div>

@@ -222,6 +222,11 @@
     margin-top: 7px;
     font-style: italic;
 }
+
+.week-menu-tabs_tab:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 700px) {
     .popup-meal__content {
         max-width: 500px;
