@@ -2819,7 +2819,7 @@ a, input, textarea, button {
   .header-wrapper {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[3];
+    -ms-grid-columns: (1fr);
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -3086,13 +3086,13 @@ a, input, textarea, button {
 .how-it-works {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[4];
+  -ms-grid-columns: (1fr);
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
 }
 @media screen and (max-width: 768px) {
   .how-it-works {
-    -ms-grid-columns: (1fr)[2];
+    -ms-grid-columns: (1fr);
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
@@ -3387,14 +3387,15 @@ a, input, textarea, button {
           justify-content: center;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (80px)[4];
+  -ms-grid-columns: (80px);
   grid-template-columns: repeat(4, 80px);
   gap: 36px;
 }
+
 @media screen and (max-width: 768px) {
   .custom-timer__body {
     gap: 16px;
-    -ms-grid-columns: (70px)[4];
+    -ms-grid-columns: (70px);
     grid-template-columns: repeat(4, 70px);
   }
 }
@@ -3557,7 +3558,7 @@ a, input, textarea, button {
 .advantages {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[3];
+  -ms-grid-columns: (1fr);
   grid-template-columns: repeat(3, 1fr);
   gap: 93px;
   row-gap: 40px;
@@ -5629,7 +5630,7 @@ a, input, textarea, button {
 .faq-wrap {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[2];
+  -ms-grid-columns: (1fr);
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
