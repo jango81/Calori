@@ -8,21 +8,26 @@ function add_to_cart()
     $product_id = isset($_POST["product_id"]) ? absint($_POST["product_id"]) : 0;
     $variant_id = isset($_POST["variant_id"]) ? absint($_POST["variant_id"]) : 0;
     $payment_type = isset($_POST["payment_type"]) ? sanitize_text_field($_POST["payment_type"]) : '';
-    $other_data = isset($_POST["other_data"]) ? wp_unslash($_POST["other_data"]) : array();
+    $delivery_day = isset($_POST["delivery_day"]) ? sanitize_text_field($_POST["delivery_day"]) : '';
+    $excluded_ingredients = isset($_POST["excluded_ingredients"]) || empty($_POST["excluded_ingredients"]) ? sanitize_text_field($_POST["excluded_ingredients"]) : "";
 
-    if (is_array($other_data)) {
-        $sanitized_data = array_map(function ($item) {
-            return is_array($item) ? array_map('sanitize_text_field', $item) : sanitize_text_field($item);
-        }, $other_data);
-    } else {
-        $sanitized_data = sanitize_text_field($other_data);
-    }
 
     $variation = array(
         'attribute_pa_maksu-tyyppi' => $payment_type,
     );
 
-    $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id, $variation, $sanitized_data);
+    $cart_item_data = array(
+        "excluded_ingredients" => $excluded_ingredients,
+        "delivery_day" => $delivery_day,
+    );
+
+    error_log("OTHER DATA");
+    error_log(print_r("INGREDIENTS: " . $excluded_ingredients, true));
+    error_log("ISEMPTY: " . empty($excluded_ingredients));
+    error_log(print_r("DELIVERY DAY: " . $delivery_day, true));
+    error_log(print_r($cart_item_data, true));
+
+    $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id, $variation, $cart_item_data);
 
     $subtotal = WC()->cart->get_subtotal();
     $delivery_fee = WC()->cart->get_shipping_total();
@@ -41,7 +46,7 @@ function add_to_cart()
             foreach ($cart_item["variation"] as $attr_name => $attr_value) {
                 $clean_attr_name = str_replace("attribute_", "", $attr_name);
                 $term = get_term_by('slug', $attr_value, $clean_attr_name);
-            
+
                 $attr_label = wc_attribute_label($clean_attr_name);
                 $attr_value_label = $term ? $term->name : $attr_value;
 
@@ -102,7 +107,8 @@ function delete_product_cart()
 add_action("wp_ajax_update_product_amount", "update_product_amount");
 add_action("wp_ajax_nopriv_update_product_amount", "update_product_amount");
 
-function update_product_amount() {
+function update_product_amount()
+{
     $cart_item_key = isset($_POST["product_key"]) ? sanitize_text_field($_POST["product_key"]) : "";
     $new_amount = isset($_POST["product_amount"]) ? absint($_POST["product_amount"]) : 0;
 

@@ -17,6 +17,8 @@
 #/wp-*.php
 #/xmlrpc.php
 
+wp-content/ai1wm-backups
+
 # Configuration
 wp-config.php
 
@@ -28,6 +30,9 @@ wp-config.php
 
 # Uploads
 #/wp-content/uploads/
+wp-content/uploads/**/*.mov
+wp-content/uploads/**/*.mp4
+wp-content/uploads/**/*.avi
 
 # Log files
 *.log

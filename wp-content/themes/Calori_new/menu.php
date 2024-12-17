@@ -14,7 +14,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
     <div class="breadcrumbs">
         <ul>
             <li>
-                <a href="/">Home</a>
+                <a href="/">Kotisivu</a>
             </li>
             <li>
                 Ruokalista
@@ -27,11 +27,11 @@ get_header(null, array("announcement" => true, "show_cart" => true))
             <div class="section-wrapper">
                 <div class="menu-page">
                     <h1 class="h1">
-                        RUOKALISTAT
+                        Ruokalistat
                     </h1>
 
                     <p class="menu-page-text">
-                        На данной странице вы можете ознакомиться с меню на эту и на следующую неделю
+                    Tällä sivulla näet kahden viikon menumme, jossa on 58 erilaista reseptiä.
                     </p>
 
                     <custom-menu class="menu">
@@ -90,7 +90,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Понедельник
+                                            Maanantai
 
                                         </div>
 
@@ -104,7 +104,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Вторник
+                                            Tiistai
 
                                         </div>
 
@@ -118,7 +118,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Среда
+                                            Keskiviikko
 
                                         </div>
 
@@ -132,7 +132,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Четверг
+                                            Torstai
 
                                         </div>
 
@@ -146,7 +146,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Пятница
+                                            Perjantai
 
                                         </div>
 
@@ -160,7 +160,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Суббота
+                                            Lauantai
 
                                         </div>
 
@@ -174,7 +174,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 </g>
                                             </svg>
 
-                                            Воскресенье
+                                            Sunnuntai
 
                                         </div>
 
@@ -200,182 +200,179 @@ get_header(null, array("announcement" => true, "show_cart" => true))
 
                                             // the_title(); // выведем заголовок поста
                                         ?>
-                                            <?php
+                                        <?php
 
-                                            // Check rows exists.
-                                            if (have_rows('this_week_whole_menu')):
-                                                $day = 1;
-                                                // print_r(get_field('this_week_whole_menu'));
+                                        // Check rows exists.
+                                        if (have_rows('this_week_whole_menu')):
+                                            $day = 1;
+                                            // print_r(get_field('this_week_whole_menu'));
 
-                                                $days = get_field('this_week_whole_menu');
-                                                // print_r($days[0]);
-                                                if ($days) {
-                                                    foreach ($days as $row) {
+                                            $days = get_field('this_week_whole_menu');
+                                            // print_r($days[0]);
+                                            if ($days) {
+                                                foreach ($days as $row) {
 
-                                                        if ($row) {
-                                                            $a = 1;
+                                                    if ($row) {
+                                                        $a = 1;
 
-                                                            foreach ($row as $dayweek) {
-                                                                // echo $a;
-                                                                if ($dayweek[0]['meals']) { ?>
-                                                                    <div class="week-menu-tabscontent_tab <?php if ($a == 1) : ?> active <?php endif; ?>">
-                                                                        <div class="menu-swiper-wrap">
-                                                                            <div class="swiper menuswiper menuswiper<?php echo $day; ?>">
-                                                                                <div class="swiper-wrapper">
-                                                                                    <?php
-                                                                                    $a = 0;
-                                                                                    foreach ($dayweek[0]['meals'] as $item) {
+                                                        foreach ($row as $dayweek) {
+                                                            // echo $a;
+                                                            if ($dayweek[0]['meals']) { ?>
+                                                                <div class="week-menu-tabscontent_tab <?php if ($a == 1) : ?> active <?php endif; ?>">
+                                                                    <div class="menu-swiper-wrap">
+                                                                        <div class="swiper menuswiper menuswiper<?php echo $day; ?>">
+                                                                            <div class="swiper-wrapper">
+                                                                                <?php
+                                                                                $a = 0;
+                                                                                foreach ($dayweek[0]['meals'] as $item) {
 
-                                                                                        // print_r($item);
+                                                                                    // print_r($item);
 
-                                                                                    ?>
-                                                                                        <div class="swiper-slide">
-                                                                                            <a data-fancybox="" data-src="#menuitem<?php echo $a; ?>" class="menu-item">
-                                                                                                <img
-                                                                                                    src="<?php echo $item['meal_image']; ?>"
-                                                                                                    alt="food"
-                                                                                                    class="menu-item-bg" />
-
-
-
-                                                                                                <div class="menu-item-title"><?php echo $item['meal_name']; ?></div>
-                                                                                                <div class="menu-item-which"><?php echo $item['meal_of_day']; ?></div>
-                                                                                            </a>
-
-                                                                                            <div id="menuitem<?php echo $a; ?>" class="menupopup" style="display:none;max-width:500px;">
-                                                                                                <!-- <button data-fancybox-close="" class="f-button is-close-btn" title="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" tabindex="-1"><path d="M20 20L4 4m16 0L4 20"></path></svg></button> -->
-
-                                                                                                <img src="<?php echo $item['meal_image']; ?>" alt="food">
-                                                                                                <div class="menupopup-wrap">
+                                                                                ?>
+                                                                                    <div class="swiper-slide">                                                                                          
+                                                                                        <a data-fancybox="" data-src="#menuitem<?php echo $day; echo $a; ?>" class="menu-item">
+                                                                                            <img
+                                                                                                src="<?php echo $item['meal_image']; ?>"
+                                                                                                alt="food"
+                                                                                                class="menu-item-bg" />
 
 
 
-                                                                                                    <div class="menupopup-wrap_title"><?php echo $item['meal_name']; ?></div>
-                                                                                                    <div class="menupopup-wrap_text">
+                                                                                            <div class="menu-item-title"><?php echo $item['meal_name']; ?></div>
+                                                                                            <div class="menu-item-which"><?php echo $item['meal_of_day']; ?></div>
+                                                                                        </a>
 
-                                                                                                        <?php echo $item['краткое_описание']; ?>
-                                                                                                    </div>
+                                                                                        <div id="menuitem<?php echo $day; echo $a; ?>" class="menupopup" style="display:none;max-width:500px;">
+                                                                                            <!-- <button data-fancybox-close="" class="f-button is-close-btn" title="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" tabindex="-1"><path d="M20 20L4 4m16 0L4 20"></path></svg></button> -->
 
-                                                                                                    <div class="menupopup-wrap_ingr">
-                                                                                                        <?php echo $item['meal_ingredients']; ?>
-                                                                                                    </div>
+                                                                                            <img src="<?php echo $item['meal_image2']; ?>"  class="menu-item-bg1" alt="food">
+                                                                                            <div class="menupopup-wrap">
 
-                                                                                                    <div class="menupopup-wrap_kbgu">
-                                                                                                        <div class="item">
-                                                                                                            <div class="item-title">
-                                                                                                                КБЖУ на 1500:
-                                                                                                            </div>
-                                                                                                            <div class="item-val">
-                                                                                                                <?php echo $item['кбжу_на_1500']; ?>
 
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="item">
-                                                                                                            <div class="item-title">
-                                                                                                                КБЖУ на 2000:
-                                                                                                            </div>
-                                                                                                            <div class="item-val">
-                                                                                                                <?php echo $item['кбжу_на_2000']; ?>
 
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="item">
-                                                                                                            <div class="item-title">
-                                                                                                                КБЖУ на 2500:
-                                                                                                            </div>
-                                                                                                            <div class="item-val">
-                                                                                                                <?php echo $item['кбжу_на_2500']; ?>
+                                                                                                <div class="menupopup-wrap_title"><?php echo $item['meal_name']; ?></div>
+                                                                                                <div class="menupopup-wrap_text">
 
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
+                                                                                                    <?php echo $item['краткое_описание']; ?>
                                                                                                 </div>
-                                                                                            </div>
 
+                                                                                                <div class="menupopup-wrap_ingr">
+                                                                                                    <?php echo $item['meal_ingredients']; ?>
+                                                                                                </div>
+
+                                                                                                <!-- <div class="menupopup-wrap_kbgu">
+                                                                                                    <div class="item">
+                                                                                                        <div class="item-title">
+                                                                                                            КБЖУ на 1500:
+                                                                                                        </div>
+                                                                                                        <div class="item-val">
+                                                                                                            <?php echo $item['кбжу_на_1500']; ?>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="item">
+                                                                                                        <div class="item-title">
+                                                                                                            КБЖУ на 2000:
+                                                                                                        </div>
+                                                                                                        <div class="item-val">
+                                                                                                            <?php echo $item['кбжу_на_2000']; ?>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="item">
+                                                                                                        <div class="item-title">
+                                                                                                            КБЖУ на 2500:
+                                                                                                        </div>
+                                                                                                        <div class="item-val">
+                                                                                                            <?php echo $item['кбжу_на_2500']; ?>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div> -->
+                                                                                            </div>
                                                                                         </div>
 
-                                                                                    <?
-                                                                                        $a++;
-                                                                                    }
-                                                                                    ?>
+                                                                                    </div>
+
+                                                                                <?
+                                                                                    $a++;
+                                                                                }
+                                                                                ?>
 
 
-                                                                                </div>
                                                                             </div>
-
-                                                                            <div class="arrow-left  arrow-left<?php echo $day; ?>">
-                                                                                <svg
-                                                                                    width="40"
-                                                                                    height="40"
-                                                                                    viewBox="0 0 40 40"
-                                                                                    fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <rect
-                                                                                        x="40"
-                                                                                        width="40"
-                                                                                        height="40"
-                                                                                        rx="20"
-                                                                                        transform="rotate(90 40 0)"
-                                                                                        fill="#213735" />
-                                                                                    <mask id="path-2-inside-1_2002_241" fill="white">
-                                                                                        <path
-                                                                                            d="M16.0326 19.9996C16.0326 19.8968 16.0697 19.7935 16.144 19.7124L23.2247 11.9416C23.3834 11.7675 23.6531 11.7547 23.8277 11.9135C24.0023 12.0722 24.0151 12.342 23.8559 12.5165L17.0364 19.9996L23.8559 27.4832C24.0146 27.6586 24.0018 27.9279 23.8277 28.0862C23.6536 28.245 23.3834 28.2326 23.2247 28.0585L16.1435 20.2869C16.0697 20.2058 16.0326 20.1025 16.0326 19.9996Z" />
-                                                                                    </mask>
-                                                                                    <path
-                                                                                        d="M16.0326 19.9996C16.0326 19.8968 16.0697 19.7935 16.144 19.7124L23.2247 11.9416C23.3834 11.7675 23.6531 11.7547 23.8277 11.9135C24.0023 12.0722 24.0151 12.342 23.8559 12.5165L17.0364 19.9996L23.8559 27.4832C24.0146 27.6586 24.0018 27.9279 23.8277 28.0862C23.6536 28.245 23.3834 28.2326 23.2247 28.0585L16.1435 20.2869C16.0697 20.2058 16.0326 20.1025 16.0326 19.9996Z"
-                                                                                        fill="white" />
-
-                                                                                </svg>
-                                                                            </div>
-                                                                            <div class="arrow-right  arrow-right<?php echo $day; ?>">
-                                                                                <svg
-                                                                                    width="40"
-                                                                                    height="40"
-                                                                                    viewBox="0 0 40 40"
-                                                                                    fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <rect
-                                                                                        y="40"
-                                                                                        width="40"
-                                                                                        height="40"
-                                                                                        rx="20"
-                                                                                        transform="rotate(-90 0 40)"
-                                                                                        fill="#213735" />
-                                                                                    <mask id="path-2-inside-1_2002_239" fill="white">
-                                                                                        <path
-                                                                                            d="M23.9673 20.0004C23.9673 20.1032 23.9302 20.2065 23.8559 20.2876L16.7752 28.0584C16.6165 28.2325 16.3467 28.2453 16.1722 28.0865C15.9976 27.9278 15.9848 27.658 16.144 27.4835L22.9635 20.0004L16.144 12.5168C15.9852 12.3414 15.9981 12.0721 16.1722 11.9138C16.3463 11.755 16.6165 11.7674 16.7752 11.9415L23.8563 19.7131C23.9302 19.7942 23.9673 19.8975 23.9673 20.0004Z" />
-                                                                                    </mask>
-                                                                                    <path
-                                                                                        d="M23.9673 20.0004C23.9673 20.1032 23.9302 20.2065 23.8559 20.2876L16.7752 28.0584C16.6165 28.2325 16.3467 28.2453 16.1722 28.0865C15.9976 27.9278 15.9848 27.658 16.144 27.4835L22.9635 20.0004L16.144 12.5168C15.9852 12.3414 15.9981 12.0721 16.1722 11.9138C16.3463 11.755 16.6165 11.7674 16.7752 11.9415L23.8563 19.7131C23.9302 19.7942 23.9673 19.8975 23.9673 20.0004Z"
-                                                                                        fill="white" />
-
-                                                                                </svg>
-                                                                            </div>
-                                                                                    <?php $day++;?>
-
                                                                         </div>
-                                                                    </div>
-                                                    <?php
 
-                                                                }
-                                                                $a++;
+                                                                        <div class="arrow-left  arrow-left<?php echo $day; ?>">
+                                                                            <svg
+                                                                                width="40"
+                                                                                height="40"
+                                                                                viewBox="0 0 40 40"
+                                                                                fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <rect
+                                                                                    x="40"
+                                                                                    width="40"
+                                                                                    height="40"
+                                                                                    rx="20"
+                                                                                    transform="rotate(90 40 0)"
+                                                                                    fill="#213735" />
+                                                                                <mask id="path-2-inside-1_2002_241" fill="white">
+                                                                                    <path
+                                                                                        d="M16.0326 19.9996C16.0326 19.8968 16.0697 19.7935 16.144 19.7124L23.2247 11.9416C23.3834 11.7675 23.6531 11.7547 23.8277 11.9135C24.0023 12.0722 24.0151 12.342 23.8559 12.5165L17.0364 19.9996L23.8559 27.4832C24.0146 27.6586 24.0018 27.9279 23.8277 28.0862C23.6536 28.245 23.3834 28.2326 23.2247 28.0585L16.1435 20.2869C16.0697 20.2058 16.0326 20.1025 16.0326 19.9996Z" />
+                                                                                </mask>
+                                                                                <path
+                                                                                    d="M16.0326 19.9996C16.0326 19.8968 16.0697 19.7935 16.144 19.7124L23.2247 11.9416C23.3834 11.7675 23.6531 11.7547 23.8277 11.9135C24.0023 12.0722 24.0151 12.342 23.8559 12.5165L17.0364 19.9996L23.8559 27.4832C24.0146 27.6586 24.0018 27.9279 23.8277 28.0862C23.6536 28.245 23.3834 28.2326 23.2247 28.0585L16.1435 20.2869C16.0697 20.2058 16.0326 20.1025 16.0326 19.9996Z"
+                                                                                    fill="white" />
+
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div class="arrow-right  arrow-right<?php echo $day; ?>">
+                                                                            <svg
+                                                                                width="40"
+                                                                                height="40"
+                                                                                viewBox="0 0 40 40"
+                                                                                fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <rect
+                                                                                    y="40"
+                                                                                    width="40"
+                                                                                    height="40"
+                                                                                    rx="20"
+                                                                                    transform="rotate(-90 0 40)"
+                                                                                    fill="#213735" />
+                                                                                <mask id="path-2-inside-1_2002_239" fill="white">
+                                                                                    <path
+                                                                                        d="M23.9673 20.0004C23.9673 20.1032 23.9302 20.2065 23.8559 20.2876L16.7752 28.0584C16.6165 28.2325 16.3467 28.2453 16.1722 28.0865C15.9976 27.9278 15.9848 27.658 16.144 27.4835L22.9635 20.0004L16.144 12.5168C15.9852 12.3414 15.9981 12.0721 16.1722 11.9138C16.3463 11.755 16.6165 11.7674 16.7752 11.9415L23.8563 19.7131C23.9302 19.7942 23.9673 19.8975 23.9673 20.0004Z" />
+                                                                                </mask>
+                                                                                <path
+                                                                                    d="M23.9673 20.0004C23.9673 20.1032 23.9302 20.2065 23.8559 20.2876L16.7752 28.0584C16.6165 28.2325 16.3467 28.2453 16.1722 28.0865C15.9976 27.9278 15.9848 27.658 16.144 27.4835L22.9635 20.0004L16.144 12.5168C15.9852 12.3414 15.9981 12.0721 16.1722 11.9138C16.3463 11.755 16.6165 11.7674 16.7752 11.9415L23.8563 19.7131C23.9302 19.7942 23.9673 19.8975 23.9673 20.0004Z"
+                                                                                    fill="white" />
+
+                                                                            </svg>
+                                                                        </div>
+                                                                                <?php $day++;?>
+
+                                                                    </div>
+                                                                </div>
+                                                <?php
+
                                                             }
+                                                            $a++;
                                                         }
                                                     }
                                                 }
-                                                // Loop through rows.
-                                                while (have_rows('this_week_whole_menu')) : the_row(); ?>
+                                            }
+                                            // Loop through rows.
+                                            while (have_rows('this_week_whole_menu')) : 
+                                                the_row(); 
+                                                $day++;
+                                                // Load sub field value.
+                                                $sub_value = get_sub_field('sub_field');
+                                            endwhile; 
+                                        ?>
 
-                                            <?php
-                                                    $day++;
-                                                    // Load sub field value.
-                                                    $sub_value = get_sub_field('sub_field');
-                                                // Do something, but make sure you escape the value if outputting directly...
-
-                                                // End loop.
-                                                endwhile;
-
-                                            endif; ?>
+                                        <?php endif; ?>
 
 
 
@@ -434,7 +431,7 @@ $('.menuswiper').each(function(){
   var menuswiper = new Swiper(this, {
     slidesPerView: 4,
     spaceBetween: 24,
-    loop:true,
+    loop:false,
     navigation: {
         nextEl: ".arrow-right" +a,
         prevEl: ".arrow-left" +a,
@@ -530,8 +527,8 @@ $('.menuswiper').each(function(){
                 Lähin toimitus
             </div>
             <div class="banner-text">
-                Huomaa-lähin toimitus on <span class="nextdate"><?php echo get_field("order_end_day", "option") ?></span>. <br>
-                Tilausten vastaanottamisen päättymiseen asti tänä päivänä:
+                Huomaa, lähin toimituspäivä on <span class="nextdate"><?php echo get_field("order_end_day", "option") ?></span>. <br>
+                Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
             </div>
             <custom-timer class=" custom-timer"
                 data-day="<?php echo get_field("order_end_day", "option") ?>"
@@ -565,45 +562,49 @@ $('.menuswiper').each(function(){
     <div class="container">
       <div class="section-wrapper">
         <div class="whywe swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
-  
-                <span class="whywe_item_text">
-                  Вкусная и полезная еда
-                </span>
-            </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                <div class="whywe_item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
 
-                <span class="whywe_item_text">
-                Сделай паузу от готовки
-                </span>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
+                    <span class="whywe_item_text">
+                    Maukasta ja terveellistä ruokaa
+                    </span>
+                    </img>
+                </div>
+                </div>
+                <div class="swiper-slide">
+                <div class="whywe_item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
 
-                <span class="whywe_item_text">
-                  Баланс и легкость в жизнь
-                </span>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
+                    <span class="whywe_item_text">
+                    Säästät yli 8 tuntia viikossa kokkaamisella
+                    </span>
+                </div>
+                </div>
 
-                <span class="whywe_item_text">
-                Достигнешь все свои цели
-                </span>
-              </div>
+                <div class="swiper-slide">
+                <div class="whywe_item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
+
+                    <span class="whywe_item_text">
+                    Tasapainoa ja helpoutta elämääsi
+                    </span>
+                </div>
+                </div>
+
+                <div class="swiper-slide">
+                <div class="whywe_item">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
+
+                    <span class="whywe_item_text">
+                    Saavutat kaikki tavoitteesi
+                    </span>
+                </div>
+                </div>
+
             </div>
-          </div>
-        </div>
+            </div>
       </div>
     </div>
   </section>
