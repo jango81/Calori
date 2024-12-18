@@ -195,7 +195,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
             class="bigbanner-bg abs">
     </section>-->
 
- <section class="bigbanner timer mb0">
+ <section class="bigbanner timer ">
       <div class="timer-wrap newbanner">
         <div class="banner-title newbanner-title">
           Uusi vuosi, <span>uusi sinä</span>
