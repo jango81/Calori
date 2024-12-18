@@ -38,8 +38,7 @@
           </h1>
 
           <div class="offer-text">
-            Palvelu, jossa ammattilaiset hoitavat sinulle valmiit ateriat
-            tarpeillesi
+          Me suunnittelemme, kokkaamme ja toimitamme ruoat kotiovelle
           </div>
 
           <a href="#meals" class="btn green">Tee tilaus</a>
@@ -692,8 +691,8 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
                       foreach ($product_variations as $variant):
                         $has_subscription_type = true;
                         $variation_id = $variant["variation_id"];
-                        $customproce = $variant["price_for_day"]; 
-                        $customproce1 = $variant["price_for_one"];
+                        $customproce = isset($variant["price_for_day"]) ? $variant["price_for_day"] : null; 
+                        $customproce1 = isset($variant["price_for_one"]) ? $variant["price_for_one"] : null;
                         // print_r($variant);
                         // echo $customproce;
                         // echo $customproce1;
@@ -1094,7 +1093,7 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
       <div class="section-wrapper">
         <div class="h2-wrapper">
           <h2 class="h2">
-            Kaytossa kiireisilla yrittajilla, vaikuttajilla ja urheilijoila
+          Käytössä kiireisillä yrittäjillä, vaikuttajilla ja urheilijoilla
           </h2>
         </div>
         <div class="reviews-wrap">
@@ -1469,9 +1468,6 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
             </div>
             <div class="swiper-slide">
               <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-            </div>
-            <div class="swiper-slide">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
             </div>
           </div>
         </div>

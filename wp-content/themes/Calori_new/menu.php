@@ -61,7 +61,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                                 <input type="radio" id="week<?php echo $b ?>" name="week_radio" value="11/05/2024 - 11/12/2024" <?php if ($b == 0): ?>checked="" <?php endif; ?>>
                                             </div>
 
-                                        <?
+                                        <?php
                                             $b++;
                                         }
 
@@ -209,25 +209,22 @@ get_header(null, array("announcement" => true, "show_cart" => true))
 
                                             $days = get_field('this_week_whole_menu');
                                             // print_r($days[0]);
-                                            if ($days) {
-                                                foreach ($days as $row) {
+                                            if ($days):
+                                                foreach ($days as $row):
 
-                                                    if ($row) {
+                                                    if ($row):
                                                         $a = 1;
 
-                                                        foreach ($row as $dayweek) {
+                                                        foreach ($row as $dayweek):
                                                             // echo $a;
-                                                            if ($dayweek[0]['meals']) { ?>
+                                                            if ($dayweek[0]['meals']): ?>
                                                                 <div class="week-menu-tabscontent_tab <?php if ($a == 1) : ?> active <?php endif; ?>">
                                                                     <div class="menu-swiper-wrap">
                                                                         <div class="swiper menuswiper menuswiper<?php echo $day; ?>">
                                                                             <div class="swiper-wrapper">
                                                                                 <?php
                                                                                 $a = 0;
-                                                                                foreach ($dayweek[0]['meals'] as $item) {
-
-                                                                                    // print_r($item);
-
+                                                                                foreach ($dayweek[0]['meals'] as $item):
                                                                                 ?>
                                                                                     <div class="swiper-slide">                                                                                          
                                                                                         <a data-fancybox="" data-src="#menuitem<?php echo $day; echo $a; ?>" class="menu-item">
@@ -247,8 +244,17 @@ get_header(null, array("announcement" => true, "show_cart" => true))
 
                                                                                             <img src="<?php echo $item['meal_image2']; ?>"  class="menu-item-bg1" alt="food">
                                                                                             <div class="menupopup-wrap">
-
-
+                                                                                                <?php 
+                                                                                                    $meal_props = $item['meal_props'];
+                                                                                                    if (!empty($meal_props)): ?>
+                                                                                                        <ul class="menupopup-wrap-props">
+                                                                                                        <?php foreach ($meal_props as $prop): ?>
+                                                                                                            <li><?php echo esc_html($prop); ?></li>
+                                                                                                        <?php endforeach;  ?>
+                                                                                                        </ul>
+                                                                                                    <?php
+                                                                                                    endif;
+                                                                                                ?>
 
                                                                                                 <div class="menupopup-wrap_title"><?php echo $item['meal_name']; ?></div>
                                                                                                 <div class="menupopup-wrap_text">
@@ -294,9 +300,9 @@ get_header(null, array("announcement" => true, "show_cart" => true))
 
                                                                                     </div>
 
-                                                                                <?
+                                                                                <?php
                                                                                     $a++;
-                                                                                }
+                                                                                endforeach;
                                                                                 ?>
 
 
@@ -355,14 +361,15 @@ get_header(null, array("announcement" => true, "show_cart" => true))
 
                                                                     </div>
                                                                 </div>
-                                                <?php
-
-                                                            }
+                                                        <?php
+                                                            endif;
                                                             $a++;
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                                        endforeach;
+                                                    endif;
+                                                endforeach;
+                                            endif;
+
+
                                             // Loop through rows.
                                             while (have_rows('this_week_whole_menu')) : 
                                                 the_row(); 
@@ -419,107 +426,6 @@ get_header(null, array("announcement" => true, "show_cart" => true))
             </div>
         </div>
     </section>
-
-
-    <script>
-        jQuery(document).ready(function($) {
-
-            let a=1;
-
-$('.menuswiper').each(function(){
-  
-  var menuswiper = new Swiper(this, {
-    slidesPerView: 4,
-    spaceBetween: 24,
-    loop:false,
-    navigation: {
-        nextEl: ".arrow-right" +a,
-        prevEl: ".arrow-left" +a,
-      },
-      breakpoints: {
-        0: {
-          slidesPerView: 'auto',
-          spaceBetween: 12,
-          centeredSlides: true,
-        },
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 24,
-          centeredSlides: false,
-        },
-        
-      },
-  });
-
-  a++;
-})
-
-
-            let b=1;
-            $('.menu__button').on('click', function() {
-                // if (! $(this).parent().children('input').attr('checked', 'checked')){
-                var postId = $(this).data('post-id');
-
-                $.ajax({
-                    url: "/wp-admin/admin-ajax.php",
-                    type: 'POST',
-                    data: {
-                        action: 'load_post_content', // Название действия
-                        post_type: 'ruokalistat',
-                        post_id: postId // ID поста
-                    },
-                    beforeSend: function() {
-                        $('.week-menu-tabscontent').empty();
-                        $('.week-menu-tabs_tab').removeClass('active');
-                        $('.week-menu-tabs_tab').eq(0).addClass('active');
-                        $('.week-menu-tabs').css('display', 'none');
-                        $('.menu__loading').addClass('_active');
-                    },
-                    success: function(response) {
-                        $('.week-menu-tabs').css('display', 'flex');
-                        $('.menu__loading').removeClass('_active');
-                        $('.week-menu-tabscontent').html(response); // Вставляем полученный контент в div
-
-                        b = 1;
-
-                        $('.menuswiper').each(function() {
-
-                            var menuswiper = new Swiper(this, {
-                                slidesPerView: 4,
-                                spaceBetween: 24,
-                                loop: false,
-                                navigation: {
-                                    nextEl: '.arrow-right' + a,
-                                    prevEl: ".arrow-left" + a,
-                                },
-                                breakpoints: {
-                                    0: {
-                                        slidesPerView: 'auto',
-                                        spaceBetween: 12,
-                                        centeredSlides: true,
-                                    },
-                                    1200: {
-                                        slidesPerView: 4,
-                                        spaceBetween: 24,
-                                        centeredSlides: false,
-                                    },
-
-                                },
-                            });
-
-                            b++;
-                        })
-                    },
-                    error: function(xhr, status, error) {
-                        $('.menu__loading').removeClass('_active');
-                        console.error('Ошибка при загрузке');
-                    }
-                });
-                // }
-            });
-
-        });
-    </script>
 
     <!--<section class="bigbanner timer mb0">
         <div class="timer-wrap">
@@ -671,9 +577,6 @@ $('.menuswiper').each(function(){
             </div>
             <div class="swiper-slide">
               <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-            </div>
-            <div class="swiper-slide">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
             </div>
           </div>
         </div>

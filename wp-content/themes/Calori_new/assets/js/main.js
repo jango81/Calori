@@ -1,12 +1,40 @@
+let a=1;
+
+$('.menuswiper').each(function(){
+  
+  var menuswiper = new Swiper(this, {
+    slidesPerView: 4,
+    spaceBetween: 24,
+    loop:true,
+    navigation: {
+        nextEl: '.arrow-right'+a,
+        prevEl: ".arrow-left" +a,
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 'auto',
+          spaceBetween: 12,
+          centeredSlides: true,
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 24,
+          centeredSlides: false,
+        },
+        
+      },
+  });
+
+  a++;
+})
+
+
+
 
   var reviews = new Swiper(".reviews", {
     slidesPerView: 4,
     spaceBetween: 24,
     loop:true,
-    navigation: {
-      nextEl: ".reviews-wrap .swiper-button-next",
-      prevEl: ".reviews-wrap .swiper-button-prev",
-    },
     breakpoints: {
         0: {
           slidesPerView: 'auto',
@@ -16,41 +44,6 @@
         },
         1200: {
           slidesPerView: 4,
-          spaceBetween: 24,
-          centeredSlides: false,
-        },
-        
-      },
-   
-  });
-
-  var reviews = new Swiper(".partners-swiper", {
-    slidesPerView: 5,
-    spaceBetween: 24,
-    loop:true,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-    // navigation: {
-    //   nextEl: ".reviews-wrap .swiper-button-next",
-    //   prevEl: ".reviews-wrap .swiper-button-prev",
-    // },
-    breakpoints: {
-        0: {
-          slidesPerView: 2,
-          spaceBetween: 12,
-          // centeredSlides: true,
-          
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 16,
-          // centeredSlides: true,
-          
-        },
-        1200: {
-          slidesPerView: 5,
           spaceBetween: 24,
           centeredSlides: false,
         },

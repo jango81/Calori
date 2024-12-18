@@ -71,6 +71,9 @@ add_action("wp_enqueue_scripts", function () {
     wp_enqueue_script("calori-landing-main", get_template_directory_uri() . "/assets/scripts/main.min.js?v1.3", array(), false, true);
 
     wp_enqueue_script("calori-main", get_template_directory_uri() . "/assets/scripts/main.js?v1.2", array(), false, true);
+    wp_localize_script("calori-main", "ajax_object", array(
+        "ajax_url" => admin_url("admin-ajax.php"),
+    ));
 });
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
@@ -127,6 +130,7 @@ function custom_changes_css()
 
 function load_post_content()
 {
+    error_log("POST ID: " . $_POST['post_id']);
     // Проверяем, установлен ли ID поста
     if (isset($_POST['post_id'])) {
         $post_id = intval($_POST['post_id']);
@@ -180,15 +184,16 @@ function load_post_content()
                                                 <div class="swiper menuswiper menuswiper<?php echo $day; ?>">
                                                     <div class="swiper-wrapper">
                                                         <?php
-                                                         $a = 0;
+                                                        $a = 0;
                                                         foreach ($dayweek[0]['meals'] as $item) {
 
                                                             // print_r($item);
                 
                                                             ?>
                                                             <div class="swiper-slide">
-                                                            
-                                                                <a data-fancybox="" data-src="#menuitem<?php echo $day; echo $a; ?>" class="menu-item">
+
+                                                                <a data-fancybox="" data-src="#menuitem<?php echo $day;
+                                                                echo $a; ?>" class="menu-item">
                                                                     <img src="<?php echo $item['meal_image']; ?>" alt="food" class="menu-item-bg" />
 
 
@@ -196,13 +201,25 @@ function load_post_content()
                                                                     <div class="menu-item-title"><?php echo $item['meal_name']; ?></div>
                                                                     <div class="menu-item-which"><?php echo $item['meal_of_day']; ?></div>
                                                                 </a>
-                                                                <div id="menuitem<?php echo $day; echo $a; ?>" class="menupopup" style="display:none;max-width:500px;">
+                                                                <div id="menuitem<?php echo $day;
+                                                                echo $a; ?>" class="menupopup"
+                                                                    style="display:none;max-width:500px;">
                                                                     <!-- <button data-fancybox-close="" class="f-button is-close-btn" title="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" tabindex="-1"><path d="M20 20L4 4m16 0L4 20"></path></svg></button> -->
 
                                                                     <img src="<?php echo $item['meal_image']; ?>" alt="food">
                                                                     <div class="menupopup-wrap">
 
-
+                                                                        <?php
+                                                                        $meal_props = $item['meal_props'];
+                                                                        if (!empty($meal_props)): ?>
+                                                                            <ul class="menupopup-wrap-props">
+                                                                                <?php foreach ($meal_props as $prop): ?>
+                                                                                    <li><?php echo esc_html($prop); ?></li>
+                                                                                <?php endforeach; ?>
+                                                                            </ul>
+                                                                            <?php
+                                                                        endif;
+                                                                        ?>
 
                                                                         <div class="menupopup-wrap_title"><?php echo $item['meal_name']; ?></div>
                                                                         <div class="menupopup-wrap_text">
@@ -298,7 +315,7 @@ function load_post_content()
                         }
                     }
                     // Loop through rows.
-                   
+
 
                 endif; ?>
 
@@ -384,13 +401,13 @@ add_filter('woocommerce_available_variation', 'load_variation_barcode_custom_fie
 
 function load_variation_barcode_custom_fields($variations)
 {
-     $variations_time = get_post_meta( $variations['variation_id'], 'price_for_day', true );
-    if ( isset( $variations_time ) && ! empty( $variations_time ) ) {
+    $variations_time = get_post_meta($variations['variation_id'], 'price_for_day', true);
+    if (isset($variations_time) && !empty($variations_time)) {
         $variations['price_for_day'] = '€';
-        $variations['price_for_day'] .= get_post_meta( $variations['variation_id'], 'price_for_day', true );
-       
+        $variations['price_for_day'] .= get_post_meta($variations['variation_id'], 'price_for_day', true);
+
     }
- 
+
     return $variations;
 }
 

@@ -18,6 +18,9 @@
 #/xmlrpc.php
 
 wp-content/ai1wm-backups
+wp-content/boost-cache
+wp-content/cache
+wp-content/jetpack-waf
 
 # Configuration
 wp-config.php

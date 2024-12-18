@@ -556,9 +556,6 @@ Ensimmäisen tilauksen jälkeen päätät itse jos haluat jatkaa palvelun käytt
             <div class="swiper-slide">
               <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
             </div>
-            <div class="swiper-slide">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
-            </div>
           </div>
         </div>
       </div>

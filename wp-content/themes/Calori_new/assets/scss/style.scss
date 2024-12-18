@@ -1,6 +1,5 @@
 :root{
     --green:#2F4F4C;
-    --greenhover:#468d86;
     --black:#111111;
     --black70:rgba(17, 17, 17, 0.70);
     --greybg:#F8F8F8;
@@ -158,26 +157,6 @@ a,input,textarea,button{
     line-height: normal;
     width: fit-content;
     display: flex;
-    align-items: center;
-    gap: 8px;
-
-    &:hover{
-        background: var(--greenhover);
-    }
-
-    &.gborder{
-        background: transparent;
-        color: var(--green);
-        border: 1px solid var(--green);
-        padding: 8px 14px;
-        padding-left: 12px;
-
-        &:hover{
-            background: var(--greenhover);
-            color: white;
-            border-color: var(--greenhover);
-        }
-    }
 }
 
   .runline{
@@ -242,12 +221,7 @@ a,input,textarea,button{
 
   .header{
     padding: 22px 0;
-    position: sticky;
-    z-index: 10000;
-    @media screen and (max-width:992px) {
-        padding: 15px 0;
-    }
-    
+
     &-wrapper{
         display: flex;
         align-items: center;
@@ -305,10 +279,6 @@ a,input,textarea,button{
                             font-weight: 400;
                             color: var(--black);
                             text-decoration: none;
-
-                            &:hover{
-                                color: var(--greenhover);
-                            }
                         }
                     }
                 }
@@ -319,24 +289,8 @@ a,input,textarea,button{
                 color: var(--black);
                 text-decoration: none;
                 font-size: 16px;
-                position: relative;
                 @media screen and (max-width:992px) {
                     margin-left: auto;
-                }
-
-                &-round{
-                    position: absolute;
-                    right: -5px;
-                    top: -5px;
-                    font-size: 10px;
-                    color: white;
-                    border-radius: 50%;
-                    background: var(--green);
-                    width: 15px;
-                    height: 15px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
                 }
             }
 
@@ -363,7 +317,6 @@ a,input,textarea,button{
         height: 70vh;
         max-height: 44vw;
         min-height: 400px;
-        background-position: 50% 89%;
 
         // display: none;
 
@@ -388,9 +341,8 @@ a,input,textarea,button{
             flex-direction: column;
             &_bg{
                 aspect-ratio: 16/5;
-                @media screen and (max-width:992px) {
+                @media screen and (max-width:576px) {
                     aspect-ratio: 390/284;
-                    object-position: 0% 90%;
                 }
                 width: 100%;
                 height: auto;
@@ -497,18 +449,6 @@ a,input,textarea,button{
         gap: 16px;
     }
 
-    @media screen and (max-width:576px) {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    &.twocol{
-        @media screen and (max-width:576px) {
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-    }
-
     &_item{
         display: flex;
         flex-direction: column;
@@ -523,7 +463,7 @@ a,input,textarea,button{
         &_img{
             width: 100%;
             aspect-ratio: 1/1;
-            height: auto;
+            height: 100%;
             object-fit: cover;
             border-radius: 24px;
             @media screen and (max-width:768px) {
@@ -603,11 +543,10 @@ a,input,textarea,button{
     border-radius: 24px;
     overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    align-items: flex-end;
+    justify-content: center;
     padding: 16px;
     text-decoration: none;
-    flex-direction: column;
     @media screen and (max-width:1200px) {
         width: 220px;
         height: 240px;
@@ -629,7 +568,8 @@ a,input,textarea,button{
         width: 100%;
         height: 100%;
         z-index: 0;
-        background: linear-gradient(180deg, rgba(56, 50, 50, 0) 57.5%, rgb(56 50 50 / 32%) 76.5%, rgb(56 50 50 / 80%) 88.19%);
+        background: linear-gradient(180deg, rgba(56, 50, 50, 0.00) 57.5%, rgba(56, 50, 50, 0.13) 76.5%, rgba(56, 50, 50, 0.21) 88.19%);
+
     }
     &-bg{
         position: absolute;
@@ -641,7 +581,6 @@ a,input,textarea,button{
         object-fit: cover;
 
     }
-    
 
     &-title{
         position: relative;
@@ -649,21 +588,9 @@ a,input,textarea,button{
         color: white;
         font-size: 20px;
         font-weight: 600;
-        text-align: center;
+
         @media screen and (max-width:992px) {
             font-size: 12px;
-        }
-    }
-
-    &-which{
-        font-size: 12px;
-        font-weight: 400;
-        color: white;
-        position: relative;
-        z-index: 1;
-
-        @media screen and (max-width:992px) {
-            font-size: 8px;
         }
     }
 
@@ -826,7 +753,7 @@ a,input,textarea,button{
         justify-content: center;
         align-items: center;
         padding: 80px 10px;
-        min-height: 400px;
+
         @media screen and (max-width:576px) {
             padding: 40px 10px;
         }
@@ -840,11 +767,6 @@ a,input,textarea,button{
            @media screen and (max-width:576px) {
                 padding: 22px 10px;
             }
-
-            &.newbanner{
-                max-width: 390px;
-                padding: 16px 20px;
-            }
            .banner-title{
             font-size: 36px;
             font-weight: 500;
@@ -855,43 +777,6 @@ a,input,textarea,button{
                font-size: 24px;
                margin-bottom: 4px;
             }
-
-            &.newbanner-title{
-                font-weight: 700;
-                font-size: 32px;
-
-                @media screen and (max-width:992px) {
-                    font-size: 26px;
-                }
-                span{
-                    font-style: italic;
-                    font-weight: 400;
-                }
-            }
-           }
-
-           .promo{
-            background: none;
-            border: 1px solid var(--green);
-            font-weight: 700;
-            padding: 8px 14px;
-            font-size: 22px;
-            color: var(--green);
-            border-radius: 16px;
-            margin-bottom: 20px;
-
-            @media screen and (max-width:992px) {
-                font-size: 18px;
-            }
-           }
-
-           .banner-after-text{
-            font-weight: 300;
-            font-size: 12px;
-            @media screen and (max-width:992px) {
-                font-size: 10px;
-            }
-            
            }
 
            .banner-text{
@@ -903,14 +788,6 @@ a,input,textarea,button{
             span{
                 font-weight: 600;
                 color: var(--darkgreen);
-            }
-
-            &.newbanner-text{
-                font-weight: 700;
-                span{
-                    // font-weight: 400;
-                    color: #38635F;
-                }
             }
            }
 
@@ -942,7 +819,6 @@ a,input,textarea,button{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 93px;
-    row-gap: 40px;
 
     @media screen and (max-width:1200px) {
         gap: 64px;
@@ -955,7 +831,6 @@ a,input,textarea,button{
     @media screen and (max-width:576px) {
         grid-template-columns: 1fr;
         gap: 16px;
-        justify-items: center;
     }
 
     &_item{
@@ -968,7 +843,6 @@ a,input,textarea,button{
         @media screen and (max-width:576px) {
             flex-direction: row;
             gap: 12px;
-            min-width: 290px;
         }
 
         &_ico{
@@ -990,31 +864,13 @@ a,input,textarea,button{
         }
     }
 }
-.woocommerce-shipping-fields{
-    padding: 0 3px;
-}
+
 .reviews{
     @media screen and (max-width:1200px) {
         overflow: visible;
         
     }
-    width: calc(100% - 100px);
-    margin: 0 auto;
-
-    &-wrap{
-        position: relative;
-
-        .swiper-button-prev, .swiper-button-next{
-            flex-shrink: 0;
-            &:after{
-                display: none;
-            }
-        }
-    }
-
-    
     .swiper-slide{
-        height: auto;
         @media screen and (max-width:1200px) {
             width: fit-content;
         }
@@ -1026,7 +882,6 @@ a,input,textarea,button{
         display: flex;
         flex-direction: column;
         gap: 24px;
-        height: 100%;
         @media screen and (max-width:1200px) {
             width: 265px;
         }
@@ -1060,7 +915,6 @@ a,input,textarea,button{
             justify-content: center;
             flex-direction: column;
             gap: 8px;
-            margin-top: auto;
 
             &_image{
                 width: 50px;
@@ -1155,12 +1009,6 @@ a,input,textarea,button{
     align-items: stretch;
     height: 28px;
     justify-content: space-between;
-    .swiper-wrapper{
-        align-items: stretch;
-    }
-    .swiper-slide{
-        height: auto;
-    }
     @media screen and (max-width:992px) {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1173,12 +1021,8 @@ a,input,textarea,button{
         grid-template-columns: 1fr;
     }
     &-item{
-        // width: auto;
-        width: 100%;
-        // height: 100%;
-        height: 28px;
-        object-fit: contain;
-        object-position: center;
+        width: auto;
+        height: 100%;
         @media screen and (max-width:992px) {
             height: 28px;
         }
@@ -1227,7 +1071,7 @@ a,input,textarea,button{
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding-bottom: 40px;
+
     }
 
     &-top{
@@ -1496,33 +1340,33 @@ a,input,textarea,button{
     font-weight: 500;
     font-size: 16px;
 }
-// .order-products__product {
-//     align-self: stretch;
-//     font-size: var(--calori-subtitle-fz);
-//     margin: 0 10px;
-//     color: var(--calori-color-text-secondary);
-//     background: none;
-//     border: 1px solid #000;
-//     border-radius: 10px;
-//     padding: 12px 30px;
-//     width: fit-content;
-//     height: 100%;
-//     transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+.order-products__product {
+    align-self: stretch;
+    font-size: var(--calori-subtitle-fz);
+    margin: 0 10px;
+    color: var(--calori-color-text-secondary);
+    background: none;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 12px 30px;
+    width: fit-content;
+    height: 100%;
+    transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
 
 
-//     &.active{
-//         color: white;
-//         background: var(--green);
-//         border: 1px solid var(--green);
+    &.active{
+        color: white;
+        background: var(--green);
+        border: 1px solid var(--green);
        
-//     }
+    }
 
-//     &:hover{
-//         border: 1px solid var(--green);
-//     background: var(--green);
-//     color: white; 
-//     }
-// }
+    &:hover{
+        border: 1px solid var(--green);
+    background: var(--green);
+    color: white; 
+    }
+}
 .order-products__product label {
     color: var(--calori-color-text-secondary);
     background: none;
@@ -1612,33 +1456,12 @@ a,input,textarea,button{
     display: flex;
     align-items: center;
     margin-top: 10px;
-    position: relative;
-    z-index: 10;
-    // flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    color: rgba(17, 17, 17, 0.60);
-}
-
-
-.order-block{
-    align-items: flex-start;
-
-    .check-box:last-child{
-        margin-bottom: 24px;
-    }
-}
-
-.custom-select__option{
-    font-size: 14px;
 }
 
 .order-calculator__button {
     font-size: 14px;
     color: var(--calori-color-bg-primary);
-    // margin-left: 10px;
-    color: var(--black);
-    margin-left: 0;
+    margin-left: 10px;
 }
 .order-calculator__button:hover {
     cursor: pointer;
@@ -1655,7 +1478,7 @@ a,input,textarea,button{
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 90000;
+    z-index: 9999;
     overflow-y: auto;
     padding: 20px 0;
 }
@@ -2322,11 +2145,8 @@ a,input,textarea,button{
 }
 
 .order__calculator{
-    margin-top: -13px;
-    margin-bottom: 16px;
-    p{
-        font-size: 14px;
-    }
+    margin-top: 0;
+    margin-bottom: 21px;
 }
 
 .order__container{
@@ -2396,7 +2216,6 @@ a,input,textarea,button{
   .menu-image{
     width: 655px;
     height: auto;
-    aspect-ratio: 2/1;
     img{
         width: 100%;
         height: 100%;
@@ -2444,216 +2263,3 @@ a,input,textarea,button{
 .madeby{
     display: flex;
 }
-
-.menupopup{
-    padding: 0;
-    border-radius: 16px;
-    // overflow: hidden;
-    width: 100%;
-    img{
-        width: 100%;
-        // height: 200px;
-        object-fit: cover;
-        border-top-right-radius: 16px;
-        border-top-left-radius: 16px;
-        aspect-ratio: 3 / 2;
-    }
-
-    &-wrap{
-        padding: 20px 12px;
-
-        &_title{
-            font-weight: 500;
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-
-        &_text{
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        &_ingr{
-            
-            margin-bottom: 8px;
-        }
-
-        &_kbgu{
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-
-            .item{
-                padding: 6px;
-                border-radius: 4px;
-                background: #F4E9D5;
-                display: flex;
-                font-size: 10px;
-            }
-        }
-    }
-}
-
-.order-block__title{
-    text-align: left;
-}
-
-.btn.order-cart__button{
-    padding: 15px 30px;
-}
-
-.order-payment._active.order-block{
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 32px;
-    align-items: flex-end;
-
-    .price_result{
-        .order-payment__title{
-            font-size: 16px;
-        }
-
-        .custom-radio__price{
-            margin: 0;
-            font-size: 28px;
-            color: var(--black);
-            font-weight: 500;
-        }
-
-        .order-radio{
-            margin-top: 0;
-        }
-
-        .custom-radio__wrapper{
-            padding: 0;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: var(--black);
-            font-weight: 500;
-        }
-
-        .price_result_title{
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--black);
-        }
-
-        .price_result_count{
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--black);
-        }
-    }
-}
-.price_result {
-    .custom-radio__wrapper{
-
-    }
-}
-
-.custom-select__value{
-    padding: 8px 15px;
-    border-radius: 8px;
-    border: 1px solid rgba(33, 55, 53, 0.30);
-    background: #F8F8F8;
-}
-
-.custom-select__value > span{
-    width: 16px;
-    height: 7px;
-}
-
-
-.product-wrap{
-    max-width: 465px;
-    width: 100%;
-}
-
-.custom-spoiler__heading span::before, .custom-spoiler__heading span::after{
-    // color: white;
-    background: white;
-}
-
-.faq-wrap{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 20px;
-
-    @media screen and (max-width:992px) {
-        grid-template-columns: 1fr;
-    }
-}
-
-.faq-block__title h2{
-    font-size: 32px;
-    font-weight: 600;
-}
-
-.faq-spoiler__heading{
-    background: var(--green);
-}
-
-.custom-spoiler__heading h3{
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.faq-spoiler__heading::before{
-    display: none;
-}
-
-.faq-spoiler__content{
-    // padding: 15px 20px;
-    background: var(--green); 
-}
-
-.faq-spoiler:not(:first-child){
-    margin-top: 0;
-}
-
-.announcement{
-    padding: 0;
-}
-
-#delivery_time{
-    position: absolute;
-}
-
-.nice-select{
-    width: 100% !important;
-  }
-
-  .woocommerce form .form-row .input-checkbox{
-    margin: 0;
-  }
-
-  .faq-wrap{
-    ul, ol{
-        list-style-type: circle;
-        padding-left: 14px;
-    }
-  }
-
-  .faq-spoiler__content{
-    padding: 0 20px;
-  }
-
-  #delivery-info{
-    h3{
-        font-weight: 600;
-    }
-  }
-
-  .fancybox__container{
-    z-index: 1000000;
-  }
-
-  .info-delivery-wrap{
-    margin-top: 21px;
-  }
-
-  .groweoapp-668e88c4a74dc6857fc81256{
-    z-index: 99999 !important; 
-  }

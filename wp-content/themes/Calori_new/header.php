@@ -165,10 +165,6 @@
                                 </div>
                             </li>
                         </ul> -->
-                        <ul class="navigation__options">
-                            <li><a href="#">Kirjaudu sisään</a></li>
-                            <li><a href="#">Luo käyttäjä</a></li>
-                        </ul>
                     </div>
                 </div>
                 <div class="header__drawer"></div>
