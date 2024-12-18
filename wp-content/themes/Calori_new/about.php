@@ -266,29 +266,104 @@ get_header(null, array("announcement" => true, "show_cart" => true))
             </div>
         </div>
     </section>
-    <section class="section">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="h2-wrapper">
-                    <h2 class="h2">
-                        Teemme yhteistyötä
-                    </h2>
-                </div>
+    <section class="section grey ">
+    <div class="container">
+      <div class="section-wrapper">
 
-                <div class="partners">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt=""
-                        class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt=""
-                        class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt=""
-                        class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt=""
-                        class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt=""
-                        class="partners-item">
-                </div>
+      <div class="h2-wrapper">
+        <h2 class="h2">
+        Miksi Calori?
+        </h2>
+      </div>
+        <div class="whywe swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Maukasta ja terveellistä ruokaa
+                </span>
+                </img>
+              </div>
             </div>
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Säästät 8h aikaa viikossa
+                </span>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Tasapainoa ja helpoutta elämääsi
+                </span>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Saavutat kaikki tavoitteesi
+                </span>
+              </div>
+            </div>
+
+          </div>
         </div>
-    </section>
+
+        <a href="/meista/miksi-calori/" class="btn green" style="margin: 24px auto 0;">
+        Lue lisää
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-wrapper">
+        <div class="h2-wrapper">
+          <h2 class="h2">
+            Teemme yhteistyötä
+          </h2>
+        </div>
+
+        <!--<div class="partners">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+        </div>-->
+        <div class="partners-swiper swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="images/partner1.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner2.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner3.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner4.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner5.png" alt="" class="partners-item">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 <?php get_footer() ?>
