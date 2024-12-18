@@ -545,19 +545,19 @@ Ensimmäisen tilauksen jälkeen päätät itse jos haluat jatkaa palvelun käytt
         <div class="partners-swiper swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="images/partner1.png" alt="" class="partners-item">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
             </div>
             <div class="swiper-slide">
-              <img src="images/partner2.png" alt="" class="partners-item">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
             </div>
             <div class="swiper-slide">
-              <img src="images/partner3.png" alt="" class="partners-item">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
             </div>
             <div class="swiper-slide">
-              <img src="images/partner4.png" alt="" class="partners-item">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
             </div>
             <div class="swiper-slide">
-              <img src="images/partner5.png" alt="" class="partners-item">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
             </div>
           </div>
         </div>
