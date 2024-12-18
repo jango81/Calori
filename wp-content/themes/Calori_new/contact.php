@@ -122,7 +122,13 @@ get_header(null, array("announcement" => true, "show_cart" => true))
     <section class="section grey ">
     <div class="container">
       <div class="section-wrapper">
-      <div class="whywe swiper">
+
+      <div class="h2-wrapper">
+        <h2 class="h2">
+        Miksi Calori?
+        </h2>
+      </div>
+        <div class="whywe swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <div class="whywe_item">
@@ -139,7 +145,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                 <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
 
                 <span class="whywe_item_text">
-                Säästät yli 8 tuntia viikossa kokkaamisella
+                Säästät 8h aikaa viikossa
                 </span>
               </div>
             </div>
@@ -166,6 +172,10 @@ get_header(null, array("announcement" => true, "show_cart" => true))
 
           </div>
         </div>
+
+        <a href="/meista/miksi-calori/" class="btn green" style="margin: 24px auto 0;">
+        Lue lisää
+        </a>
       </div>
     </div>
   </section>
@@ -179,12 +189,31 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                     </h2>
                 </div>
 
-                <div class="partners">
+               <!-- <div class="partners">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+                </div>-->
+                <div class="partners-swiper swiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <img src="images/partner1.png" alt="" class="partners-item">
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="images/partner2.png" alt="" class="partners-item">
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="images/partner3.png" alt="" class="partners-item">
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="images/partner4.png" alt="" class="partners-item">
+                    </div>
+                    <div class="swiper-slide">
+                      <img src="images/partner5.png" alt="" class="partners-item">
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>
