@@ -67,10 +67,10 @@ add_action("wp_enqueue_scripts", function () {
     wp_enqueue_style("calori-reset-style", get_template_directory_uri() . "/assets/styles/reset.css");
     wp_enqueue_style("calori-style", get_template_directory_uri() . "/assets/styles/style.css");
 
-    wp_enqueue_style("calori-style-new", get_template_directory_uri() . "/assets/styles/style.min.css?v.1.45");
-    wp_enqueue_script("calori-landing-main", get_template_directory_uri() . "/assets/scripts/main.min.js?v1.2", array(), false, true);
+    wp_enqueue_style("calori-style-new", get_template_directory_uri() . "/assets/styles/style.min.css?v.1.46");
+    wp_enqueue_script("calori-landing-main", get_template_directory_uri() . "/assets/scripts/main.min.js?v1.3", array(), false, true);
 
-    wp_enqueue_script("calori-main", get_template_directory_uri() . "/assets/scripts/main.js?v1.1", array(), false, true);
+    wp_enqueue_script("calori-main", get_template_directory_uri() . "/assets/scripts/main.js?v1.2", array(), false, true);
 });
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
