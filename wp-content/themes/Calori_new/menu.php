@@ -521,7 +521,7 @@ $('.menuswiper').each(function(){
         });
     </script>
 
-    <section class="bigbanner timer mb0">
+    <!--<section class="bigbanner timer mb0">
         <div class="timer-wrap">
             <div class="banner-title">
                 Lähin toimitus
@@ -557,7 +557,30 @@ $('.menuswiper').each(function(){
             <a href="<?php echo get_home_url(); ?>#order" class="btn green">Tee tilaus</a>
         </div>
         <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
-    </section>
+    </section> -->
+
+ <section class="bigbanner timer mb0">
+      <div class="timer-wrap newbanner">
+        <div class="banner-title newbanner-title">
+          Uusi vuosi, <span>uusi sinä</span>
+        </div>
+        <div class="banner-text newbanner-text">
+          Seuraava toimitus on <span>Perjantai 3.1.2024</span>. <br><br>
+          Tee tilaus ennen uutta vuotta, ja saat 50€ alennuksen tilauksestasi koodilla:
+        </div>
+
+        <button class="promo">
+          CALORI25
+        </button>
+        
+        <div class="banner-after-text">
+          Koodi voimassa 18.12-31.12.2024, minimitilaus 100€.
+        </div>
+      </div>
+      <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
+     </section>
+
+
     <section class="section grey ">
     <div class="container">
       <div class="section-wrapper">
