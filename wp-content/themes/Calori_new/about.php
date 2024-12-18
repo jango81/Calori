@@ -156,7 +156,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
     <div class="main__dark">
     </div>
 
-    <section class="bigbanner timer">
+   <!-- <section class="bigbanner timer">
         <div class="timer-wrap">
             <div class="banner-title">
                 Ehdi tehdä tilaus
@@ -193,8 +193,28 @@ get_header(null, array("announcement" => true, "show_cart" => true))
         </div>
         <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner"
             class="bigbanner-bg abs">
-    </section>
+    </section>-->
 
+ <section class="bigbanner timer mb0">
+      <div class="timer-wrap newbanner">
+        <div class="banner-title newbanner-title">
+          Uusi vuosi, <span>uusi sinä</span>
+        </div>
+        <div class="banner-text newbanner-text">
+          Seuraava toimitus on <span>Perjantai 3.1.2024</span>. <br><br>
+          Tee tilaus ennen uutta vuotta, ja saat 50€ alennuksen tilauksestasi koodilla:
+        </div>
+
+        <button class="promo">
+          CALORI25
+        </button>
+        
+        <div class="banner-after-text">
+          Koodi voimassa 18.12-31.12.2024, minimitilaus 100€.
+        </div>
+      </div>
+      <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
+     </section>
 
     <section class="section">
         <div class="container">
