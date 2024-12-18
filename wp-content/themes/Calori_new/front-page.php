@@ -1430,12 +1430,31 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
           </h2>
         </div>
 
-        <div class="partners">
+        <!--<div class="partners">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+        </div>-->
+        <div class="partners-swiper swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="images/partner1.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner2.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner3.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner4.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="images/partner5.png" alt="" class="partners-item">
+            </div>
+          </div>
         </div>
       </div>
     </div>
