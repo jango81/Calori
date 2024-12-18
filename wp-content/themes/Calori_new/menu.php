@@ -521,7 +521,7 @@ $('.menuswiper').each(function(){
         });
     </script>
 
-    <section class="bigbanner timer mb0">
+    <!--<section class="bigbanner timer mb0">
         <div class="timer-wrap">
             <div class="banner-title">
                 Lähin toimitus
@@ -557,77 +557,129 @@ $('.menuswiper').each(function(){
             <a href="<?php echo get_home_url(); ?>#order" class="btn green">Tee tilaus</a>
         </div>
         <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
-    </section>
+    </section> -->
+
+ <section class="bigbanner timer mb0">
+      <div class="timer-wrap newbanner">
+        <div class="banner-title newbanner-title">
+          Uusi vuosi, <span>uusi sinä</span>
+        </div>
+        <div class="banner-text newbanner-text">
+          Seuraava toimitus on <span>Perjantai 3.1.2024</span>. <br><br>
+          Tee tilaus ennen uutta vuotta, ja saat 50€ alennuksen tilauksestasi koodilla:
+        </div>
+
+        <button class="promo">
+          CALORI25
+        </button>
+        
+        <div class="banner-after-text">
+          Koodi voimassa 18.12-31.12.2024, minimitilaus 100€.
+        </div>
+      </div>
+      <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
+     </section>
+
+
     <section class="section grey ">
     <div class="container">
       <div class="section-wrapper">
+
+      <div class="h2-wrapper">
+        <h2 class="h2">
+        Miksi Calori?
+        </h2>
+      </div>
         <div class="whywe swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                <div class="whywe_item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
 
-                    <span class="whywe_item_text">
-                    Maukasta ja terveellistä ruokaa
-                    </span>
-                    </img>
-                </div>
-                </div>
-                <div class="swiper-slide">
-                <div class="whywe_item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
-
-                    <span class="whywe_item_text">
-                    Säästät yli 8 tuntia viikossa kokkaamisella
-                    </span>
-                </div>
-                </div>
-
-                <div class="swiper-slide">
-                <div class="whywe_item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
-
-                    <span class="whywe_item_text">
-                    Tasapainoa ja helpoutta elämääsi
-                    </span>
-                </div>
-                </div>
-
-                <div class="swiper-slide">
-                <div class="whywe_item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
-
-                    <span class="whywe_item_text">
-                    Saavutat kaikki tavoitteesi
-                    </span>
-                </div>
-                </div>
-
+                <span class="whywe_item_text">
+                Maukasta ja terveellistä ruokaa
+                </span>
+                </img>
+              </div>
             </div>
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Säästät 8h aikaa viikossa
+                </span>
+              </div>
             </div>
+
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Tasapainoa ja helpoutta elämääsi
+                </span>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="whywe_item">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
+
+                <span class="whywe_item_text">
+                Saavutat kaikki tavoitteesi
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <a href="/meista/miksi-calori/" class="btn green" style="margin: 24px auto 0;">
+        Lue lisää
+        </a>
       </div>
     </div>
   </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="h2-wrapper">
-                    <h2 class="h2">
-                        Teemme yhteistyötä
-                    </h2>
-                </div>
-
-                <div class="partners">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
-                </div>
-            </div>
+  <section class="section">
+    <div class="container">
+      <div class="section-wrapper">
+        <div class="h2-wrapper">
+          <h2 class="h2">
+            Teemme yhteistyötä
+          </h2>
         </div>
-    </section>
+
+        <!--<div class="partners">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
+          <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+        </div>-->
+        <div class="partners-swiper swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <div class="main__dark">
     </div>

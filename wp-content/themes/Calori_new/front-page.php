@@ -435,7 +435,26 @@
     </section> -->
 
 
+ <section class="bigbanner timer mb0">
+      <div class="timer-wrap newbanner">
+        <div class="banner-title newbanner-title">
+          Uusi vuosi, <span>uusi sinä</span>
+        </div>
+        <div class="banner-text newbanner-text">
+          Seuraava toimitus on <span>Perjantai 3.1.2024</span>. <br><br>
+          Tee tilaus ennen uutta vuotta, ja saat 50€ alennuksen tilauksestasi koodilla:
+        </div>
 
+        <button class="promo">
+          CALORI25
+        </button>
+        
+        <div class="banner-after-text">
+          Koodi voimassa 18.12-31.12.2024, minimitilaus 100€.
+        </div>
+      </div>
+      <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
+     </section>
 
 
   <section id="order" class="section grey mb0">
@@ -1430,12 +1449,31 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
           </h2>
         </div>
 
-        <div class="partners">
+        <!--<div class="partners">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+        </div>-->
+        <div class="partners-swiper swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner1.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner2.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner3.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
+            </div>
+            <div class="swiper-slide">
+              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
+            </div>
+          </div>
         </div>
       </div>
     </div>
