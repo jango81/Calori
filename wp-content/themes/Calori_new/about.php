@@ -216,76 +216,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
       <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
      </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="h2-wrapper">
-                    <h2 class="h2">
-                        Meidän edut
-                    </h2>
-                </div>
-
-                <div class="advantages">
-                    <div class="advantages_item">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico05.svg"
-                            class="advantages_item_ico">
-
-
-
-                        <div class="advantages_item_text">
-                            Suunniteltua ja kokattua puolestasi
-                        </div>
-                    </div>
-                    <div class="advantages_item">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico06.svg"
-                            class="advantages_item_ico">
-
-
-
-                        <div class="advantages_item_text">
-                            Ravitsemusasiantuntijoita tiimissä
-                        </div>
-                    </div>
-                    <div class="advantages_item">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico07.svg"
-                            class="advantages_item_ico">
-
-
-                        <div class="advantages_item_text">
-                            Ruokalistat kehittyvät viikoittain
-                        </div>
-                    </div>
-                    <div class="advantages_item">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico08.svg"
-                            class="advantages_item_ico">
-
-
-                        <div class="advantages_item_text">
-                            Ammattikokkien valmistamaa ruokaa
-                        </div>
-                    </div>
-                    <div class="advantages_item">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg"
-                            class="advantages_item_ico">
-
-
-                        <div class="advantages_item_text">
-                            Yli 60 reseptiä reseptikirjassa
-                        </div>
-                    </div>
-                    <div class="advantages_item">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg"
-                            class="advantages_item_ico">
-
-
-                        <div class="advantages_item_text">
-                            Joustava kylmäkuljetus kotiovellesi
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <section class="section grey ">
     <div class="container">
       <div class="section-wrapper">
@@ -376,9 +307,6 @@ get_header(null, array("announcement" => true, "show_cart" => true))
             </div>
             <div class="swiper-slide">
               <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-            </div>
-            <div class="swiper-slide">
-              <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
             </div>
           </div>
         </div>

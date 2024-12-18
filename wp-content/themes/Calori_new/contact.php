@@ -59,7 +59,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
             </div>
         </form>
         
-        <section id="about-info">
+        <section id="about-info" style="margin-bottom:80px;">
             <div class="about-info__container container">
                 <div class="about-info__body" >
                     
@@ -232,9 +232,6 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                     </div>
                     <div class="swiper-slide">
                       <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner4.png" alt="" class="partners-item">
-                    </div>
-                    <div class="swiper-slide">
-                      <img src="<?php echo get_template_directory_uri() ?>/assets/images/partner5.png" alt="" class="partners-item">
                     </div>
                   </div>
                 </div>

@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         addListeners() {
-            if(this.cartIcon) this.cartIcon.addEventListener("click", this.showCart.bind(this));
+            if (this.cartIcon) this.cartIcon.addEventListener("click", this.showCart.bind(this));
 
             this.siteWrapper.addEventListener("scroll", this.showHeaderScrolled.bind(this));
             this.burgerMenu.addEventListener("click", this.setNavigationClass.bind(this));
@@ -627,4 +627,99 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("cartUpdated");
         document.querySelector("#cart").open();
     }
+
+    jQuery(document).ready(function ($) {
+        let a = 1;
+
+        $(".menuswiper").each(function () {
+            var menuswiper = new Swiper(this, {
+                slidesPerView: 4,
+                spaceBetween: 24,
+                loop: false,
+                navigation: {
+                    nextEl: ".arrow-right" + a,
+                    prevEl: ".arrow-left" + a,
+                },
+                breakpoints: {
+                    0: {
+                        slidesPerView: "auto",
+                        spaceBetween: 12,
+                        centeredSlides: true,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                        centeredSlides: false,
+                    },
+                },
+            });
+        });
+
+        a++;
+
+        let b = 1;
+        $(".menu__button").on("click", function () {
+            // if (! $(this).parent().children('input').attr('checked', 'checked')){
+            var postId = $(this).data("post-id");
+
+            if(!postId) return;
+
+            $.ajax({
+                url: ajax_object.ajax_url, // URL, к которому мы будем делать запрос
+                type: "POST",
+                data: {
+                    action: "load_post_content", // Название действия
+                    post_type: "ruokalistat",
+                    post_id: postId, // ID поста
+                },
+                beforeSend: function () {
+                    $(".week-menu-tabscontent").empty();
+                    $(".week-menu-tabs_tab").removeClass("active");
+                    $(".week-menu-tabs_tab").eq(0).addClass("active");
+                    $(".week-menu-tabs").css("display", "none");
+                    $(".menu__loading").addClass("_active");
+                },
+                success: function (response) {
+                    $(".week-menu-tabs").css("display", "flex");
+                    $(".menu__loading").removeClass("_active");
+                    console.log(response);
+                    
+                    $(".week-menu-tabscontent").html(response); // Вставляем полученный контент в div
+
+                    b = 1;
+
+                    $(".menuswiper").each(function () {
+                        var menuswiper = new Swiper(this, {
+                            slidesPerView: 4,
+                            spaceBetween: 24,
+                            loop: false,
+                            navigation: {
+                                nextEl: ".arrow-right" + a,
+                                prevEl: ".arrow-left" + a,
+                            },
+                            breakpoints: {
+                                0: {
+                                    slidesPerView: "auto",
+                                    spaceBetween: 12,
+                                    centeredSlides: true,
+                                },
+                                1200: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 24,
+                                    centeredSlides: false,
+                                },
+                            },
+                        });
+
+                        b++;
+                    });
+                },
+                error: function (xhr, status, error) {
+                    $(".menu__loading").removeClass("_active");
+                    console.error("Ошибка при загрузке");
+                },
+            });
+            // }
+        });
+    });
 });
