@@ -17,6 +17,8 @@
 #/wp-*.php
 #/xmlrpc.php
 
+
+wp-content\themes\Calori_new\prepros.config
 wp-content/ai1wm-backups
 wp-content/boost-cache
 wp-content/cache

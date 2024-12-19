@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const headerSelectors = {
         headerTag: ".header",
         burgerMenu: ".header__burger",
-        navButton: ".navigation__button",
+        navButton: ".navigation__button button",
         drawer: ".header__drawer",
         headerItem: ".header__item",
         menuItem: ".menu__item",

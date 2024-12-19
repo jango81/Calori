@@ -131,7 +131,7 @@
 
                   <div class="swiper-slide">
                     <a data-fancybox="" data-src="#menuitem<?php echo $a; ?>" class="menu-item">
-                      <img src="<?php the_sub_field('food_photo'); ?>" alt="food" class="menu-item-bg" />
+                      <img src="<?php the_sub_field('food_photo'); ?>" alt="food" class="menu-item-bg skip-lazy" />
 
                       <div class="label">
                         <img src="<?php echo get_template_directory_uri() ?>/assets/images/toprated.svg" alt=""

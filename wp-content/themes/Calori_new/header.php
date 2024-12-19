@@ -35,7 +35,7 @@
               </svg>              
           </button>
 
-          <a href="/" class="logo">
+          <a href="<?php echo site_url() ?>" class="logo">
             <img src="<?php echo get_template_directory_uri() ?>/assets/images/logo.svg" alt="logo" class="logo_image" />
           </a>
 

@@ -2828,3 +2828,30 @@ input[type="checkbox"] {
 .menupopup-wrap-props li:not(:first-child) {
     margin-left: 10px;
 }
+
+.week-menu-tabscontent {
+    
+}
+
+@media screen and (max-width: 579px) {
+    .week-menu-tabs_tab,
+    .menu__current  .menu__button  {
+        font-size: 14px !important
+    }
+    
+}
+
+@media screen and (max-width: 384px) {
+    .menu .menu__buttons {
+        display: block;
+        min-width: 100%;
+    }
+    .menu .menu__button  {
+        margin: 0;
+    }
+    .menu .menu__button:not(:first-child) {
+        margin-top: 10px;
+    }
+    .menu .menu__sticky {
+    }
+}
