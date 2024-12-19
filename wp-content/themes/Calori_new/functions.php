@@ -206,7 +206,7 @@ function load_post_content()
                                                                     style="display:none;max-width:500px;">
                                                                     <!-- <button data-fancybox-close="" class="f-button is-close-btn" title="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" tabindex="-1"><path d="M20 20L4 4m16 0L4 20"></path></svg></button> -->
 
-                                                                    <img src="<?php echo $item['meal_image']; ?>" alt="food">
+                                                                    <img src="<?php echo $item['meal_image2']; ?>" alt="food">
                                                                     <div class="menupopup-wrap">
 
                                                                         <?php
