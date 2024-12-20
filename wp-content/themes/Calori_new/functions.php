@@ -342,7 +342,6 @@ add_action('wp_ajax_load_post_content', 'load_post_content');
 add_action('wp_ajax_nopriv_load_post_content', 'load_post_content'); // Для неавторизованных пользователей
 
 
-
 add_action('woocommerce_product_after_variable_attributes', 'shop_add_variable_custom_fields', 10, 3);
 
 function shop_add_variable_custom_fields($loop, $variation_data, $variation)
@@ -484,6 +483,13 @@ function add_subscription_meta($item_id, $item, $item_order_id)
 
     $order->save();
 }
+
+
+add_filter("woocommerce_webhook_payload", function( $payload, $resource, $resource_id, $id ) {
+    $payload["webhook_id"] = $id;
+
+    return $payload;
+}, 10, 4);
 
 
 require_once get_template_directory() . "/incs/calori-nav-menu.php";
