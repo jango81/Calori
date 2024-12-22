@@ -31,7 +31,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                     </h1>
 
                     <p class="menu-page-text">
-                    Tällä sivulla näet kahden viikon menumme, jossa on 58 erilaista reseptiä.
+                    Tällä sivulla näet kahden viikon menumme, jossa on 56 erilaista reseptiä.
                     </p>
 
                     <custom-menu class="menu">
