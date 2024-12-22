@@ -662,7 +662,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // if (! $(this).parent().children('input').attr('checked', 'checked')){
             var postId = $(this).data("post-id");
 
-            if(!postId) return;
+            if (!postId) return;
 
             $.ajax({
                 url: ajax_object.ajax_url, // URL, к которому мы будем делать запрос
@@ -683,7 +683,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     $(".week-menu-tabs").css("display", "flex");
                     $(".menu__loading").removeClass("_active");
                     console.log(response);
-                    
+
                     $(".week-menu-tabscontent").html(response); // Вставляем полученный контент в div
 
                     b = 1;
@@ -720,6 +720,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
             });
             // }
+        });
+
+        $(".ingredients .spoiler-title").click(function () {
+            const content = $(this).next(".spoiler-content");
+            content.slideToggle(300); // Анимация открытия/закрытия
+            const spoiler = $(this).closest(".spoiler");
+
+            spoiler.toggleClass("_active");
+        });
+
+        $(".order-block.ingredients .spoiler.mob .check-box").click(function (event) {
+            if (!$(event.target).is("input") && !$(event.target).is("label")) {
+                const input = $(this).find("input[type='checkbox']");
+                const isChecked = input.prop("checked");
+
+                // Переключаем состояние вручную
+                input.prop("checked", !isChecked);
+            }
         });
     });
 });

@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         attachEventListeners() {
-            const { productButtons, calculatorButton, variantSelect, orderForm } = this.elements;
+            const { productButtons, calculatorButton, variantSelect, orderForm, ingredientCheckBoxes} = this.elements;
 
             // calculatorButton.addEventListener("click", () => this.elements.calculator.classList.toggle("_active"));
             productButtons.forEach((button) => button.addEventListener("click", this.productButtonHandler.bind(this)));
