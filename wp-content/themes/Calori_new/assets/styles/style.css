@@ -88,7 +88,7 @@ input[type="checkbox"] {
     z-index: 999999;
     display: none;
     align-items: center;
-    justify-content: center
+    justify-content: center;
 }
 .loading::before {
     content: "";
@@ -120,8 +120,6 @@ input[type="checkbox"] {
 }
 
 /*-------------------------------- Animations --------------------------------*/
-
-
 
 /*-------------------------------- Default input styles --------------------------------*/
 
@@ -712,7 +710,7 @@ input[type="checkbox"] {
     bottom: 0;
 }
 .cart__empty {
-    text-align: center,
+    text-align: center;
 }
 
 .cart__container {
@@ -721,7 +719,7 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%
+    height: 100%;
 }
 .cart__body {
     display: flex;
@@ -849,7 +847,7 @@ input[type="checkbox"] {
     margin-left: 5px;
 }
 
-.cart-amount__heading .arrow{
+.cart-amount__heading .arrow {
     position: relative;
     margin-left: 10px;
     width: 20px;
@@ -2033,8 +2031,7 @@ input[type="checkbox"] {
         width: 100%;
         height: 100%;
     }
-    .order-type__button
-    .order-block__button {
+    .order-type__button .order-block__button {
         height: var(--order-form-elems-height);
         flex: 1 1 auto;
     }
@@ -2829,13 +2826,11 @@ input[type="checkbox"] {
     margin-left: 10px;
 }
 
-
 @media screen and (max-width: 579px) {
     .week-menu-tabs_tab,
-    .menu__current  .menu__button  {
-        font-size: 14px !important
+    .menu__current .menu__button {
+        font-size: 14px !important;
     }
-    
 }
 
 @media screen and (max-width: 384px) {
@@ -2843,7 +2838,7 @@ input[type="checkbox"] {
         display: block;
         min-width: 100%;
     }
-    .menu .menu__button  {
+    .menu .menu__button {
         margin: 0;
     }
     .menu .menu__button:not(:first-child) {
@@ -2864,4 +2859,111 @@ input[type="checkbox"] {
     font-size: 18px;
     color: #ffff;
     font-weight: 600;
+}
+
+.order-block.ingredients .spoiler {
+    display: none;
+}
+
+.order-block.ingredients .order-block__title.mob {
+    display: none;
+}
+
+@media screen and (max-width: 990px) {
+    .order-block.ingredients {
+        margin-bottom: 20px;
+    }
+    .order-block.ingredients .order-block__title.mob {
+        display: block;
+    }
+    .order-block.ingredients .order-block__title.desktop {
+        display: none;
+    }
+    .order-block.ingredients .wrapper.desktop {
+        display: none;
+    }
+    .order-block.ingredients .spoiler {
+        display: block;
+        width: 100%;
+        margin-top: 6px;
+    }
+    .order-block.ingredients .spoiler-title {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(33, 55, 53, 0.3);
+        background: #f8f8f8;
+        font-size: 18px;
+        transition: all 0.3s ease;
+    }
+
+    .order-block.ingredients .spoiler-title:hover {
+        cursor: pointer;
+        background: var(--calori-color-bg-primary);
+        border: 1px solid var(--calori-color-bg-primary);
+        color: var(--calori-color-text-third);
+    }
+
+    .order-block.ingredients .spoiler._active .spoiler-title {
+        background: var(--calori-color-bg-primary);
+        border: 1px solid var(--calori-color-bg-primary);
+        color: var(--calori-color-text-third);
+    }
+
+    .order-block.ingredients .spoiler-content {
+        position: relative;
+        z-index: 0;
+        transform: translateY(-38px);
+        padding-top: 38px;
+        width: 100%;
+        border: 1px solid #000;
+        border-radius: var(--calori-blocks-border-radius);
+    }
+
+    .order-block .check-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .order-block .check-box label {
+        font-size: 15px;
+        margin-left: 10px;
+    }
+
+    .order-block input[name="exclusion-ingredients"][type="checkbox"] {
+        line-height: normal;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .radio-sm label {
+        font-size: 17px !important;
+    }
+    .order-block .custom-select__value h5 {
+        font-size: 15px !important;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .order__products {
+        display: flex !important;
+        flex-direction: column !important;
+        min-width: auto !important;
+    }
+
+    .order-products__product {
+        width: 100% !important;
+    }
+
+    .order-products__product label {
+        width: auto !important;
+    }
 }
