@@ -239,7 +239,7 @@
 
           <div class="menu-more-btn">
             <p class="menu-more-btn-text">
-            Yli 60 erilaista ateriaa
+            Yli 56 erilaista ateriaa
             </p>
             <a href="/ruokalistat/" class="btn green"> Katso koko ruokalista </a>
           </div>
