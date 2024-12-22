@@ -491,6 +491,12 @@ add_filter("woocommerce_webhook_payload", function( $payload, $resource, $resour
     return $payload;
 }, 10, 4);
 
+add_action("woocommerce_before_checkout_form", function($checkout) {
+    echo "<div class='checkout-warning-notify'>";
+    echo "<p>Huomioithan, että seuraava toimitus on Perjantai 3.1.2024!</p>";
+    echo "</div>";
+});
+
 
 require_once get_template_directory() . "/incs/calori-nav-menu.php";
 require_once get_template_directory() . "/incs/calori-get-meal-menu.php";
