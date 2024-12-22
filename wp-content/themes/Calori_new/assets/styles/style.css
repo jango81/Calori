@@ -2829,9 +2829,6 @@ input[type="checkbox"] {
     margin-left: 10px;
 }
 
-.week-menu-tabscontent {
-    
-}
 
 @media screen and (max-width: 579px) {
     .week-menu-tabs_tab,
@@ -2854,4 +2851,17 @@ input[type="checkbox"] {
     }
     .menu .menu__sticky {
     }
+}
+
+.checkout-warning-notify {
+    background: var(--calori-color-bg-primary);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.checkout-warning-notify p {
+    font-size: 18px;
+    color: #ffff;
+    font-weight: 600;
 }
