@@ -103,7 +103,13 @@
       </div>
     </div>
   </section>
-
+<style>
+	@media screen and (max-width: 1200px) {
+		.menu-swiper-wrap .menuswiper{
+			width:100%;
+		}
+	}
+	</style>
 
   <section class="section" id="meals">
     <div class="container">
@@ -259,16 +265,22 @@
           nextEl: ".arrow-right_1",
           prevEl: ".arrow-left_1",
         },
+		  autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
         breakpoints: {
           0: {
             slidesPerView: 'auto',
             spaceBetween: 12,
-            // centeredSlides: true,
+			centeredSlides: true,
+			  loop: true,
+
           },
           1200: {
             slidesPerView: 4,
             spaceBetween: 24,
-            centeredSlides: false,
+           centeredSlides: false,
           },
 
         },
