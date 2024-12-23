@@ -263,7 +263,7 @@
           0: {
             slidesPerView: 'auto',
             spaceBetween: 12,
-            centeredSlides: true,
+            // centeredSlides: true,
           },
           1200: {
             slidesPerView: 4,
