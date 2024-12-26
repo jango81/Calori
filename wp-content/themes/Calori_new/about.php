@@ -71,7 +71,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
       while (have_rows('about-us-section-items')):
         the_row(); ?>
         <section id="about-info">
-          <div class="about-info__container container">
+          <div class="about-info__container _container">
             <div class="about-info__body">
               <div class="about-info__image">
                 <img src='<?php echo esc_url(get_sub_field('item-image')) ?>' alt='about-image' />
