@@ -73,8 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this.mealCard.forEach((el) => el.removeEventListener("click", this.showPopup.bind(this)));
         }
         menuButtonHandle(e) {
-            console.log("Button clicked", e.currentTarget);
-
             this.printData(e.currentTarget);
         }
         findAllValuesByKey(obj, key, findOne = false) {
