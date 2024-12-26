@@ -23,7 +23,7 @@
         <?php 
         $is_visible = get_field("main-banner-button-visibility", "option");
         if ($is_visible): ?>
-          <a href="#meals" class="btn green"><?php echo esc_html(get_field("main-banner-button-text", "options")) ?></a>
+          <a class="btn green"><?php echo esc_html(get_field("main-banner-button-text", "options")) ?></a>
         <?php endif; ?>
       </div>
     </div>
@@ -48,7 +48,7 @@
           <?php 
           $is_visible = get_field("main-banner-button-visibility", "option");
           if ($is_visible): ?>
-            <a href="#meals" class="btn green"><?php echo esc_html(get_field("main-banner-button-text", "option")) ?></a>
+            <a class="btn green"><?php echo esc_html(get_field("main-banner-button-text", "option")) ?></a>
           <?php endif; ?>
         </div>
       </div>

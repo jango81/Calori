@@ -56,29 +56,6 @@
                     </a>
 
                     <div class="header-wrapper-right">
-                        <!-- <nav class="nav">
-              <ul>
-                <li>
-                  <a href="#"> Ruokalista </a>
-                </li>
-                <li>
-                  <a href="#"> Tuotteet </a>
-                </li>
-                <li>
-                  <a href="#"> Meistä </a>
-                </li>
-                <li>
-                  <a href="#"> Toimitus </a>
-                </li>
-                <li>
-                  <a href="#"> Yrityksille </a>
-                </li>
-                <li>
-                  <a href="#"> Arvostelut </a>
-                </li>
-              </ul>
-            </nav> -->
-
                         <?php do_action("print_nav_menu", "header_menu", array(
                             "wrapper_class" => "nav",
                             "menu_class" => "header__menu",
@@ -99,7 +76,7 @@
                             </svg>
                         </a>
 
-                        <a href="<?php echo get_home_url(); ?>#order" class="btn green">Tilaa nyt</a>
+                        <a class="btn green">Tilaa nyt</a>
                     </div>
                 </div>
             </div>
