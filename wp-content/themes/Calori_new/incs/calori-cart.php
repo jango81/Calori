@@ -21,7 +21,7 @@ function add_to_cart()
         "delivery_day" => $delivery_day,
     );
 
-    $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id);
+    $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id, $variation, $cart_item_data);
 
     $subtotal = WC()->cart->get_subtotal();
     $delivery_fee = WC()->cart->get_shipping_total();

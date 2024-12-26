@@ -367,7 +367,7 @@
             "category" => array("tuote"),
           ));
 
-          if (!empty($products)): ?>
+          if (!empty($products)): $checkbox_count = 0?>
             <form class="order__form" id="add-to-cart-form">
               <div class="order__products order-products order-block">
                 <?php foreach ($products as $product): ?>
@@ -512,11 +512,11 @@
                               $exclusion_ingredients = get_sub_field("ingredient_name"); ?>
                               
                               <div class="check-box">
-                                <input type="checkbox" name="exclusion-ingredients" id="exclusion-ingredients<?=$a;?>"
+                                <input type="checkbox" name="exclusion-ingredients" id="exclusion-ingredients<?=$checkbox_count?>"
                                 data-ingredient="<?php echo esc_attr($exclusion_ingredients) ?>"/>
-                                <label for="exclusion-ingredients<?=$a;?>"><?php echo esc_html($exclusion_ingredients) ?></label>
+                                <label for="exclusion-ingredients<?=$checkbox_count;?>"><?php echo esc_html($exclusion_ingredients) ?></label>
                               </div>
-                              <?php $a++;?>
+                              <?php $checkbox_count++; $a++;?>
                             <?php endwhile; ?>
                           </div>
                         </fieldset>
