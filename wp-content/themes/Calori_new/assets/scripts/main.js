@@ -332,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data.success) {
                     this.loading.classList.remove("_active");
                     parent.querySelector(cartSelectors.productAmount).textContent = data.data.product_new_amount;
+                    this.updateCartCount(data.data.cart_count);
                 }
 
                 return data.data;
@@ -379,6 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (data.success) {
                     this.loading.classList.remove("_active");
+                    this.updateCartCount(data.data.cart_count);
                 }
 
                 parent.remove();
@@ -395,6 +397,10 @@ document.addEventListener("DOMContentLoaded", () => {
         closeHandle() {
             this.classList.remove("_active");
             this.mainDark.classList.remove("_active");
+        }
+        updateCartCount(count) {
+            const headerCartCount = document.querySelector(".header .cart-text-round");
+            headerCartCount.textContent = count;
         }
     }
     customElements.define("custom-cart", CustomCart);
@@ -722,22 +728,33 @@ document.addEventListener("DOMContentLoaded", () => {
             // }
         });
 
+        //Order section ingredients spoiler click Mobile
         $(".ingredients .spoiler-title").click(function () {
             const content = $(this).next(".spoiler-content");
-            content.slideToggle(300); // Анимация открытия/закрытия
+            content.slideToggle(300); 
             const spoiler = $(this).closest(".spoiler");
 
             spoiler.toggleClass("_active");
         });
 
+        //Order section ingredients click
         $(".order-block.ingredients .check-box").click(function (event) {
             if (!$(event.target).is("input") && !$(event.target).is("label")) {
                 const input = $(this).find("input[type='checkbox']");
                 const isChecked = input.prop("checked");
 
-                // Переключаем состояние вручную
                 input.prop("checked", !isChecked);
             }
+        });
+
+        //Front page main banner order now button click"
+        $(".first-screen .btn.green").click(function () {
+            $("#order")[0].scrollIntoView({ behavior: "smooth" });
+        });
+
+        //Front page header order now button click"
+        $(".header .btn.green").click(function () {
+            $("#order")[0].scrollIntoView({ behavior: "smooth" });
         });
     });
 });
