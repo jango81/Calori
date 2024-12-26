@@ -268,6 +268,8 @@ document.addEventListener("DOMContentLoaded", () => {
     class CustomCart extends HTMLElement {
         constructor() {
             super();
+            this.cartAjaxStartEvent = new CustomEvent("cartAjaxStart");
+            this.cartAjaxCompleteEvent = new CustomEvent("cartAjaxComplete");
         }
 
         connectedCallback() {
@@ -275,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         init() {
-            this.loading = document.querySelector("#loading");
+            this.loading = document.querySelector(".calori-loading");
             this.closeButton = this.querySelector(cartSelectors.closeButton);
             this.productContainer = this.querySelector(cartSelectors.productContainer);
             this.subtotal = this.querySelector(cartSelectors.cartSubtotal);
@@ -314,7 +316,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         async fetchUpdateAmount(key, amount, parent) {
             try {
-                this.loading.classList.add("_active");
+                this.dispatchEvent(this.cartAjaxStartEvent);
+                //this.loading.style.display = "block";
                 const response = await fetch(ajax_object.ajax_url, {
                     method: "POST",
                     headers: {
@@ -330,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
 
                 if (data.success) {
-                    this.loading.classList.remove("_active");
+                    //this.loading.style.display = "none";
                     parent.querySelector(cartSelectors.productAmount).textContent = data.data.product_new_amount;
                     this.updateCartCount(data.data.cart_count);
                 }
@@ -338,6 +341,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return data.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                this.dispatchEvent(this.cartAjaxCompleteEvent);
             }
         }
         setSummary(data) {
@@ -363,7 +368,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         async fetchDeleteProduct(key, parent) {
             try {
-                this.loading.classList.add("_active");
+                //this.loading.display = "block";
+                this.dispatchEvent(this.cartAjaxStartEvent);
                 const response = await fetch(ajax_object.ajax_url, {
                     method: "POST",
                     headers: {
@@ -379,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
 
                 if (data.success) {
-                    this.loading.classList.remove("_active");
+                    //this.loading.style.display = "none";
                     this.updateCartCount(data.data.cart_count);
                 }
 
@@ -388,6 +394,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return data.data;
             } catch (error) {
                 console.error(error);
+            } finally {
+                this.dispatchEvent(this.cartAjaxCompleteEvent);
             }
         }
         open() {
@@ -688,7 +696,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 success: function (response) {
                     $(".week-menu-tabs").css("display", "flex");
                     $(".menu__loading").removeClass("_active");
-                    console.log(response);
 
                     $(".week-menu-tabscontent").html(response); // Вставляем полученный контент в div
 
@@ -731,7 +738,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //Order section ingredients spoiler click Mobile
         $(".ingredients .spoiler-title").click(function () {
             const content = $(this).next(".spoiler-content");
-            content.slideToggle(300); 
+            content.slideToggle(300);
             const spoiler = $(this).closest(".spoiler");
 
             spoiler.toggleClass("_active");
@@ -756,5 +763,29 @@ document.addEventListener("DOMContentLoaded", () => {
         $(".header .btn.green").click(function () {
             $("#order")[0].scrollIntoView({ behavior: "smooth" });
         });
+
+        //Enable loading when page is loading
+        $(document).ready(function () {
+            const loader = $(".calori-loading");
+            loader.fadeOut(500, function () {
+                loader.removeClass("_active");
+                $(".wrapper").css("display", "block");
+            });
+        });
+
+        $("#cart").on("cartAjaxStart", function () {
+            $(".calori-loading").fadeIn(500, function () {
+                $(".wrapper").fadeOut(500);
+            });
+        });
+
+        $("#cart").on("cartAjaxComplete", function () {
+            const loader = $(".calori-loading");
+            loader.fadeOut(500, function () {
+                loader.removeClass("_active");
+                $(".wrapper").fadeIn(500);
+            });
+        });
     });
+
 });

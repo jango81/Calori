@@ -61,7 +61,7 @@ input[type="checkbox"] {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
+    z-index: 8001;
 }
 
 .main__dark._active {
@@ -700,7 +700,7 @@ input[type="checkbox"] {
     width: 100%;
     background: #fff;
     padding: 20px 0;
-    z-index: 100000;
+    z-index: 9000;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     transition: bottom 0.3s ease;
@@ -2995,4 +2995,41 @@ input[type="checkbox"] {
 
 .btn:hover {
     cursor: pointer;
+}
+
+.calori-loading {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #ffff;
+}
+
+.calori-loading._active {
+    display: block;
+}
+
+.calori-loading .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+}
+
+.calori-loading .spinner img {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    z-index: 8000 !important;
+}
+
+.wrapper {
+    display: none;
 }
