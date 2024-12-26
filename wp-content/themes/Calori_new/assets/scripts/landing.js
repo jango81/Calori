@@ -462,8 +462,6 @@ document.addEventListener("DOMContentLoaded", () => {
         getExclusionIngredients() {
             const activeCheckBoxes = Array.from(this.querySelectorAll('.order-block input[type="checkbox"][name="exclusion-ingredients"]:checked'));
 
-            console.log(activeCheckBoxes);
-
         
             return activeCheckBoxes.map((el) => el.getAttribute("data-ingredient").trim()).join(", ");
         }
@@ -493,9 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 excluded_ingredients: this.getExclusionIngredients(),
             };
 
-            console.log(formData);
-            
-            return;
+
             const params = new URLSearchParams(formData).toString();
 
             const data = this.fetchData(params); 
