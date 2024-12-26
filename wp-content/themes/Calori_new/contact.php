@@ -38,12 +38,13 @@ get_header(null, array("announcement" => true, "show_cart" => true))
         </section>
 
         
-        <form class="contact-form">
+        <div class="contact-form">
             <div class="contact-form__container _container">
                 <header class="contact-form__heading">
                     <h3>Jätä yhteydenotto pyyntö ja palaamme mahdollisimman pian!</h3>
                 </header>
-                <div class="contact-form__block">
+				<?php echo do_shortcode('[contact-form-7 id="0b99b45" title="Contact"]');?>
+<!--                 <div class="contact-form__block">
                     <input type="text" placeholder="Nimi" />
                 </div>
                 <div class="contact-form__block">
@@ -55,9 +56,9 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                 <div class="contact-form__block">
                     <button type="button" class="contact-form__button btn btn-solid btn-medium"><span
                             class="btn-text">Lähetä</span></button>
-                </div>
+                </div> -->
             </div>
-        </form>
+        </div>
         
         <section id="about-info" style="margin-bottom:80px;">
             <div class="about-info__container container">

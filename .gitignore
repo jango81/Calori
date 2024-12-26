@@ -5,24 +5,26 @@
 #
 # Note: if you want to stage/commit WP core files
 # you can delete this whole section/until Configuration.
-#/wp-admin/
-#/wp-content/index.php
-#/wp-content/languages
-#/wp-content/plugins/index.php
-#/wp-content/themes/index.php
-#/wp-includes/
-#/index.php
-#/license.txt
-#/readme.html
-#/wp-*.php
-#/xmlrpc.php
+/wp-admin/
+/wp-content/index.php
+/wp-content/languages
+/wp-content/plugins/index.php
+/wp-content/themes/index.php
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-*.php
+/xmlrpc.php
 
 
-wp-content\themes\Calori_new\prepros.config
+wp-content/themes/Calori_new/prepros.config
 wp-content/ai1wm-backups
 wp-content/boost-cache
 wp-content/cache
 wp-content/jetpack-waf
+wp-content/w3tc-config
+wp-content/advanced-cache.php
 
 # Configuration
 wp-config.php
@@ -34,7 +36,7 @@ wp-config.php
 /wp-content/plugins/hello.php
 
 # Uploads
-#/wp-content/uploads/
+/wp-content/uploads/
 wp-content/uploads/**/*.mov
 wp-content/uploads/**/*.mp4
 wp-content/uploads/**/*.avi
@@ -49,7 +51,7 @@ wp-content/uploads/**/*.avi
 #
 # Note: If you wish to whitelist plugins,
 # uncomment the next line
-#/wp-content/plugins
+/wp-content/plugins
 
 # All themes
 #
