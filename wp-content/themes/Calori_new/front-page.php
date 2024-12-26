@@ -8,111 +8,101 @@
   </div>
 
   <section class="first-screen section desc"
-    style="background-image: url(<?php echo get_template_directory_uri() ?>/assets/images/fsnew1.jpg);">
+    style="background-image: url(<?php echo get_field("main-banner-bg-image-desktop", "option")?>">
     <div class="first-screen-wrapper">
       <div class="offer">
         <h1 class="h1">
-        Aloita uusi vuosi 
-          <span>terveellisillä ja maukkailla ruoilla</span>
+        <?php echo esc_html(get_field("main-banner-title-bold", "option")) ?> 
+          <span><?php echo esc_html(get_field("main-banner-title-slim", "option")) ?> </span>
         </h1>
 
         <div class="offer-text">
-        Me suunnittelemme, kokkaamme ja toimitamme ruoat kotiovelle
+        <?php echo esc_html(get_field("main-banner-subtitle", "option")) ?>
         </div>
-
-        <a href="#meals" class="btn green">Tee tilaus</a>
+        
+        <?php 
+        $is_visible = get_field("main-banner-button-visibility", "option");
+        if ($is_visible): ?>
+          <a href="#meals" class="btn green"><?php echo esc_html(get_field("main-banner-button-text", "options")) ?></a>
+        <?php endif; ?>
       </div>
     </div>
   </section>
 
   <section class="first-screen mob">
     <div class="first-screen-wrapper">
-      <img src="<?php echo get_template_directory_uri() ?>/assets/images/fsnew2.jpg" class="first-screen-wrapper_bg"
+      <img src="<?php echo get_field("main-banner-bg-image-mobile", "option")?>" class="first-screen-wrapper_bg"
         alt="fsbg" />
 
       <div class="container">
         <div class="offer">
           <h1 class="h1">
-          Aloita uusi vuosi 
-            <span>terveellisillä ja maukkailla ruoilla</span>
+          <?php echo esc_html(get_field("main-banner-title-bold", "option")) ?> 
+            <span><?php echo esc_html(get_field("main-banner-title-slim", "option")) ?> </span>
           </h1>
 
           <div class="offer-text">
-          Me suunnittelemme, kokkaamme ja toimitamme ruoat kotiovelle
+          <?php echo esc_html(get_field("main-banner-subtitle", "option")) ?>
           </div>
-
-          <a href="#meals" class="btn green">Tee tilaus</a>
+          
+          <?php 
+          $is_visible = get_field("main-banner-button-visibility", "option");
+          if ($is_visible): ?>
+            <a href="#meals" class="btn green"><?php echo esc_html(get_field("main-banner-button-text", "option")) ?></a>
+          <?php endif; ?>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-wrapper">
-        <div class="h2-wrapper">
-          <h2 class="h2">Miten se toimii?</h2>
-        </div>
-
-        <div class="how-it-works twocol">
-          <div class="how-it-works_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa.png" alt="how1"
-              class="how-it-works_item_img" />
-
-            <div class="how-it-works_item_text">
-              <div class="how-it-works_item_text_title">Tilaa</div>
-              <div class="how-it-works_item_text_text">
-              Valitse sopiva ruokatilaus
-              </div>
-            </div>
+  <?php 
+  if(get_field("how-it-works-section-visibility", "option")): ?>
+    <section class="section">
+      <div class="container">
+        <div class="section-wrapper">
+          <div class="h2-wrapper">
+            <h2 class="h2"><?php echo esc_html(get_field("how-it-works-title", "option")) ?></h2>
           </div>
-          <div class="how-it-works_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/how3.png" alt="how2"
-              class="how-it-works_item_img" />
 
-            <div class="how-it-works_item_text">
-              <div class="how-it-works_item_text_title">Kokkaamme</div>
-              <div class="how-it-works_item_text_text">
-              Kokkaamme sen mukaan ruokia
+          <div class="how-it-works twocol">
+            <?php 
+            if(have_rows("how-it-works-cards", "option")):
+              while(have_rows("how-it-works-cards", "option")): the_row(); ?>
+              <div class="how-it-works_item">
+              <img src="<?php echo esc_html(get_sub_field("how-it-works-card-image")) ?>" alt="how1"
+                class="how-it-works_item_img" />
+
+              <div class="how-it-works_item_text">
+                <div class="how-it-works_item_text_title"><?php echo esc_html(get_sub_field("how-it-works-card-title")) ?></div>
+                <div class="how-it-works_item_text_text">
+                <?php echo esc_html(get_sub_field("how-it-works-card-text"))?>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="how-it-works_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/how2.png" alt="how3"
-              class="how-it-works_item_img" />
-
-            <div class="how-it-works_item_text">
-              <div class="how-it-works_item_text_title">Toimitamme</div>
-              <div class="how-it-works_item_text_text">
-              Toimitamme kotiin kahdesti viikossa
-              </div>
-            </div>
-          </div>
-          <div class="how-it-works_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/tilaa2.png" alt="how4"
-              class="how-it-works_item_img" />
-
-            <div class="how-it-works_item_text">
-              <div class="how-it-works_item_text_title">Nauti</div>
-              <div class="how-it-works_item_text_text">
-              Nauti ruoasta ja sen helppoudesta
-              </div>
-            </div>
+            <?php endwhile; endif ?>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php endif ?>
+  
 
+  <style>
+	@media screen and (max-width: 1200px) {
+		.menu-swiper-wrap .menuswiper{
+			width:100%;
+		}
+	}
+	</style>
 
   <section class="section" id="meals">
     <div class="container">
       <div class="section-wrapper">
         <div class="h2-wrapper">
-          <h2 class="h2">Tutustu ruokalistoihimme</h2>
+          <h2 class="h2"><?php echo esc_html(get_field("small-meal-menu-title", "option")) ?></h2>
 
           <p class="section-text">
-          Kaikki ruuat tehdään käsin, suosien kotimaisia raaka-aineita
+          <?php echo esc_html(get_field("small-meal-menu-subtitle", "option")) ?>
           </p>
         </div>
 
@@ -239,9 +229,11 @@
 
           <div class="menu-more-btn">
             <p class="menu-more-btn-text">
-            Yli 56 erilaista ateriaa
+            <?php echo esc_html(get_field("small-meal-menu-button-side-text", "option")) ?>
             </p>
-            <a href="/ruokalistat/" class="btn green"> Katso koko ruokalista </a>
+            <?php if(get_field("small-meal-menu-button-visibility", "option")): ?>
+              <a href="/ruokalistat/" class="btn green"><?php echo esc_html(get_field("small-meal-menu-button-text", "option")) ?></a>
+            <?php endif ?>
           </div>
         </div>
       </div>
@@ -259,16 +251,22 @@
           nextEl: ".arrow-right_1",
           prevEl: ".arrow-left_1",
         },
+		  autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
         breakpoints: {
           0: {
             slidesPerView: 'auto',
             spaceBetween: 12,
-            centeredSlides: true,
+			centeredSlides: true,
+			  loop: true,
+
           },
           1200: {
             slidesPerView: 4,
             spaceBetween: 24,
-            centeredSlides: false,
+           centeredSlides: false,
           },
 
         },
@@ -281,179 +279,29 @@
 
   </script>
 
-
-
-
-
-  <!-- 
-    <section id="meals">
-        <custom-meals class="meals" data-post-id="<?php echo get_option("page_on_front") ?>">
-            <?php
-
-            function find_key_recursive($array, $key)
-            {
-              $results = [];
-
-              foreach ($array as $k => $value) {
-                if ($k === $key) {
-                  $results[] = $value;
-                }
-                if (is_array($value)) {
-                  $results = array_merge($results, find_key_recursive($value, $key));
-                }
-              }
-
-              return $results;
-            }
-
-            function isCurrentDateInRange($start, $end)
-            {
-              $currentDate = new DateTime();
-              $currentDate->setTime(0, 0, 0);
-
-              $startDate = DateTime::createFromFormat('m/d/Y', $start);
-              $endDate = DateTime::createFromFormat('m/d/Y', $end);
-              $startDate->setTime(0, 0, 0);
-              $endDate->setTime(0, 0, 0);
-
-              if ($startDate === false || $endDate === false) {
-                return false;
-              }
-
-              return $currentDate >= $startDate && $currentDate <= $endDate;
-            }
-            function convertDateRange($dateRange)
-            {
-              list($start, $end) = explode(' - ', $dateRange);
-
-              $startDate = DateTime::createFromFormat('m/d/Y', trim($start));
-              $endDate = DateTime::createFromFormat('m/d/Y', trim($end));
-
-              if ($startDate && $endDate) {
-                return $startDate->format('d.m') . ' - ' . $endDate->format('d.m');
-              }
-
-              return $dateRange;
-            }
-            $args = array(
-              'post_type' => 'ruokalistat',
-              'posts_per_page' => -1,
-            );
-
-            $query = new WP_Query($args);
-
-            $weeks = array();
-            $is_current_week_menu = false;
-            if ($query->have_posts()) {
-              while ($query->have_posts()) {
-                $query->the_post();
-                $post_id = get_the_ID();
-                $fields = get_fields();
-                if ($fields && isCurrentDateInRange($fields["start_date"], $fields["end_date"])) {
-                  $week_menu = $fields;
-                  $is_current_week_menu = true;
-                  break;
-                } else {
-                  $post_props = array("post_id" => $post_id, "fields" => $fields);
-                  array_push($weeks, $post_props);
-                }
-              }
-
-              if (!$is_current_week_menu) {
-                $week_menu = $weeks[0]["fields"];
-                $post_id = $weeks[0]["post_id"];
-              }
-
-              $converted_date = convertDateRange($week_menu["start_date"] . " - " . $week_menu["end_date"]);
-            }
-
-            ?>
-            <div class="meals__container _container">
-                <div class="meals__content">
-                    <header class="meals__title section-title">
-                        <h1><?php echo $is_current_week_menu ? "Tämän viikon ruokalista" : $converted_date ?></h1>
-                    </header>
-                    <ul class="meals__days"></ul>
-                </div>
-            </div>
-            <div class="swiper meals-swiper">
-                <div class="loading-gif">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/icons/loading-gif.gif"
-                        alt="loading">
-                </div>
-                <?php
-                if (have_rows("this_week_whole_menu", $post_id)):
-                  while (have_rows("this_week_whole_menu", $post_id)):
-                    the_row();
-                    $row = get_row(true);
-                    foreach ($row as $key => $value):
-
-                      if (!empty($value)):
-                        $meals = find_key_recursive($value, "meals"); ?>
-
-                                <div class="swiper-wrapper meals-swiper__wrapper" data-day="<?php echo esc_attr($key) ?>">
-                                    <?php foreach ($meals[0] as $meal):
-                                      ?>
-                                        <div class="swiper-slide meals-slide">
-                                            <div class="meals-slide__content">
-                                                <div class="meals-slide__image">
-                                                    <img src="<?php echo esc_attr($meal["meal_image"]) ?>" alt="food image" />
-                                                </div>
-                                                <div class="meals-slide__info">
-                                                    <header class="meals-slide__title">
-                                                        <h2><?php echo esc_html($meal["meal_name"]) ?></h2>
-                                                    </header>
-                                                    <div class="meals-slide__description">
-                                                        <p><?php echo esc_html($meal["meal_of_day"]) ?></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php else: ?>
-                                <div class="swiper-wrapper meals-swiper__wrapper no-meals" data-day="<?php echo esc_attr($key) ?>">
-                                    <div class="no-meals-message">
-                                        <h1>Ei ruokia tälle päivälle</h1>
-                                    </div>
-                                </div>
-                            <?php endif ?>
-                        <?php endforeach;
-                  endwhile; ?>
-                    <div class="swiper-button-prev swiper-nav-button meals-swiper-prev"></div>
-                    <div class="swiper-button-next swiper-nav-button meals-swiper-next"></div>
-                    <div class="swiper-pagination meals-swiper__pagination"></div>
-                <?php endif; ?>
-            </div>
-            <div class="meals-popup">
-                <div class="meals-popup__image">
-                    <img src="" alt="food image" />
-                </div>
-            </div>
-        </custom-meals>
-    </section> -->
-
-
- <section class="bigbanner timer mb0">
+  <?php if(get_field("event-banner-section-visibility", "option")): ?>
+    <section class="bigbanner timer mb0">
       <div class="timer-wrap newbanner">
         <div class="banner-title newbanner-title">
-          Uusi vuosi, <span>uusi sinä</span>
+          <?php echo get_field("event-banner-title", "option") ?>
         </div>
         <div class="banner-text newbanner-text">
-          Seuraava toimitus on <span>Perjantai 3.1.2024</span>. <br><br>
-          Tee tilaus ennen uutta vuotta, ja saat 50€ alennuksen tilauksestasi koodilla:
+          <?php echo get_field("event-banner-main-text", "option") ?>
         </div>
 
-        <button class="promo">
-          CALORI25
-        </button>
+        <?php if(get_field("event-banner-coupon-visibility")): ?>
+          <button class="promo">
+            <?php echo esc_html(get_field("event-banner-coupon-text", "option")) ?>
+          </button>
+        <?php endif ?>
         
         <div class="banner-after-text">
-          Koodi voimassa 18.12-31.12.2024, minimitilaus 100€.
+          <?php echo sanitize_text_field(get_field("event-banner-subtext", "option")) ?>
         </div>
       </div>
       <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
-     </section>
+    </section>
+  <?php endif ?>
 
 
   <section id="order" class="section grey mb0">
