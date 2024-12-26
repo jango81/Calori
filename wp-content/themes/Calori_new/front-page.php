@@ -283,23 +283,23 @@
     <section class="bigbanner timer mb0">
       <div class="timer-wrap newbanner">
         <div class="banner-title newbanner-title">
-          <?php echo get_field("event-banner-title", "option") ?>
+          <?php echo wp_kses_post(get_field("event-banner-title", "option")) ?>
         </div>
         <div class="banner-text newbanner-text">
-          <?php echo get_field("event-banner-main-text", "option") ?>
+          <?php echo wp_kses_post(get_field("event-banner-main-text", "option")) ?>
         </div>
 
-        <?php if(get_field("event-banner-coupon-visibility")): ?>
+        <?php if(get_field("event-banner-coupon-visibility", "option")): ?>
           <button class="promo">
-            <?php echo esc_html(get_field("event-banner-coupon-text", "option")) ?>
+            <?php echo wp_kses_post(get_field("event-banner-coupon-text", "option")) ?>
           </button>
         <?php endif ?>
         
         <div class="banner-after-text">
-          <?php echo sanitize_text_field(get_field("event-banner-subtext", "option")) ?>
+          <?php echo wp_kses_post(get_field("event-banner-subtext", "option")) ?>
         </div>
       </div>
-      <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
+      <img src="<?php echo esc_html(get_field("event-banner-background-image", "option")) ?>" alt="banner" class="bigbanner-bg abs">
     </section>
   <?php endif ?>
 
@@ -313,9 +313,7 @@
 
           <p class="section-text mb30">
           Huomaa, lähin toimituspäivä on <span class="nextdate"><?php echo get_field("order_end_day", "option") ?></span>.
-
-Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
-           
+          Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
           </p>
 
           <custom-timer class=" custom-timer" data-day="<?php echo get_field("order_end_day", "option") ?>"
@@ -889,92 +887,49 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
     })
   </script>
 
+  <?php if(get_field("video-section-visibility", "option")): ?>
+    <section class="bigbanner">
+      <img src="<?php echo esc_html(get_field("video-section-background-image", "option")) ?>" alt="banner"
+        class="bigbanner-bg abs">
 
-
-
-
-
-  <section class="bigbanner">
-    <img src="<?php echo get_template_directory_uri() ?>/assets/images/bigbanner.png" alt="banner"
-      class="bigbanner-bg abs">
-
-    <div class="container">
-      <div class="bigbanner-video">
-        <div class="bigbanner-video-title">
-          Katso video mikä Calori on?
+      <div class="container">
+        <div class="bigbanner-video">
+          <div class="bigbanner-video-title">
+            <?php echo wp_kses_post(get_field("video-section-title", "option")) ?>
+          </div>
+          <button data-fancybox data-src="<?php echo esc_html(get_field("video-section-video-url", "option"))?>" class="btn green">
+          <?php echo esc_html(get_field("video-section-button-text", "option")) ?>
+          </button>
         </div>
-        <button data-fancybox data-src="https://youtube.com/shorts/ZVsbpOU7goA?feature=share" class="btn green">
-        Katso video
-        </button>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php endif; ?>
 
-
-  <section class="section">
-    <div class="container">
-      <div class="section-wrapper">
-        <div class="h2-wrapper">
-          <h2 class="h2">
-            Meidän edut
-          </h2>
-        </div>
-
-        <div class="advantages">
-          <div class="advantages_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico05.svg" class="advantages_item_ico">
-
-
-
-            <div class="advantages_item_text">
-            Suunniteltua ja kokattua puolestasi
-            </div>
+  <?php if(get_field("advantages-visibility", "option")): ?>
+    <section class="section">
+      <div class="container">
+        <div class="section-wrapper">
+          <div class="h2-wrapper">
+            <h2 class="h2">
+              <?php echo esc_html(get_field("advantages-title", "option")) ?>
+            </h2>
           </div>
-          <div class="advantages_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico06.svg" class="advantages_item_ico">
 
-
-
-            <div class="advantages_item_text">
-            Ravitsemusasiantuntijoita tiimissä
-            </div>
-          </div>
-          <div class="advantages_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico07.svg" class="advantages_item_ico">
-
-
-            <div class="advantages_item_text">
-            Ruokalistat kehittyvät viikoittain
-            </div>
-          </div>
-          <div class="advantages_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico08.svg" class="advantages_item_ico">
-
-
-            <div class="advantages_item_text">
-            Ammattikokkien valmistamaa ruokaa
-            </div>
-          </div>
-          <div class="advantages_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg" class="advantages_item_ico">
-
-
-            <div class="advantages_item_text">
-            Yli 60 reseptiä reseptikirjassa
-            </div>
-          </div>
-          <div class="advantages_item">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico09.svg" class="advantages_item_ico">
-
-
-            <div class="advantages_item_text">
-            Joustava kylmäkuljetus kotiovellesi
-            </div>
+          <div class="advantages">
+            <?php if(have_rows("advantages-items", "option")): 
+                  while(have_rows("advantages-items", "option")): the_row()?>
+                  <div class="advantages_item">
+                    <img src="<?php echo esc_html(get_sub_field("advantages-item-icon"))?>" class="advantages_item_ico">
+                      <div class="advantages_item_text">
+                      <?php echo esc_html(get_sub_field("advantages-item-text")) ?>
+                      </div>
+                  </div>
+            <?php endwhile; endif ?>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php endif ?>
 
   <section class="section">
     <div class="container">
@@ -1266,66 +1221,39 @@ Tilauksien vastaanottamiset lähimmälle toimitukselle sulkeutuvat:
     </div>
   </section>
 
-  <section class="section grey ">
-    <div class="container">
-      <div class="section-wrapper">
-
-      <div class="h2-wrapper">
-        <h2 class="h2">
-        Miksi Calori?
-        </h2>
-      </div>
-        <div class="whywe swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico01.svg" class="whywe_item_ico">
-
-                <span class="whywe_item_text">
-                Maukasta ja terveellistä ruokaa
-                </span>
-                </img>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico02.svg" class="whywe_item_ico">
-
-                <span class="whywe_item_text">
-                Säästät 8h aikaa viikossa
-                </span>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico03.svg" class="whywe_item_ico">
-
-                <span class="whywe_item_text">
-                Tasapainoa ja helpoutta elämääsi
-                </span>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="whywe_item">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ico04.svg" class="whywe_item_ico">
-
-                <span class="whywe_item_text">
-                Saavutat kaikki tavoitteesi
-                </span>
-              </div>
-            </div>
-
+  <?php if(get_field("why-calori-visibility", "option")): ?>
+    <section class="section grey">
+      <div class="container">
+        <div class="section-wrapper">
+          <div class="h2-wrapper">
+            <h2 class="h2">
+            <?php echo esc_html(get_field("why-calori-title", "option")) ?>
+            </h2>
           </div>
+          <div class="whywe swiper">
+            <div class="swiper-wrapper">
+              <?php if(have_rows("why-calori-items", "option")):
+                      while(have_rows("why-calori-items", "option")): the_row()?>
+                      <div class="swiper-slide">
+                        <div class="whywe_item">
+                          <img src="<?php echo esc_html(get_sub_field("why-calori-item-icon")) ?>" class="whywe_item_ico">
+                          <span class="whywe_item_text">
+                            <?php echo esc_html(get_sub_field("why-calori-item-text")) ?>
+                          </span>
+                        </div>
+                      </div>
+              <?php endwhile; endif ?>
+            </div>
+          </div>
+          <?php if(get_field("why-calori-button-visibility", "option")): ?>
+            <a href="/meista/miksi-calori/" class="btn green" style="margin: 24px auto 0;">
+            <?php echo esc_html(get_field("why-calori-button-text", "option")) ?>
+            </a>
+          <?php endif ?>
         </div>
-
-        <a href="/meista/miksi-calori/" class="btn green" style="margin: 24px auto 0;">
-        Lue lisää
-        </a>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php endif; ?>
 
   <section class="section">
     <div class="container">
