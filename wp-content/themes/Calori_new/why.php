@@ -35,8 +35,9 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                         while (have_rows('why-cards')):
                             the_row(); ?>
                             <div class="how-it-works_item">
-                                <img src='<?php echo esc_url(get_sub_field('card-image')) ?>' alt='why_image' />
-
+                                <div class="how-it-works-image-wrapper">
+                                    <img src='<?php echo esc_url(get_sub_field('card-image')) ?>' alt='why_image' />
+                                </div>
                                 <div class="how-it-works_item_text">
                                     <div class="how-it-works_item_text_title">
                                         <?php echo esc_html(get_sub_field('card-title')) ?>

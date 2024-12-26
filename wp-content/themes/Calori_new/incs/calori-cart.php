@@ -21,13 +21,7 @@ function add_to_cart()
         "delivery_day" => $delivery_day,
     );
 
-    error_log("OTHER DATA");
-    error_log(print_r("INGREDIENTS: " . $excluded_ingredients, true));
-    error_log("ISEMPTY: " . empty($excluded_ingredients));
-    error_log(print_r("DELIVERY DAY: " . $delivery_day, true));
-    error_log(print_r($cart_item_data, true));
-
-    $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id, $variation, $cart_item_data);
+    $cart_item_key = WC()->cart->add_to_cart($product_id, 1, $variant_id);
 
     $subtotal = WC()->cart->get_subtotal();
     $delivery_fee = WC()->cart->get_shipping_total();

@@ -493,8 +493,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 excluded_ingredients: this.getExclusionIngredients(),
             };
 
+            console.log("formData", formData);
+            
+
             const params = new URLSearchParams(formData).toString();
-            const data = this.fetchData(params);
+
+            const data = this.fetchData(params); 
         }
         async fetchData(params) {
             try {
@@ -511,7 +515,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 const data = await response.json();
-                console.log(data);
 
                 if (data.success) {
                     localStorage.setItem("cartUpdated", "true");
