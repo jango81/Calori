@@ -736,30 +736,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         //Order section ingredients spoiler click Mobile
-        $(".ingredients .spoiler-title").click(function () {
+        /* $(".order-block.ingredients .spoiler-title").click(function () {
             const content = $(this).next(".spoiler-content");
             content.slideToggle(300);
             const spoiler = $(this).closest(".spoiler");
 
             spoiler.toggleClass("_active");
-        });
+        }); */
 
-        //Order section ingredients click
-        $(".order-block.ingredients .check-box").click(function (event) {
+        //Order section ingredients spoiler click Desktop
+        /* $(".order-block.ingredients .check-box").click(function (event) {
+            console.log(event.target);
+            
             if (!$(event.target).is("input") && !$(event.target).is("label")) {
+                console.log("Valid target", event.target);
+                
+                
                 const input = $(this).find("input[type='checkbox']");
                 const isChecked = input.prop("checked");
 
                 input.prop("checked", !isChecked);
             }
-        });
+        }); */
 
-        //Front page main banner order now button click"
+        //Scroll to order section when click on order now button"
         $(".first-screen .btn.green").click(function () {
             $("#order")[0].scrollIntoView({ behavior: "smooth" });
         });
 
-        //Front page header order now button click"
+        //Scroll to order section when click on order now button"
         $(".header .btn.green").click(function () {
             $("#order")[0].scrollIntoView({ behavior: "smooth" });
         });
@@ -773,12 +778,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
+        //Shows loading when cart is updating
         $("#cart").on("cartAjaxStart", function () {
             $(".calori-loading").fadeIn(500, function () {
                 $(".wrapper").fadeOut(500);
             });
         });
 
+        //Hides loading when cart is updated
         $("#cart").on("cartAjaxComplete", function () {
             const loader = $(".calori-loading");
             loader.fadeOut(500, function () {
