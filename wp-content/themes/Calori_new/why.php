@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Miksi Calori? */
 get_header(null, array("announcement" => true, "show_cart" => true))
-?>
+    ?>
 <main id="main">
 
     <?php get_template_part("mini-cart") ?>
@@ -15,89 +15,41 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                 <a href="/">Kotisivu</a>
             </li>
             <li>
-            Miksi Calori?
+                Miksi Calori?
             </li>
         </ul>
     </div>
     <article id="why-calori">
-    <section class="section">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="menu-page">
-                    <h1 class="h1">
-                    Miksi Calori?
-                    </h1>
-                    
+        <section class="section">
+            <div class="container">
+                <div class="section-wrapper">
+                    <div class="menu-page">
+                        <h1 class="h1">
+                            <?php echo esc_html(get_field('why-title')) ?>
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="how-it-works" style="margin-top: 40px;">
+                    <?php if (have_rows('why-cards')):
+                        while (have_rows('why-cards')):
+                            the_row(); ?>
+                            <div class="how-it-works_item">
+                                <img src='<?php echo esc_url(get_sub_field('card-image')) ?>' alt='why_image' />
+
+                                <div class="how-it-works_item_text">
+                                    <div class="how-it-works_item_text_title">
+                                        <?php echo esc_html(get_sub_field('card-title')) ?>
+                                    </div>
+                                    <div class="how-it-works_item_text_text">
+                                        <?php echo wp_kses_post(get_sub_field('card-text')) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; endif; ?>
                 </div>
             </div>
-
-            <div class="how-it-works" style="margin-top: 40px;">
-                <div class="how-it-works_item">
-                    <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/why1.png"
-                    alt="how1"
-                    class="how-it-works_item_img" />
-
-                    <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Miltä kuulostaa jos sinulla olisi oma kokki?</div>
-                    <div class="how-it-works_item_text_text">
-                    ✔ Huipputiimissämme on ammattilaiset kokit laajan kokemuksen kanssa <br>
-                    ✔ Helsingin yliopiston ravitsemusopettaja ravistemusasiantuntijana
-                    </div>
-                    </div>
-                </div>
-                <div class="how-it-works_item">
-                    <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/why2.png"
-                    alt="how1"
-                    class="how-it-works_item_img" />
-
-                    <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Säästä aikaa ja vaivaa</div>
-                    <div class="how-it-works_item_text_text">
-                    ✔ Säästät yli 7 tuntia aikaa viikossa, kun sinun ei tarvitse huolehtia ruokailusta <br>
-                    ✔ Me suunnittelemme, kokkaamme ja toimitamme ruoat kotiovelle
-                    </div>
-                    </div>
-                </div>
-                <div class="how-it-works_item">
-                    <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/why3.png"
-                    alt="how1"
-                    class="how-it-works_item_img" />
-
-                    <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Tiedät mitä syöt</div>
-                    <div class="how-it-works_item_text_text">
-                    ✔ Kalorit koostuvat (20%pr/30%rs/50%hl) <br>
-                    ✔ 15% kovia rasvoja ja 85% pehmeitä <br>
-                    ✔ Energiantarve ja -saanti kohtaavat <br>
-                    ✔ Paljon piristävää vaihtelua ruokailussa <br>
-                    ✔ Yli 60 reseptiä reseptikirjassa
-                    </div>
-                    </div>
-                </div>
-                <div class="how-it-works_item">
-                    <img
-                    src="<?php echo get_template_directory_uri() ?>/assets/images/why4.png"
-                    alt="how1"
-                    class="how-it-works_item_img" />
-
-                    <div class="how-it-works_item_text">
-                    <div class="how-it-works_item_text_title">Ylläpidä säännöllistä ruokailua</div>
-                    <div class="how-it-works_item_text_text">
-                    ✔ 2-5 ravitsevaa ateriaa päiväksi <br>
-                    ✔ Optimaalinen ravintoainejakauma <br>
-                    ✔ Hallitse painoa, syö terveellisesti, kasvata lihasmassaa
-                    </div>
-                    </div>
-                </div>
-                </div>
-        </div>
-    </section>
-
-       
-       
+        </section>
     </article>
     <div class="main__dark">
     </div>
@@ -141,30 +93,28 @@ get_header(null, array("announcement" => true, "show_cart" => true))
         <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
     </section>
 -->
- <section class="bigbanner timer mb0">
-      <div class="timer-wrap newbanner">
-        <div class="banner-title newbanner-title">
-          Uusi vuosi, <span>uusi sinä</span>
+<?php if (get_field("event-banner-section-visibility", "option")): ?>
+    <section class="bigbanner timer mb0">
+        <div class="timer-wrap newbanner">
+            <div class="banner-title newbanner-title">
+                <?php echo wp_kses_post(get_field("event-banner-title", "option")) ?>
+            </div>
+            <div class="banner-text newbanner-text">
+                <?php echo wp_kses_post(get_field("event-banner-main-text", "option")) ?>
+            </div>
+
+            <?php if (get_field("event-banner-coupon-visibility", "option")): ?>
+                <button class="promo">
+                    <?php echo wp_kses_post(get_field("event-banner-coupon-text", "option")) ?>
+                </button>
+            <?php endif ?>
+
+            <div class="banner-after-text">
+                <?php echo wp_kses_post(get_field("event-banner-subtext", "option")) ?>
+            </div>
         </div>
-        <div class="banner-text newbanner-text">
-          Seuraava toimitus on <span>Perjantai 3.1.2024</span>. <br><br>
-          Tee tilaus ennen uutta vuotta, ja saat 50€ alennuksen tilauksestasi koodilla:
-        </div>
-
-        <button class="promo">
-          CALORI25
-        </button>
-        
-        <div class="banner-after-text">
-          Koodi voimassa 18.12-31.12.2024, minimitilaus 100€.
-        </div>
-      </div>
-      <img src="<?php echo get_template_directory_uri() ?>/assets/images/banner11.png" alt="banner" class="bigbanner-bg abs">
-     </section>
-
-
-
-  
-    
-
+        <img src="<?php echo esc_html(get_field("event-banner-background-image", "option")) ?>" alt="banner"
+            class="bigbanner-bg abs">
+    </section>
+<?php endif ?>
 <?php get_footer() ?>
