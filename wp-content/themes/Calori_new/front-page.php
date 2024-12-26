@@ -85,8 +85,6 @@
       </div>
     </section>
   <?php endif ?>
-  
-
   <style>
 	@media screen and (max-width: 1200px) {
 		.menu-swiper-wrap .menuswiper{
