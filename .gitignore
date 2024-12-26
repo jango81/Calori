@@ -56,3 +56,6 @@ wp-content/uploads/**/*.avi
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+
+wp-admin/error_log
+error_log

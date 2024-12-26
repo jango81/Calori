@@ -55,7 +55,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                       the_row(); ?>
                       <div class="about-quote__icon">
                         <div class="about-quote__image">
-                          <img src="<?php echo esc_url(get_field("about-us-quote-image")) ?>" alt="quote icon" />
+                          <img src="<?php echo esc_url(get_sub_field("about-us-quote-image")) ?>" alt="quote icon" />
                         </div>
                         <span></span>
                       </div>
