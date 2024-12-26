@@ -2873,15 +2873,15 @@ input[type="checkbox"] {
     .order-block.ingredients {
         margin-bottom: 20px;
     }
-    .order-block.ingredients .order-block__title.mob {
+    /* .order-block.ingredients .order-block__title.mob {
         display: block;
-    }
-    .order-block.ingredients .order-block__title.desktop {
+    } */
+    /* .order-block.ingredients .order-block__title.desktop {
         display: none;
-    }
-    .order-block.ingredients .wrapper.desktop {
+    } */
+    /* .order-block.ingredients .wrapper.desktop {
         display: none;
-    }
+    } */
     .order-block.ingredients .spoiler {
         display: block;
         width: 100%;
@@ -2928,12 +2928,16 @@ input[type="checkbox"] {
         display: flex;
         align-items: center;
         width: 100%;
-        padding: 20px;
+        padding: 13px;
     }
 
     .order-block .check-box label {
         font-size: 15px;
         margin-left: 10px;
+    }
+
+    .order-block.ingredients .wrapper.desktop {
+        width: 100%;
     }
 
     .order-block input[name="exclusion-ingredients"][type="checkbox"] {

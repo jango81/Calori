@@ -730,7 +730,7 @@ document.addEventListener("DOMContentLoaded", () => {
             spoiler.toggleClass("_active");
         });
 
-        $(".order-block.ingredients .spoiler.mob .check-box").click(function (event) {
+        $(".order-block.ingredients .check-box").click(function (event) {
             if (!$(event.target).is("input") && !$(event.target).is("label")) {
                 const input = $(this).find("input[type='checkbox']");
                 const isChecked = input.prop("checked");

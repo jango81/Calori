@@ -468,13 +468,13 @@
                       if (have_rows("exclusion_of_ingredients", "option")): ?>
                       <?php $a=0;?>
                         <fieldset class="order-block ingredients">
-                          <legend class="order-block__title mob">
+                          <!-- <legend class="order-block__title mob">
                             Lisäasetukset
-                          </legend>
+                          </legend> -->
                           <legend class="order-block__title desktop">
                             Poista raaka-aineita
                           </legend>
-                          <div class="spoiler mob">
+                          <!-- <div class="spoiler mob">
                             <div class="spoiler-title">
                             <h5>Poista raaka-aineita</h5>
                             <div class="arrow">
@@ -507,7 +507,7 @@
                               <?php $a++;?>
                             <?php endwhile; ?>
                             </div>
-                          </div>
+                          </div> -->
                           <div class="wrapper desktop">
                           <?php while (have_rows("exclusion_of_ingredients", "option")):
                               the_row();
@@ -530,46 +530,6 @@
                           return explode(':', $item)[1];
                         }, $delivery_day);
                         ?>
-                        <!-- <fieldset class="order-block">
-                          <legend class="order-block__title">Выберите день первой доставки</legend>
-
-                          <?php if (!empty($values)): ?>
-                            <custom-select class="custom-select order-block__select delivery-time-select"
-                              data-heading="" data-value="">
-                              <select name="order-variants"></select>
-                              <div class="custom-select__wrapper">
-                                <div class="custom-select__value">
-                                  <h5>
-                                  </h5>
-                                  <div class="arrow">
-                                    <svg width="17" height="9" viewBox="0 0 17 9" fill="none"
-                                      xmlns="http://www.w3.org/2000/svg">
-                                      <mask id="path-1-inside-1_2003_50" fill="white">
-                                        <path
-                                          d="M8.802 8.46731C8.69915 8.46731 8.59587 8.43018 8.51478 8.35592L0.744003 1.27522C0.569877 1.11646 0.557074 0.846732 0.715836 0.672179C0.874597 0.497626 1.14432 0.484823 1.31887 0.644011L8.802 7.46352L16.2856 0.644011C16.461 0.485249 16.7303 0.498053 16.8886 0.672179C17.0474 0.846305 17.035 1.11646 16.8609 1.27522L9.08923 8.35635C9.00814 8.43018 8.90486 8.46731 8.802 8.46731Z" />
-                                      </mask>
-                                      <path
-                                        d="M8.802 8.46731C8.69915 8.46731 8.59587 8.43018 8.51478 8.35592L0.744003 1.27522C0.569877 1.11646 0.557074 0.846732 0.715836 0.672179C0.874597 0.497626 1.14432 0.484823 1.31887 0.644011L8.802 7.46352L16.2856 0.644011C16.461 0.485249 16.7303 0.498053 16.8886 0.672179C17.0474 0.846305 17.035 1.11646 16.8609 1.27522L9.08923 8.35635C9.00814 8.43018 8.90486 8.46731 8.802 8.46731Z"
-                                        fill="white" />
-                                      <path
-                                        d="M8.51478 8.35592L9.19016 7.61844L9.18831 7.61676L8.51478 8.35592ZM0.744003 1.27522L0.0702479 2.01417L0.0704787 2.01438L0.744003 1.27522ZM1.31887 0.644011L0.645031 1.38289L0.6453 1.38313L1.31887 0.644011ZM8.802 7.46352L8.12843 8.20264L8.80198 8.81647L9.47556 8.20266L8.802 7.46352ZM16.2856 0.644011L15.6145 -0.0973993L15.612 -0.0951279L16.2856 0.644011ZM16.8886 0.672179L16.1487 1.34494L16.1496 1.34593L16.8886 0.672179ZM16.8609 1.27522L17.5344 2.0144L17.5346 2.01417L16.8609 1.27522ZM9.08923 8.35635L9.76248 9.09576L9.76273 9.09553L9.08923 8.35635ZM8.802 7.46731C8.93863 7.46731 9.07922 7.51685 9.19016 7.61844L7.83941 9.0934C8.11252 9.34351 8.45967 9.46731 8.802 9.46731V7.46731ZM9.18831 7.61676L1.41753 0.536053L0.0704787 2.01438L7.84126 9.09509L9.18831 7.61676ZM1.41776 0.536264C1.65114 0.749058 1.66836 1.11112 1.45561 1.34503L-0.0239418 -0.000672758C-0.554215 0.582344 -0.511389 1.48385 0.0702479 2.01417L1.41776 0.536264ZM1.45561 1.34503C1.24272 1.5791 0.879267 1.59651 0.645031 1.38289L1.99272 -0.094864C1.40938 -0.626861 0.506475 -0.583848 -0.0239418 -0.000672758L1.45561 1.34503ZM0.6453 1.38313L8.12843 8.20264L9.47558 6.7244L1.99245 -0.0951087L0.6453 1.38313ZM9.47556 8.20266L16.9591 1.38315L15.612 -0.0951279L8.12845 6.72438L9.47556 8.20266ZM16.9566 1.38542C16.7256 1.59454 16.3635 1.5811 16.1487 1.34494L17.6285 -0.000582993C17.097 -0.584998 16.1964 -0.624041 15.6145 -0.0973951L16.9566 1.38542ZM16.1496 1.34593C15.9366 1.11224 15.9528 0.749874 16.1871 0.536264L17.5346 2.01417C18.1171 1.48304 18.1581 0.580371 17.6276 -0.0015738L16.1496 1.34593ZM16.1874 0.536037L8.41572 7.61717L9.76273 9.09553L17.5344 2.0144L16.1874 0.536037ZM8.41597 7.61694C8.52618 7.51659 8.66566 7.46731 8.802 7.46731V9.46731C9.14405 9.46731 9.4901 9.34377 9.76248 9.09576L8.41597 7.61694Z"
-                                        fill="#213735" mask="url(#path-1-inside-1_2003_50)" />
-                                    </svg>
-
-                                  </div>
-                                </div>
-                                <div class="custom-select__options">
-                                  <?php foreach ($values as $value): ?>
-                                    <div class="custom-select__option" data-value="<?php echo esc_attr($value); ?>">
-                                      <?php echo esc_html($value) ?>
-                                    </div>
-                                  <?php endforeach; ?>
-                                </div>
-                              </div>
-                            </custom-select>
-                          <?php endif; ?>
-
-                        </fieldset> -->
                       <?php endif; ?>
                     </div>
                     <div class="order__details">
@@ -696,11 +656,7 @@
                         </button>
                       </div>
                     </div>
-
-
-
                   </div>
-
                   <div class="menu-image">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu.png" alt="">
                   </div>
@@ -738,7 +694,7 @@
         TOIMITUKSET
       </h3>
       <p>
-        Toimitukset tapahtuvat kylmäkuljetuksina joka tiistai ja perjantai klo 15.30-22.00. Voit valita toimitusaikaikkunan tilauksen yhteydessä kolmen tunnin tarkkuudella. Ensimmäisen toimituspäivän voit valita itse tilauksen yhteydessä.
+      Toimitamme ruokia koko viikolle kahdesti viikossa. Toimitukset tapahtuvat kylmäkuljetuksina joka tiistai ja perjantai klo 15.30-22.00. Voit valita toimitusaikaikkunan tilauksen yhteydessä kolmen tunnin tarkkuudella. Ensimmäisen toimituspäivän voit valita itse tilauksen yhteydessä.
       </p>
       <br>
       <br>
