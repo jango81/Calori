@@ -76,178 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     customElements.define("announcement-bar", AnnouncementBar);
 
-    const headerSelectors = {
-        headerTag: ".header",
-        burgerMenu: ".header__burger",
-        navButton: ".navigation__button button",
-        drawer: ".header__drawer",
-        headerItem: ".header__item",
-        menuItem: ".menu__item",
-        subMenu: ".submenu",
-        navOpenSubMenuBtn: ".navigation__open button",
-        navOpenSubMenuBlock: ".navigation__open",
-        navRow: ".navigation__row",
-        cartIcon: ".header__cart-icon",
-    };
-
-    class CustomHeader extends HTMLElement {
-        constructor() {
-            super();
-        }
-        connectedCallback() {
-            this.init();
-        }
-
-        init() {
-            this.siteWrapper = document.querySelector("#wrapper");
-            this.headerTag = document.querySelector("#header");
-            this.mainDark = document.querySelector(".main__dark");
-            this.cart = document.querySelector("#cart");
-            this.burgerMenu = this.querySelector(headerSelectors.burgerMenu);
-            this.navigationButton = this.querySelector(headerSelectors.navButton);
-            this.drawer = this.querySelector(headerSelectors.drawer);
-            this.cartIcon = this.querySelector(headerSelectors.cartIcon);
-            this.headerItem = [...this.querySelectorAll(headerSelectors.headerItem)];
-            this.menuItem = [...this.querySelectorAll(headerSelectors.menuItem)];
-            this.navOpenSubMenuBtn = [...this.querySelectorAll(headerSelectors.navOpenSubMenuBtn)];
-            this.navRow = [...this.querySelectorAll(headerSelectors.navRow)];
-
-            this.menuItem.forEach((element) => {
-                const subMenu = this.checkSubmenu(element);
-                if (subMenu) {
-                    subMenu.style.height = 0;
-                }
-            });
-
-            this.addListeners();
-        }
-
-        addListeners() {
-            if (this.cartIcon) this.cartIcon.addEventListener("click", this.showCart.bind(this));
-
-            this.siteWrapper.addEventListener("scroll", this.showHeaderScrolled.bind(this));
-            this.burgerMenu.addEventListener("click", this.setNavigationClass.bind(this));
-            this.navigationButton.addEventListener("click", this.removeNavigationClass.bind(this));
-            this.drawer.addEventListener("click", this.removeNavigationClass.bind(this));
-
-            this.navRow.forEach((element) => {
-                const subMenu = element.nextElementSibling;
-                if (subMenu) {
-                    element.addEventListener("click", this.navSubmenuButtonHandle.bind(this));
-                }
-            });
-
-            this.headerItem.forEach((element) => {
-                element.addEventListener("mouseover", this.showSubMenu.bind(this));
-                element.addEventListener("mouseout", this.hideSubMenu.bind(this));
-            });
-        }
-        showCart() {
-            document.dispatchEvent(new Event("showCart"));
-        }
-        showHeaderScrolled() {
-            const rect = this.headerTag.getBoundingClientRect();
-            const headerTopSide = rect.top;
-            const headerBottomSide = rect.bottom;
-            const headerHeight = this.headerTag.offsetHeight;
-
-            if (headerTopSide < 0 - headerHeight) {
-                this.headerTag.style.height = headerHeight;
-                this.classList.add("scrolled");
-            } else if (headerBottomSide >= 0 && this.classList.contains("scrolled")) {
-                this.classList.remove("scrolled");
-                this.classList.add("hide");
-                this.addEventListener(
-                    "animationend",
-                    () => {
-                        this.classList.remove("hide");
-                    },
-                    { once: true }
-                );
-            }
-        }
-        setNavigationClass() {
-            document.querySelector(".navigation").classList.add("_active");
-            document.querySelector(".header__drawer").classList.add("_active");
-        }
-        removeNavigationClass() {
-            document.querySelector(".navigation").classList.remove("_active");
-            document.querySelector(".header__drawer").classList.remove("_active");
-        }
-
-        checkSubmenu(menuItem) {
-            const children = [...menuItem.children];
-            for (const child of children) {
-                if (child.classList.contains("submenu")) {
-                    const parent = child.closest(".menu__item");
-                    const buttonBlock = parent.querySelector(headerSelectors.navOpenSubMenuBlock);
-
-                    if (buttonBlock) {
-                        buttonBlock.style.visibility = "visible";
-                    }
-                    return child;
-                }
-            }
-
-            return null;
-        }
-
-        showSubMenu(event) {
-            const currentMenuItem = event.currentTarget;
-            const subMenu = this.checkSubmenu(currentMenuItem);
-
-            if (subMenu && subMenu.classList.contains("_active")) return;
-
-            if (subMenu) {
-                subMenu.classList.add("_active");
-                this.changeHeight(subMenu);
-            }
-        }
-
-        hideSubMenu(event) {
-            const currentMenuItem = event.currentTarget;
-            const toElement = event.relatedTarget;
-            const subMenu = this.checkSubmenu(currentMenuItem);
-
-            if (subMenu && !subMenu.classList.contains("_active")) return;
-
-            if (subMenu && (currentMenuItem.contains(toElement) || subMenu.contains(toElement))) return;
-
-            if (subMenu) {
-                subMenu.classList.remove("_active");
-                this.changeHeight(subMenu);
-            }
-        }
-
-        changeHeight(subMenu) {
-            if (subMenu.classList.contains("_active")) {
-                const height = subMenu.scrollHeight + "px";
-                subMenu.style.height = "0px";
-
-                setTimeout(function () {
-                    subMenu.style.height = height;
-                }, 0);
-            } else {
-                subMenu.style.height = "0px";
-            }
-        }
-
-        navSubmenuButtonHandle(event) {
-            const target = event.currentTarget;
-            const parent = target.closest(".menu__item");
-            const subMenu = this.checkSubmenu(parent);
-
-            if (subMenu) {
-                subMenu.classList.toggle("_active");
-                this.changeHeight(subMenu);
-            }
-
-            target.classList.toggle("_active");
-        }
-    }
-
-    customElements.define("custom-header", CustomHeader);
-
     const cartSelectors = {
         product: ".cart__product",
         productName: ".cart-product__name",
@@ -295,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this.amountSelects.forEach((el) => el.addEventListener("change", this.updateAmount.bind(this)));
 
             document.addEventListener("showCart", this.open.bind(this));
-            //document.addEventListener("cartUpdated", this.updateCart.bind(this));
 
             this.closeButton.addEventListener("click", this.closeHandle.bind(this));
 
@@ -399,8 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         open() {
+            console.log("Open cart");
+
             this.classList.add("_active");
             this.mainDark.classList.add("_active");
+            console.log("main dark", this.mainDark);
         }
         closeHandle() {
             this.classList.remove("_active");
@@ -643,6 +473,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     jQuery(document).ready(function ($) {
+        function addNotify(message, type = "error") {
+            const notifyContainer = $("#notify-container");
+            let iconUrl = "";
+
+            switch (type) {
+                case "error":
+                    iconUrl = notifyContainer.data("error-icon");
+                    break;
+                case "info":
+                    iconUrl = notifyContainer.data("info-icon");
+                    break;
+            }
+
+            const notifyHtml = `
+              <div class="calori-message-notify ${type}" style="display: none;">
+                <div class="message-wrapper">
+                  <div class="message-content">
+                    <div class="message-title-icons">
+                      <div class="message-icon">
+                        <img src="${iconUrl}" alt="${type} icon">
+                      </div>
+                    </div>
+                    <div class="message-text">
+                      <p>${message}</p>
+                    </div>
+                    <div class="message-close">
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+
+            const notify = $(notifyHtml);
+            notifyContainer.append(notify);
+            notify.fadeIn(200);
+
+            notify.find(".message-close").on("click", function () {
+                notify.fadeOut(200, function () {
+                    $(this).remove();
+                });
+            });
+
+            setTimeout(() => {
+                notify.fadeOut(200, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+
         let a = 1;
 
         $(".menuswiper").each(function () {
@@ -735,29 +615,25 @@ document.addEventListener("DOMContentLoaded", () => {
             // }
         });
 
-        //Order section ingredients spoiler click Mobile
-        /* $(".order-block.ingredients .spoiler-title").click(function () {
+        //Show ingredient spoiler on mobile
+        $(".order-block.ingredients .spoiler-title").click(function () {
             const content = $(this).next(".spoiler-content");
             content.slideToggle(300);
             const spoiler = $(this).closest(".spoiler");
 
             spoiler.toggleClass("_active");
-        }); */
+        });
 
-        //Order section ingredients spoiler click Desktop
-        /* $(".order-block.ingredients .check-box").click(function (event) {
+        //Check ingredient checkbox when click on ingredient block
+        $(".order-block.ingredients .check-box").click(function (event) {
             console.log(event.target);
-            
             if (!$(event.target).is("input") && !$(event.target).is("label")) {
-                console.log("Valid target", event.target);
-                
-                
                 const input = $(this).find("input[type='checkbox']");
                 const isChecked = input.prop("checked");
 
                 input.prop("checked", !isChecked);
             }
-        }); */
+        });
 
         //Scroll to order section when click on order now button"
         $(".first-screen .btn.green").click(function () {
@@ -774,15 +650,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const loader = $(".calori-loading");
             loader.fadeOut(500, function () {
                 loader.removeClass("_active");
-                $(".wrapper").css("display", "block");
+                $("#wrapper").css("display", "block");
             });
         });
 
         //Shows loading when cart is updating
         $("#cart").on("cartAjaxStart", function () {
-            $(".calori-loading").fadeIn(500, function () {
-                $(".wrapper").fadeOut(500);
-            });
+            $(".calori-loading").fadeIn(500);
         });
 
         //Hides loading when cart is updated
@@ -790,9 +664,37 @@ document.addEventListener("DOMContentLoaded", () => {
             const loader = $(".calori-loading");
             loader.fadeOut(500, function () {
                 loader.removeClass("_active");
-                $(".wrapper").fadeIn(500);
             });
         });
-    });
 
+        //HEADER
+
+        //Show cart
+        $(".header .cart-text").click(function () {
+            $("#cart").addClass("_active");
+            $(".main__dark").addClass("_active");
+        });
+
+        //CHECKOUT PAGE
+
+        //Hide delivery fields when delivery method is pickup
+        $("#delivery_type").on("change", function () {
+            const deliveryMethod = $(this).val();
+            const fieldsToHide = [$("#delivery_outdoor_field"), $("#ship-to-different-address"), $("#delivery_time_field")];
+
+            if (deliveryMethod === "nouto") {
+                fieldsToHide.forEach((field) => field.hide());
+            } else {
+                fieldsToHide.forEach((field) => field.show());
+            }
+        });
+
+
+        //ORDER 
+
+        //Show order fetch error
+        $(".order").on("orderError", function (event) {
+            addNotify(event.detail.message);
+        });
+    });
 });

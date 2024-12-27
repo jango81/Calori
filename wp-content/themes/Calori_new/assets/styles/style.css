@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import "./variables.css";
+@import "./notify.css";
 
 @media (min-width: 900px) {
     :root {
@@ -969,7 +970,6 @@ input[type="checkbox"] {
 }
 .header {
     display: block;
-    height: 100%;
     padding: 15px 0;
     position: relative;
     top: 0;
@@ -2869,19 +2869,23 @@ input[type="checkbox"] {
     display: none;
 }
 
-@media screen and (max-width: 990px) {
+.order-block.ingredients .wrapper.desktop {
+    display: block;
+}
+
+@media screen and (max-width: 1300px) {
     .order-block.ingredients {
         margin-bottom: 20px;
     }
-    /* .order-block.ingredients .order-block__title.mob {
+    .order-block.ingredients .order-block__title.mob {
         display: block;
-    } */
-    /* .order-block.ingredients .order-block__title.desktop {
+    }
+    .order-block.ingredients .order-block__title.desktop {
         display: none;
-    } */
-    /* .order-block.ingredients .wrapper.desktop {
+    }
+    .order-block.ingredients .wrapper.desktop {
         display: none;
-    } */
+    }
     .order-block.ingredients .spoiler {
         display: block;
         width: 100%;
@@ -3034,4 +3038,6 @@ input[type="checkbox"] {
     display: none;
 }
 
-
+#delivery_outdoor_field {
+    font-size: 15px !important;
+}

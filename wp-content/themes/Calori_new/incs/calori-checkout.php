@@ -146,10 +146,28 @@ add_action("woocommerce_before_order_notes", function ($checkout) {
 
 });
 
+add_action("woocommerce_after_checkout_billing_form", function () {
+    $address = get_option('woocommerce_store_address') . " " . get_option('woocommerce_store_address_2') . " " . get_option('woocommerce_store_city') . " " . get_option('woocommerce_store_postcode');
+    echo "<div class='checkout-field-inputs'>";
+    woocommerce_form_field("delivery_type", array(
+        "type" => "select",
+        "class" => array("checkout-field-select"),
+        "label" => "Toimitustapa",
+        "options" => array(
+            "kotiinkuljetus" => "Kotiinkuljetus",
+            "nouto" => "Nouto" . " (" . $address . ")",
+        ),
+        "required" => true
+    ), "");
+    echo "</div>";
+}, 10, 1);
+
 add_action("woocommerce_checkout_update_order_meta", function ($order_id) {
     $delivery_time = isset($_POST["delivery_time"]) ? sanitize_text_field($_POST["delivery_time"]) : "";
     $is_checked = isset($_POST["delivery_outdoor"]) ? "YES" : "NO";
+    $delivery_type = isset($_POST["delivery_type"]) ? sanitize_text_field($_POST["delivery_type"]) : "";
     $order = wc_get_order($order_id);
+    $order->update_meta_data("delivery_type", $delivery_type);
     $order->update_meta_data("delivery_outdoor", $is_checked);
     $order->update_meta_data("delivery_time", $delivery_time);
     $order->save_meta_data();
@@ -159,6 +177,7 @@ add_action("woocommerce_checkout_update_order_meta", function ($order_id) {
 add_action('woocommerce_admin_order_data_after_shipping_address', function ($order) {
     echo '<p><strong>' . esc_html__('Delivery outdoor') . ':</strong> ' . esc_html($order->get_meta('delivery_outdoor', true)) . '</p>';
     echo '<p><strong>' . esc_html__('Delivery time') . ':</strong> ' . esc_html($order->get_meta('delivery_time', true)) . '</p>';
+    echo '<p><strong>' . esc_html__('Delivery type') . ':</strong> ' . esc_html($order->get_meta('delivery_type', true)) . '</p>';
 }, 10, 1);
 
 

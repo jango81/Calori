@@ -1,0 +1,140 @@
+/* ---------------------------- NOTIFY STYLES  -----------------------------*/
+
+#notify-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.calori-message-notify {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.calori-message-notify .message-wrapper {
+    position: relative;
+    padding: 15px 40px 15px 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    animation: slideIn 0.5s ease;
+}
+
+.calori-message-notify .message-icon {
+    position: relative;
+    height: 25px;
+    width: 25px;
+}
+.calori-message-notify .message-icon img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.calori-message-notify .message-text {
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+.calori-message-notify .message-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calori-message-notify .message-close {
+    position: absolute;
+    right: 35px;
+    top: 0;
+    transform: translateX(35px);
+    height: 100%;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calori-message-notify .message-close span {
+    position: relative;
+    height: 15px;
+    width: 15px;
+    transition: transform 0.3s ease;
+}
+
+.calori-message-notify .message-close span::before,
+.calori-message-notify .message-close span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3px;
+    width: 100%;
+}
+
+.calori-message-notify .message-close span::before {
+    transform: rotate(45deg);
+}
+
+.calori-message-notify .message-close span::after {
+    transform: rotate(-45deg);
+}
+
+.calori-message-notify .message-close:hover {
+    cursor: pointer;
+}
+
+
+/*ERROR COLORS*/
+.calori-message-notify.error .message-wrapper::before {
+    background: #f87979;
+}
+
+.calori-message-notify.error .message-close span::before,
+.calori-message-notify.error .message-close span::after {
+    background: #fa4848;
+}
+
+.calori-message-notify.error .message-close {
+    background: #f87979;
+}
+
+.calori-message-notify.error .message-text {
+    color: #fa4848;
+}
+
+.calori-message-notify.error .message-wrapper {
+    background: #ffc9c9;
+}
+
+/*INFO COLORS*/
+
+.calori-message-notify.info .message-wrapper::before {
+    background: #70c6ff;
+}
+
+.calori-message-notify.info .message-close span::before,
+.calori-message-notify.info .message-close span::after {
+    background: #40b8f7;
+}
+
+.calori-message-notify.info .message-close {
+    background: #70c6ff;
+}
+
+.calori-message-notify.info .message-text {
+    color: #40b8f7;
+}
+
+.calori-message-notify.info .message-wrapper {
+    background: #d5f0fd;
+}
+
+
+
+
