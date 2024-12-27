@@ -367,7 +367,7 @@
             "category" => array("tuote"),
           ));
 
-          if (!empty($products)): $checkbox_count = 0?>
+          if (!empty($products)): $b = 0; ?>
             <form class="order__form" id="add-to-cart-form">
               <div class="order__products order-products order-block">
                 <?php foreach ($products as $product): ?>
@@ -381,7 +381,6 @@
               <?php foreach ($products as $product):
                 $product_attributes = $product->get_attributes();
                 $product_variations = $product->get_available_variations();
-
                 ?>
                 <div class="order__controls" data-product-id="<?php echo esc_attr($product->get_id()) ?>">
                   <div class="product-wrap">
@@ -462,17 +461,18 @@
                           </fieldset>
                         <?php endforeach; ?>
                       <?php endif; ?>
-                      <?php
-                      if (have_rows("exclusion_of_ingredients", "option")): ?>
-                      <?php $a=0;?>
+                    </div>
+                    <div class="order__details">
+                    <?php
+                      if (have_rows("exclusion_of_ingredients", "option")): $a = 0?>
                         <fieldset class="order-block ingredients">
-                          <!-- <legend class="order-block__title mob">
+                          <legend class="order-block__title mob">
                             Lisäasetukset
-                          </legend> -->
+                          </legend>
                           <legend class="order-block__title desktop">
                             Poista raaka-aineita
                           </legend>
-                          <!-- <div class="spoiler mob">
+                          <div class="spoiler mob">
                             <div class="spoiler-title">
                             <h5>Poista raaka-aineita</h5>
                             <div class="arrow">
@@ -498,39 +498,28 @@
                               $exclusion_ingredients = get_sub_field("ingredient_name"); ?>
                               
                               <div class="check-box">
-                                <input type="checkbox" name="exclusion-ingredients" id="exclusion-ingredients<?=$a;?>"
+                                <input type="checkbox" name="exclusion-ingredients" id="exclusion-ingredients<?=$a;?><?=$b;?>"
                                 data-ingredient="<?php echo esc_attr($exclusion_ingredients) ?>"/>
-                                <label for="exclusion-ingredients<?=$a;?>"><?php echo esc_html($exclusion_ingredients) ?></label>
+                                <label for="exclusion-ingredients<?=$a;?><?=$b;?>"><?php echo esc_html($exclusion_ingredients) ?></label>
                               </div>
                               <?php $a++;?>
                             <?php endwhile; ?>
                             </div>
-                          </div> -->
+                          </div>
                           <div class="wrapper desktop">
                           <?php while (have_rows("exclusion_of_ingredients", "option")):
                               the_row();
                               $exclusion_ingredients = get_sub_field("ingredient_name"); ?>
-                              
                               <div class="check-box">
-                                <input type="checkbox" name="exclusion-ingredients" id="exclusion-ingredients<?=$checkbox_count?>"
+                                <input type="checkbox" name="exclusion-ingredients" id="exclusion-ingredients<?=$a;?><?=$b;?>"
                                 data-ingredient="<?php echo esc_attr($exclusion_ingredients) ?>"/>
-                                <label for="exclusion-ingredients<?=$checkbox_count;?>"><?php echo esc_html($exclusion_ingredients) ?></label>
+                                <label for="exclusion-ingredients<?=$a;?><?=$b;?>"><?php echo esc_html($exclusion_ingredients) ?></label>
                               </div>
-                              <?php $checkbox_count++; $a++;?>
-                            <?php endwhile; ?>
+                              <?php $a++;?>
+                          <?php endwhile; ?>
                           </div>
                         </fieldset>
                       <?php endif ?>
-                      <?php
-                      $delivery_day = get_field("available_delivery_days", "option");
-                      if (!empty($delivery_day)):
-                        $values = array_map(function ($item) {
-                          return explode(':', $item)[1];
-                        }, $delivery_day);
-                        ?>
-                      <?php endif; ?>
-                    </div>
-                    <div class="order__details">
                       <?php
                       foreach ($product_variations as $variant):
                         $has_subscription_type = true;
@@ -640,7 +629,6 @@
                           <span class="btn-text">Lisää ostoskoriin</span>
                         </button>
                       </div>
-
                       <div class="info-delivery-wrap">
                         <button class="btn gborder" data-fancybox data-src="#delivery-info">
                         <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -659,9 +647,7 @@
                     <img src="<?php echo get_template_directory_uri() ?>/assets/images/menu.png" alt="">
                   </div>
                 </div>
-
-              <?php endforeach; ?>
-
+              <?php $b++; endforeach; ?>
             </form>
           <?php else: ?>
             <div class="error__message">
@@ -671,8 +657,6 @@
           <div class="error__message">
             <h1></h1>
           </div>
-
-
         </div>
       </div>
     </custom-order>

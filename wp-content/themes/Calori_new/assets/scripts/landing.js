@@ -204,26 +204,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         showSwiperWrappers() {
-            this.swiperWrappers.forEach(el => {
-                if(el.dataset.day === this.currentDay) {
+            this.swiperWrappers.forEach((el) => {
+                if (el.dataset.day === this.currentDay) {
                     el.classList.add("_active");
 
-                    this.initSwiper(el.classList.value)
+                    this.initSwiper(el.classList.value);
 
-                    if(el.classList.contains("no-meals")) {
+                    if (el.classList.contains("no-meals")) {
                         this.mealsSwiper.pagination.el.style.display = "none";
                     } else {
                         this.mealsSwiper.pagination.el.style.display = "block";
                     }
-                    
                 } else {
                     el.classList.remove("_active");
                 }
-            })
+            });
         }
 
         initSwiper(wrapperClass) {
-            if(this.mealsSwiper) this.mealsSwiper.destroy(); 
+            if (this.mealsSwiper) this.mealsSwiper.destroy();
 
             this.mealsSwiper = new Swiper(mealsSelectors.mealsSwiper, {
                 loop: false,
@@ -260,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
             });
         }
-    
+
         addDays() {
             this.daysElement.innerHTML = "";
 
@@ -368,7 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         attachEventListeners() {
-            const { productButtons, calculatorButton, variantSelect, orderForm, ingredientCheckBoxes} = this.elements;
+            const { productButtons, calculatorButton, variantSelect, orderForm, ingredientCheckBoxes } = this.elements;
 
             // calculatorButton.addEventListener("click", () => this.elements.calculator.classList.toggle("_active"));
             productButtons.forEach((button) => button.addEventListener("click", this.productButtonHandler.bind(this)));
@@ -490,10 +489,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 excluded_ingredients: this.getExclusionIngredients(),
             };
 
-
             const params = new URLSearchParams(formData).toString();
 
-            const data = this.fetchData(params); 
+            const data = this.fetchData(params);
         }
         async fetchData(params) {
             try {
@@ -506,7 +504,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Virhe tuotteen lisäämisessä ostoskoriin: ${response.status}`);
                 }
 
                 const data = await response.json();
@@ -521,6 +519,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 return data;
             } catch (error) {
+                const orderErrorEvent = new CustomEvent("orderError", { detail: { message: error } });
+                this.dispatchEvent(orderErrorEvent);
                 console.error(error);
             }
         }
@@ -784,5 +784,4 @@ document.addEventListener("DOMContentLoaded", () => {
     customElements.define("custom-calculator", CustomCalculator);
 
     //Head section button
-    
 });
