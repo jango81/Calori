@@ -16,7 +16,9 @@
 .contact-form__block:not(:first-child) {
     margin-top: 15px;
 }
-.contact-form__block input[type='text'], input[type='email'], input[type='tel'],
+.contact-form__block input[type="text"],
+input[type="email"],
+input[type="tel"],
 .contact-form__block textarea {
     font-size: 16px;
     width: 100%;
@@ -43,3 +45,69 @@
     padding-left: 40px;
 }
 
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info-container {
+    max-width: 840px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.contact-info-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-info-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-top: 50px;
+}
+.contact-info-category:not(:first-child) {
+    margin-top: 30px;
+}
+
+.contact-info-category ul {
+    
+    font-size: 18px;
+}
+
+.contact-info-category ul li:not(:first-child) {
+    margin-top: 5px;
+}
+
+.contact-info-category ul li span {
+    font-weight: 500;
+}
+
+.contact-info-category h3 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .contact-info-category h3 {
+        text-align: center;
+        font-size: 20px;
+    }
+    .contact-info-category ul {
+        font-size: 17px;
+        max-width: 80%;
+    }
+
+    .contact-info-category,
+    .contact-info-body  {
+        display: block;
+    }
+    .contact-info-category {
+        width: 100%;
+    }
+}

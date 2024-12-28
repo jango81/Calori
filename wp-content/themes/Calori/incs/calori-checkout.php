@@ -36,7 +36,7 @@ add_filter("woocommerce_checkout_fields", function ($fields) {
         "billing_address_1" => "Katuosoite",
         "billing_address_2" => "Katuosoite 2",
         "billing_city" => "Kaupunki",
-        "billing_postcode" => "Postinumero",
+        "billing_postcode" => "Postinumero (esim. 00800)",
         "billing_country" => "Maa",
         "billing_state" => "Maakunta",
         "billing_phone" => "Puhelinnumero",
@@ -45,7 +45,9 @@ add_filter("woocommerce_checkout_fields", function ($fields) {
 
     foreach ($labels as $field_key => $label) {
         if (isset($fields["billing"][$field_key])) {
-            #unset($fields["billing"][$field_key]["label"]);
+            if($field_key === "billing_postcode") {
+                $fields["billing"][$field_key]["label"] = $label;
+            }
             $fields["billing"][$field_key]["placeholder"] = $label;
             $fields["billing"][$field_key]["class"] = array("checkout-field-inputs");
         }
@@ -63,17 +65,21 @@ add_filter("woocommerce_checkout_fields", function ($fields) {
         "shipping_address_1" => "Katuosoite",
         "shipping_address_2" => "Katuosoite 2",
         "shipping_city" => "Kaupunki",
-        "shipping_postcode" => "Postinumero",
+        "shipping_postcode" => "Postinumero (esim. 00800)",
         "shipping_country" => "Maa",
         "shipping_state" => "Maakunta"
     ];
 
     foreach ($labels as $field_key => $label) {
         if (isset($fields["shipping"][$field_key])) {
-            #unset($fields["shipping"][$field_key]["label"]);
+            if($field_key === "shipping_postcode") {
+                $fields["shipping"][$field_key]["label"] = $label;
+            }
             $fields["shipping"][$field_key]["placeholder"] = $label;
             $fields["shipping"][$field_key]["class"] = array("checkout-field-inputs");
         }
+
+        
     }
 
     return $fields;

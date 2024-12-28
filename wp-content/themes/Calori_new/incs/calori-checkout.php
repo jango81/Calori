@@ -46,7 +46,6 @@ add_filter("woocommerce_checkout_fields", function ($fields) {
 
     foreach ($labels as $field_key => $label) {
         if (isset($fields["billing"][$field_key])) {
-            #unset($fields["billing"][$field_key]["label"]);
             $fields["billing"][$field_key]["placeholder"] = $label;
             $fields["billing"][$field_key]["class"] = array("checkout-field-inputs");
         }
@@ -71,7 +70,6 @@ add_filter("woocommerce_checkout_fields", function ($fields) {
 
     foreach ($labels as $field_key => $label) {
         if (isset($fields["shipping"][$field_key])) {
-            #unset($fields["shipping"][$field_key]["label"]);
             $fields["shipping"][$field_key]["placeholder"] = $label;
             $fields["shipping"][$field_key]["class"] = array("checkout-field-inputs");
         }
@@ -79,6 +77,12 @@ add_filter("woocommerce_checkout_fields", function ($fields) {
 
     return $fields;
 });
+
+add_filter("woocommerce_default_address_fields", function($address_fields) {
+    $address_fields["postcode"]["label"] = "Postinumero (esim. 00800)";
+    return $address_fields;
+}, 10, 1);
+
 
 #account fields
 add_filter("woocommerce_checkout_fields", function ($fields) {

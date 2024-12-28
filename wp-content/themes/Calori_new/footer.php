@@ -131,15 +131,7 @@
             </ul>
           </div>
         </div>
-
-        <div class="footer-col">
-          <div class="footer-form">
-            <?php echo do_shortcode('[contact-form-7 id="d7385ff" title="Contact form 1"]'); ?>
-
-          </div>
-        </div>
       </div>
-
       <div class="footer-bottom">
         <div class="madeby">
           <img src="<?php echo get_template_directory_uri() ?>/assets/images/madeon.svg" alt="made" class="madeby-img">
