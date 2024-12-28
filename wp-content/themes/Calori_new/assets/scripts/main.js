@@ -696,5 +696,24 @@ document.addEventListener("DOMContentLoaded", () => {
         $(".order").on("orderError", function (event) {
             addNotify(event.detail.message);
         });
+
+        //MENU PAGE 
+
+        //Fixing menu button text
+
+        $(".menu-page .menu__button label").each(function (index, element) {
+            const $element = $(element);
+            
+            const dataTitle = $element.data("title").split(",").map((item) => item.trim());
+            const text = dataTitle[0];
+            const date = dataTitle[1];
+
+            if(text && date) {
+                $element.addClass("_date");
+                $element.html(`${text} <span>${date}</span>`);
+            } else {
+                $element.text($(this).data("title"));
+            }
+        });
     });
 });

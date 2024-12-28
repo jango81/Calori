@@ -497,6 +497,19 @@ add_action("woocommerce_before_checkout_form", function($checkout) {
     echo "</div>";
 });
 
+add_action( 'template_redirect', function() {
+    if(is_product()) {
+        wp_redirect(get_home_url());
+        exit;
+    }
+
+    if(is_singular("ruokalistat")) {
+        wp_redirect(get_home_url());
+        exit;
+    }
+});
+
+
 
 require_once get_template_directory() . "/incs/calori-nav-menu.php";
 require_once get_template_directory() . "/incs/calori-get-meal-menu.php";

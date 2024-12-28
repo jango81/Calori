@@ -2834,7 +2834,7 @@ input[type="checkbox"] {
     }
 }
 
-@media screen and (max-width: 384px) {
+@media screen and (max-width: 458px) {
     .menu .menu__buttons {
         display: block;
         min-width: 100%;
@@ -2843,9 +2843,8 @@ input[type="checkbox"] {
         margin: 0;
     }
     .menu .menu__button:not(:first-child) {
+        margin-left: 0;
         margin-top: 10px;
-    }
-    .menu .menu__sticky {
     }
 }
 
@@ -3044,5 +3043,5 @@ input[type="checkbox"] {
 }
 
 .footer-bottom {
-    transform: translateY(0) !important;   
+    transform: translateY(0) !important;
 }

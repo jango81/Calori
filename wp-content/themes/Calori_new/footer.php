@@ -9,14 +9,16 @@
             <img src="<?php echo get_template_directory_uri() ?>/assets/images/logowhite.svg" alt="calori"
               class="logo-image">
           </a>
+        </div>
 
+        <div class="footer-col">
           <div class="footer-col-wrap">
             <div class="footer-col-wrap-title">
               Asiakaspalvelu
             </div>
             <ul class="footer-col-wrap-ul">
               <li>
-                Arkisin 10:00-20:00
+                Arkisin 10:00-20:00 (Puhelinnumero on huoltokatkossa 1.1 asti.)
               </li>
             </ul>
           </div>
