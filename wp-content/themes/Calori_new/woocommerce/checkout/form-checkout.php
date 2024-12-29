@@ -45,9 +45,10 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 				<div class="col-2">
 					<?php do_action('woocommerce_checkout_shipping'); ?>
 				</div>
-			</div>
 
-			<?php do_action('woocommerce_checkout_after_customer_details'); ?>
+				<?php do_action('woocommerce_checkout_after_customer_details'); ?>
+
+			</div>
 
 		<?php endif; ?>
 
