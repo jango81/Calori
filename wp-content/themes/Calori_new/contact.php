@@ -37,13 +37,13 @@ get_header(null, array("announcement" => true, "show_cart" => true))
     </section>
 
 
-    <div class="contact-form">
+    <!-- <div class="contact-form">
       <div class="contact-form__container _container">
         <header class="contact-form__heading">
           <h3><?php echo esc_html(get_field('contact-us-form-title')) ?></h3>
         </header>
         <?php echo do_shortcode('[contact-form-7 id="0b99b45" title="Contact"]'); ?>
-        <!--                 <div class="contact-form__block">
+                        <div class="contact-form__block">
                     <input type="text" placeholder="Nimi" />
                 </div>
                 <div class="contact-form__block">
@@ -55,35 +55,36 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                 <div class="contact-form__block">
                     <button type="button" class="contact-form__button btn btn-solid btn-medium"><span
                             class="btn-text">Lähetä</span></button>
-                </div> -->
+                </div> 
       </div>
-    </div>
+    </div> -->
 
-    <section id="about-info" style="margin-bottom:80px;">
-      <div class="about-info__container container">
-        <div class="about-info__body">
-          <div class="about-info__text">
+    <section id="contact-info" style="margin-bottom:80px;">
+      <div class="contact-info-container _container">
+        <div class="contact-info-body">
+          <div class="contact-info-calori contact-info-category">
+            <h3>Calorin tiimi</h3>
             <ul>
-              <li>
-                <?php echo esc_html(get_field('contact-us-company-field-name')) . " " . esc_html(get_field('contact-us-company-name')) ?>
-              </li>
-              <li>
-                <?php echo esc_html(get_field('contact-us-address-field-name')) . " " . esc_html(get_field('contact-us-address-name')) ?>
-              </li>
-              <li><?php echo esc_html(get_field('contact-us-support-field-name')) ?> <a
-                  href="tel:<?php echo esc_html(get_field('contact-us-support-phone')) ?>"><?php echo esc_html(get_field('contact-us-support-phone')) ?>
-              </li></a>
-              <li><?php echo esc_html(get_field('contact-us-email-field-name')) ?> <a
-                  href="mailto:<?php echo esc_html(get_field('contact-us-email-name')) ?>"><?php echo esc_html(get_field('contact-us-email-name')) ?>
-              </li></a>
-              <li><?php echo esc_html(get_field('contact-us-logistics-field-name')) ?> <a
-                  href="tel:<?php echo esc_html(get_field('contact-us-logistics-phone')) ?>"><?php echo esc_html(get_field('contact-us-logistics-phone')) ?>
-              </li></a>
-              <li><?php echo esc_html(get_field('contact-us-logistics-field-name-two')) ?> <a
-                  href="mailto:<?php echo esc_html(get_field('contact-us-logistics-email')) ?>"><?php echo esc_html(get_field('contact-us-logistics-email')) ?>
-              </li></a>
+              <li><span>Asiakaspalvelun sähköposti:</span> info@calori.fi</li>
+              <li><span>Asiakaspalvelun numero:</span> 0402160180 (Asiakaspalvelun puhelinnumero on huoltokatkossa 1.1 asti.)</li>
+              <li><span>Yhteistyötarjoukset:</span> yhteistyo@calori.fi</li>
+              <li><span>Keittiön ja toimiston osoite:</span> Sörnäisten rantatie 27 A, 00500 Helsinki </li>
+              <li><span>Yritys:</span> Lagom Food Oy (3165571-2) </li>
             </ul>
           </div>
+          <div class="contact-info-delivery contact-info-category">
+            <h3>Logistiikan tiimi</h3>
+            <ul>
+              <li><span>Logistiikan puhelinnumero:</span> +358442477829</li>
+              <li><span>Logistiikan sähköposti:</span> asiakaspalvelu@priima.fi</li>
+            </ul>
+          </div>
+          <!-- <div class="contact-info-others contact-info-category">
+            <h3>Muu info</h3>
+            <ul>
+              
+            </ul>
+          </div> -->
         </div>
       </div>
     </section>

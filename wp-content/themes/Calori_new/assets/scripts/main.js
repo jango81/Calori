@@ -682,7 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const deliveryMethod = $(this).val();
             const fieldsToHide = [$("#delivery_outdoor_field"), $("#ship-to-different-address"), $("#delivery_time_field")];
 
-            if (deliveryMethod === "nouto") {
+            if (deliveryMethod === "local_pickup") {
                 fieldsToHide.forEach((field) => field.hide());
             } else {
                 fieldsToHide.forEach((field) => field.show());
@@ -696,5 +696,32 @@ document.addEventListener("DOMContentLoaded", () => {
         $(".order").on("orderError", function (event) {
             addNotify(event.detail.message);
         });
+
+        //MENU PAGE 
+
+        //Fixing menu button text
+
+        $(".menu-page .menu__button label").each(function (index, element) {
+            const $element = $(element);
+            
+            const dataTitle = $element.data("title").split(",").map((item) => item.trim());
+            const text = dataTitle[0];
+            const date = dataTitle[1];
+
+            if(text && date) {
+                $element.addClass("_date");
+                $element.html(`${text} <span>${date}</span>`);
+            } else {
+                $element.text($(this).data("title"));
+            }
+        });
+
+        //FIXING SHIPPING POST CODE UPDATE WHEN SHIPPING ADDRESS IS DIFFERENT
+
+        if(!$("#ship-to-different-address").is(":checked")) {
+            $("#billing_postcode").on("change", function() {
+                $("#shipping_postcode").val($(this).val());
+            });
+        }
     });
 });

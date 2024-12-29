@@ -3,6 +3,8 @@
 #menu {
     padding-bottom: var(--calori-sections-padding);
 }
+
+
 .menu__loading {
     display: none;
 }

@@ -55,8 +55,7 @@ get_header(null, array("announcement" => true, "show_cart" => true))
                                         <?php while ($query->have_posts()) {
                                             $query->the_post(); ?>
                                             <div class="menu__button radio-sm" data-post-id="<?php the_ID(); ?>">
-                                                <label class="<?php if ($b == 0): ?>menu__current <?php endif; ?> menu__button" for="week<?php echo $b ?>">
-                                                    <?php the_title(); ?>
+                                                <label class="<?php if ($b == 0): ?>menu__current <?php endif; ?> menu__button" for="week<?php echo $b ?>" data-title="<?php the_title(); ?>">
                                                 </label>
                                                 <input type="radio" id="week<?php echo $b ?>" name="week_radio" value="11/05/2024 - 11/12/2024" <?php if ($b == 0): ?>checked="" <?php endif; ?>>
                                             </div>

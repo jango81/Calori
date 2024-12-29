@@ -473,7 +473,7 @@ function add_subscription_meta($item_id, $item, $item_order_id)
             $days = (int) $display_value;
             $subscription_duration = $time_class->calculate_subs_duration($order_date_created, $days);
 
-            $new_meta_key = 'subscription_duration';
+            $new_meta_key = 'Subscription duration';
             $new_meta_value = empty($subscription_duration['end_date']) && empty($subscription_duration['start_date']) ? "null" : $subscription_duration['start_date'] . ' - ' . $subscription_duration['end_date'];
 
             $item->update_meta_data($new_meta_key, $new_meta_value);
@@ -485,17 +485,68 @@ function add_subscription_meta($item_id, $item, $item_order_id)
 }
 
 
-add_filter("woocommerce_webhook_payload", function( $payload, $resource, $resource_id, $id ) {
+add_filter("woocommerce_webhook_payload", function ($payload, $resource, $resource_id, $id) {
     $payload["webhook_id"] = $id;
 
     return $payload;
 }, 10, 4);
 
-add_action("woocommerce_before_checkout_form", function($checkout) {
+add_action("woocommerce_before_checkout_form", function ($checkout) {
     echo "<div class='checkout-warning-notify'>";
     echo "<p>Huomioithan, että seuraava toimitus on Perjantai 3.1.2024!</p>";
     echo "</div>";
 });
+
+add_action('template_redirect', function () {
+    if (is_product()) {
+        wp_redirect(get_home_url());
+        exit;
+    }
+
+    if (is_singular("ruokalistat")) {
+        wp_redirect(get_home_url());
+        exit;
+    }
+});
+
+
+/**
+ * Change shipping field attributes to trigger checkout update.
+ */
+function fluidcheckout_change_shipping_address_fields_args($fields)
+{
+    if (array_key_exists('shipping_state', $fields)) {
+        $fields['shipping_state']['class'][] = 'update_totals_on_change';
+    }
+    if (array_key_exists('shipping_city', $fields)) {
+        $fields['shipping_city']['class'][] = 'update_totals_on_change';
+    }
+    if (array_key_exists('shipping_postcode', $fields)) {
+        error_log("CHANGE SHIPPING POSTCODE");
+        $fields['shipping_postcode']['class'][] = 'update_totals_on_change';
+    }
+    return $fields;
+}
+add_filter('woocommerce_shipping_fields', 'fluidcheckout_change_shipping_address_fields_args', 300);
+
+
+/**
+ * Change billing field attributes to trigger checkout update.
+ */
+function fluidcheckout_change_billing_address_fields_args($fields)
+{
+    if (array_key_exists('billing_state', $fields)) {
+        $fields['billing_state']['class'][] = 'update_totals_on_change';
+    }
+    if (array_key_exists('billing_city', $fields)) {
+        $fields['billing_city']['class'][] = 'update_totals_on_change';
+    }
+    if (array_key_exists('billing_postcode', $fields)) {
+        $fields['billing_postcode']['class'][] = 'update_totals_on_change';
+    }
+    return $fields;
+}
+add_filter('woocommerce_billing_fields', 'fluidcheckout_change_billing_address_fields_args', 300);
 
 
 require_once get_template_directory() . "/incs/calori-nav-menu.php";

@@ -1,0 +1,9 @@
+@media (min-width: 1080px) {
+    .checkout.woocommerce-checkout {
+        display: block;
+    }
+    .checkout.woocommerce-checkout .form-wrapper {
+        display: flex;
+    }
+}
+
